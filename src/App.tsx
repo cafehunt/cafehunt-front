@@ -1,8 +1,12 @@
+import Button from '@mui/material/Button';
+import { AppStyled } from './App.styled';
+
 function App() {
   return (
-    <div>
+    <AppStyled>
       <h1>Hello</h1>
-    </div>
+      <Button variant="contained">Hello World</Button>
+    </AppStyled>
   );
 }
 
