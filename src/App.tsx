@@ -1,13 +1,16 @@
-import Button from '@mui/material/Button';
-import { AppStyled } from './App.styled';
+import { FC } from 'react';
+import { ThemeProvider } from 'styled-components';
 
-function App() {
+import * as Styled from './App.styled';
+import * as theme from './theme';
+
+const App: FC = () => {
   return (
-    <AppStyled>
+    <ThemeProvider theme={theme}>
+      <Styled.GlobalStyles />
       <h1>Hello</h1>
-      <Button variant="contained">Hello World</Button>
-    </AppStyled>
+    </ThemeProvider>
   );
-}
+};
 
 export default App;
