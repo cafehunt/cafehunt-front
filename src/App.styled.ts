@@ -1,8 +1,31 @@
 import { createGlobalStyle } from 'styled-components';
 
-import { FONTS, LINE_HEIGHTS } from './theme';
+import { FONTS, FONT_SIZES, LINE_HEIGHTS } from './theme';
+import { COLORS } from './theme/colors.const';
+
+import MariupolRegular from './assets/font/Mariupol-Regular.woff';
+import MariupolMedium from './assets/font/Mariupol-Medium.woff';
+import MariupolBold from './assets/font/Mariupol-Bold.woff';
 
 export const GlobalStyles = createGlobalStyle`
+  @font-face {
+    font-family: 'Mariupol';
+    src: url(${MariupolRegular}) format('woff');
+    font-weight: 400;
+  }
+
+  @font-face {
+    font-family: 'Mariupol';
+    src: url(${MariupolMedium}) format('woff');
+    font-weight: 500;
+  }
+
+  @font-face {
+    font-family: 'Mariupol';
+    src: url(${MariupolBold}) format('woff');
+    font-weight: 700;
+  }
+
 *,
   *::before,
   *::after {
@@ -38,10 +61,11 @@ export const GlobalStyles = createGlobalStyle`
 
   body {
     min-height: 100vh;
-    padding-bottom: 100px;
     font-family: ${FONTS.primary};
+    font-size: ${FONT_SIZES.m};
     line-height: ${LINE_HEIGHTS.m};
     text-rendering: optimizeSpeed;
+    color: ${COLORS.black};
   }
 
   a:not([class]) {

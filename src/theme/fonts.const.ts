@@ -1,9 +1,10 @@
 export const FONTS = {
-  primary: "'Inter', sans-serif;",
+  primary: "'Mariupol', sans-serif;",
 };
 
 export const FONT_WEIGHTS = {
   regular: 400,
+  medium: 500,
   bold: 700,
 };
 
@@ -14,7 +15,7 @@ export const FONT_SIZES = {
 };
 
 export const LINE_HEIGHTS = {
-  l: '40px',
-  m: '26px',
+  l: '48px',
+  m: '22px',
   s: '14px',
 };
