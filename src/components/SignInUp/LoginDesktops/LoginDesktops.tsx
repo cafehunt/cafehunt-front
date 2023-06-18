@@ -1,22 +1,22 @@
 import { FC } from 'react';
 
 import {
-  LoginStyled,
-  LoginContent,
+  ContentDesktopsStyled,
+  ContentWrapper,
   Title,
   Link,
   Form,
-  LoginImage,
   ResetPassword,
-} from './LoginDesktops.styled';
-import { Input } from '../Input';
-import { Button } from '../Button';
+  ContentImage,
+} from '../CommonContent';
+import { Input } from '../../Input';
+import { Button } from '../../Button';
 import { SignNavigation } from '../SignNavigation/SignNavigation';
 
 export const LoginDesktops: FC = () => {
   return (
-    <LoginStyled>
-      <LoginContent>
+    <ContentDesktopsStyled>
+      <ContentWrapper>
         <SignNavigation />
         <div>
           <Title>Welcome back!</Title>
@@ -43,8 +43,8 @@ export const LoginDesktops: FC = () => {
             <Button type="submit">Log in</Button>
           </Form>
         </div>
-      </LoginContent>
-      <LoginImage></LoginImage>
-    </LoginStyled>
+      </ContentWrapper>
+      <ContentImage></ContentImage>
+    </ContentDesktopsStyled>
   );
 };

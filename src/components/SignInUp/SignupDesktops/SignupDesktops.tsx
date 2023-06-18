@@ -1,21 +1,21 @@
 import { FC } from 'react';
 
+import { Input } from '../../Input';
+import { Button } from '../../Button';
+import { SignNavigation } from '../SignNavigation/SignNavigation';
 import {
-  SignupStyled,
-  SignupContent,
+  ContentDesktopsStyled,
+  ContentWrapper,
   Title,
   Link,
   Form,
-  SignupImage,
-} from './SignupDesktops.styled';
-import { Input } from '../Input';
-import { Button } from '../Button';
-import { SignNavigation } from '../SignNavigation/SignNavigation';
+  ContentImage,
+} from '../CommonContent';
 
 export const SignupDesktops: FC = () => {
   return (
-    <SignupStyled>
-      <SignupContent>
+    <ContentDesktopsStyled>
+      <ContentWrapper>
         <SignNavigation />
         <div>
           <Title>Create an account</Title>
@@ -50,8 +50,8 @@ export const SignupDesktops: FC = () => {
             <Button type="submit">Sign up</Button>
           </Form>
         </div>
-      </SignupContent>
-      <SignupImage></SignupImage>
-    </SignupStyled>
+      </ContentWrapper>
+      <ContentImage></ContentImage>
+    </ContentDesktopsStyled>
   );
 };

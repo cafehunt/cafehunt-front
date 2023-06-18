@@ -1,17 +1,26 @@
 import styled from 'styled-components';
 
-import { FONT_SIZES, FONT_WEIGHTS, LINE_HEIGHTS } from '../../theme';
-import { COLORS } from '../../theme';
+import { FONT_SIZES, FONT_WEIGHTS, LINE_HEIGHTS, COLORS } from '../../../theme';
 
-import loginBg from '../../assets/img/login-bg.jpg';
+import loginBg from '../../../assets/img/login-bg.jpg';
 
-export const SignupStyled = styled.div`
+export const ContentDesktopsStyled = styled.div`
   display: flex;
   gap: 90px;
   padding: 40px 0 40px 60px;
 `;
 
-export const SignupContent = styled.div`
+export const ContentPhonesStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 100%;
+  max-width: 428px;
+  margin: 0 auto;
+  padding: 40px 20px;
+`;
+
+export const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -49,7 +58,7 @@ export const ResetPassword = styled.a`
   color: ${COLORS.main};
 `;
 
-export const SignupImage = styled.div`
+export const ContentImage = styled.div`
   flex: 1;
   max-width: 850px;
   min-height: 700px;

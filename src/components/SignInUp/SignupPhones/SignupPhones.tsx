@@ -1,14 +1,14 @@
 import { FC } from 'react';
 
-import { SignupStyled, Title, Link, Form } from './SignupPhones.styled';
+import { ContentPhonesStyled, Title, Link, Form } from '../CommonContent';
 
-import { Input } from '../Input';
-import { Button } from '../Button';
+import { Input } from '../../Input';
+import { Button } from '../../Button';
 import { SignNavigation } from '../SignNavigation/SignNavigation';
 
 export const SignupPhones: FC = () => {
   return (
-    <SignupStyled>
+    <ContentPhonesStyled>
       <SignNavigation />
       <div>
         <Title>Create an account</Title>
@@ -43,6 +43,6 @@ export const SignupPhones: FC = () => {
           <Button type="submit">Sign up</Button>
         </Form>
       </div>
-    </SignupStyled>
+    </ContentPhonesStyled>
   );
 };

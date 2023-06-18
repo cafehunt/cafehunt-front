@@ -1,19 +1,19 @@
 import { FC } from 'react';
 
 import {
-  LoginStyled,
+  ContentPhonesStyled,
   Title,
   Link,
   Form,
   ResetPassword,
-} from './LoginPhones.styled';
-import { Input } from '../Input';
-import { Button } from '../Button';
+} from '../CommonContent';
+import { Input } from '../../Input';
+import { Button } from '../../Button';
 import { SignNavigation } from '../SignNavigation/SignNavigation';
 
 export const LoginPhones: FC = () => {
   return (
-    <LoginStyled>
+    <ContentPhonesStyled>
       <SignNavigation />
       <div>
         <Title>Welcome back!</Title>
@@ -34,6 +34,6 @@ export const LoginPhones: FC = () => {
           <Button type="submit">Log in</Button>
         </Form>
       </div>
-    </LoginStyled>
+    </ContentPhonesStyled>
   );
 };
