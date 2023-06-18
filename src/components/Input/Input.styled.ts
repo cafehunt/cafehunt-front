@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { COLORS } from '../../theme';
-import { FONT_WEIGHTS } from '../../theme';
 
 export const InputStyled = styled.label`
   display: flex;
