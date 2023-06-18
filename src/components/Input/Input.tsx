@@ -1,10 +1,5 @@
 import { FC, useState } from 'react';
-import {
-  IconContainer,
-  InputContainer,
-  InputStyled,
-  ResetPassword,
-} from './Input.styled';
+import { IconContainer, InputContainer, InputStyled } from './Input.styled';
 import { IoEyeOutline, IoEyeOffOutline } from 'react-icons/io5';
 
 type Props = {
@@ -37,9 +32,6 @@ export const Input: FC<Props> = ({ type, label, name, placeholder = '' }) => {
           </IconContainer>
         )}
       </InputContainer>
-      {type === 'password' && (
-        <ResetPassword href="#">Don’t remember your password?</ResetPassword>
-      )}
     </InputStyled>
   );
 };

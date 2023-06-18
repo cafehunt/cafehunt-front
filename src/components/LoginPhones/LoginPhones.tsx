@@ -9,6 +9,7 @@ import {
   Title,
   Link,
   Form,
+  ResetPassword,
 } from './LoginPhones.styled';
 import { Logo } from '../Logo';
 import { Input } from '../Input';
@@ -41,6 +42,7 @@ export const LoginPhones: FC = () => {
             placeholder="m.brown@gmail.com"
           />
           <Input type="password" label="Enter your password" name="password" />
+          <ResetPassword href="#">Don’t remember your password?</ResetPassword>
           <Button type="submit">Log in</Button>
         </Form>
       </div>

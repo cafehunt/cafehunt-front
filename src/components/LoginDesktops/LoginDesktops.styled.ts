@@ -62,6 +62,13 @@ export const Form = styled.form`
   gap: 24px;
 `;
 
+export const ResetPassword = styled.a`
+  font: inherit;
+  font-weight: ${FONT_WEIGHTS.medium};
+  text-decoration: none;
+  color: ${COLORS.main};
+`;
+
 export const LoginImage = styled.div`
   flex: 1;
   max-width: 850px;
