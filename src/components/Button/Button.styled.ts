@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLORS } from '../../theme';
+import { COLORS, FONT_WEIGHTS } from '../../theme';
 
 type Props = {
   disabled?: boolean;
@@ -8,6 +8,7 @@ type Props = {
 export const Button = styled.button<Props>`
   padding: 12px 0;
 
+  font-weight: ${FONT_WEIGHTS.medium};
   color: ${COLORS.white};
 
   border: 1px solid transparent;
@@ -23,8 +24,8 @@ export const Button = styled.button<Props>`
   }
 
   &:disabled {
-    color: ${COLORS.mid_grey};
-    background-color: ${COLORS.light_grey};
+    color: ${COLORS.dark_grey};
+    background-color: ${COLORS.grey};
     cursor: not-allowed;
   }
 `;
