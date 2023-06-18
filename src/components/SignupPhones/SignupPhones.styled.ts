@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { FONT_SIZES, FONT_WEIGHTS, LINE_HEIGHTS } from '../../theme';
 import { COLORS } from '../../theme';
 
-export const LoginStyled = styled.div`
+export const SignupStyled = styled.div`
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -13,7 +13,7 @@ export const LoginStyled = styled.div`
   padding: 40px 20px;
 `;
 
-export const LoginHeader = styled.div`
+export const SignupHeader = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -53,11 +53,4 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 24px;
-`;
-
-export const ResetPassword = styled.a`
-  font: inherit;
-  font-weight: ${FONT_WEIGHTS.medium};
-  text-decoration: none;
-  color: ${COLORS.main};
 `;

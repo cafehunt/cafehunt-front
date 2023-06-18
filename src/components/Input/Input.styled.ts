@@ -31,10 +31,6 @@ export const InputContainer = styled.div`
 
     &:focus {
       border-color: ${COLORS.main};
-
-      &::placeholder {
-        color: ${COLORS.main};
-      }
     }
   }
 `;
@@ -49,11 +45,4 @@ export const IconContainer = styled.div`
   color: ${COLORS.black};
 
   cursor: pointer;
-`;
-
-export const ResetPassword = styled.a`
-  font: inherit;
-  font-weight: ${FONT_WEIGHTS.medium};
-  text-decoration: none;
-  color: ${COLORS.main};
 `;

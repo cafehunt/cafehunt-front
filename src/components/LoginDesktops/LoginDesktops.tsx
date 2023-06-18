@@ -11,6 +11,7 @@ import {
   Link,
   Form,
   LoginImage,
+  ResetPassword,
 } from './LoginDesktops.styled';
 import { Logo } from '../Logo';
 import { Input } from '../Input';
@@ -48,6 +49,9 @@ export const LoginDesktops: FC = () => {
               label="Enter your password"
               name="password"
             />
+            <ResetPassword href="#">
+              Don’t remember your password?
+            </ResetPassword>
             <Button type="submit">Log in</Button>
           </Form>
         </div>
