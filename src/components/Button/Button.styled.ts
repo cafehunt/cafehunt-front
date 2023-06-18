@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLORS } from '../../theme/colors.const';
+import { COLORS } from '../../theme';
 
 type Props = {
   disabled?: boolean;
