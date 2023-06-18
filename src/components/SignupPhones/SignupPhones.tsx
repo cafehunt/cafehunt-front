@@ -1,31 +1,15 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { FC } from 'react';
 
-import { AiOutlineArrowLeft } from 'react-icons/ai';
+import { SignupStyled, Title, Link, Form } from './SignupPhones.styled';
 
-import {
-  SignupStyled,
-  SignupHeader,
-  Title,
-  Link,
-  Form,
-} from './SignupPhones.styled';
-import { Logo } from '../Logo';
 import { Input } from '../Input';
 import { Button } from '../Button';
+import { SignNavigation } from '../SignNavigation/SignNavigation';
 
 export const SignupPhones: FC = () => {
   return (
     <SignupStyled>
-      <SignupHeader>
-        <a href="#">
-          <AiOutlineArrowLeft />
-          <span>Back</span>
-        </a>
-        <div>
-          <Logo />
-        </div>
-      </SignupHeader>
+      <SignNavigation />
       <div>
         <Title>Create an account</Title>
         <p>

@@ -13,26 +13,6 @@ export const SignupStyled = styled.div`
   padding: 40px 20px;
 `;
 
-export const SignupHeader = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-
-  a {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-
-    font: inherit;
-    text-decoration: none;
-    color: ${COLORS.black};
-
-    svg {
-      font-size: 20px;
-    }
-  }
-`;
-
 export const Title = styled.h2`
   margin-bottom: 16px;
 

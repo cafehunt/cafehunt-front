@@ -1,32 +1,20 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { FC } from 'react';
-
-import { AiOutlineArrowLeft } from 'react-icons/ai';
 
 import {
   LoginStyled,
-  LoginHeader,
   Title,
   Link,
   Form,
   ResetPassword,
 } from './LoginPhones.styled';
-import { Logo } from '../Logo';
 import { Input } from '../Input';
 import { Button } from '../Button';
+import { SignNavigation } from '../SignNavigation/SignNavigation';
 
 export const LoginPhones: FC = () => {
   return (
     <LoginStyled>
-      <LoginHeader>
-        <a href="#">
-          <AiOutlineArrowLeft />
-          <span>Back</span>
-        </a>
-        <div>
-          <Logo />
-        </div>
-      </LoginHeader>
+      <SignNavigation />
       <div>
         <Title>Welcome back!</Title>
         <p>
