@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { FONT_SIZES, FONT_WEIGHTS, LINE_HEIGHTS } from '../../theme';
-import { COLORS } from '../../theme/colors.const';
+import { COLORS } from '../../theme';
 
 export const LoginStyled = styled.div`
   display: flex;

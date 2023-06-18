@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
 import { FONTS, FONT_SIZES, LINE_HEIGHTS } from './theme';
-import { COLORS } from './theme/colors.const';
+import { COLORS } from './theme';
 
 import MariupolRegular from './assets/font/Mariupol-Regular.woff';
 import MariupolMedium from './assets/font/Mariupol-Medium.woff';

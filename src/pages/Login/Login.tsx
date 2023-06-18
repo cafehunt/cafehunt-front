@@ -7,8 +7,15 @@ import { Form, Link, LoginStyled, Title, LoginHeader } from './Login.styled';
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
 import { Logo } from '../../components/Logo';
+import { useMediaQueries } from '../../hooks/useMediaQueries';
 
 export const Login: FC = () => {
+  const { md } = useMediaQueries();
+
+  if (md) {
+    return <p>Medium screens</p>;
+  }
+
   return (
     <LoginStyled>
       <LoginHeader>
