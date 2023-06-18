@@ -1,35 +1,23 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { FC } from 'react';
 
-import { AiOutlineArrowLeft } from 'react-icons/ai';
-
 import {
-  LoginStyled,
-  LoginContent,
-  LoginHeader,
+  ContentDesktopsStyled,
+  ContentWrapper,
   Title,
   Link,
   Form,
-  LoginImage,
   ResetPassword,
-} from './LoginDesktops.styled';
-import { Logo } from '../Logo';
-import { Input } from '../Input';
-import { Button } from '../Button';
+  ContentImage,
+} from '../CommonContent';
+import { Input } from '../../Input';
+import { Button } from '../../Button';
+import { SignNavigation } from '../SignNavigation/SignNavigation';
 
 export const LoginDesktops: FC = () => {
   return (
-    <LoginStyled>
-      <LoginContent>
-        <LoginHeader>
-          <a href="#">
-            <AiOutlineArrowLeft />
-            <span>Back</span>
-          </a>
-          <div>
-            <Logo />
-          </div>
-        </LoginHeader>
+    <ContentDesktopsStyled>
+      <ContentWrapper>
+        <SignNavigation />
         <div>
           <Title>Welcome back!</Title>
           <p>
@@ -55,8 +43,8 @@ export const LoginDesktops: FC = () => {
             <Button type="submit">Log in</Button>
           </Form>
         </div>
-      </LoginContent>
-      <LoginImage></LoginImage>
-    </LoginStyled>
+      </ContentWrapper>
+      <ContentImage></ContentImage>
+    </ContentDesktopsStyled>
   );
 };

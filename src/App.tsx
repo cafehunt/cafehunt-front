@@ -10,8 +10,8 @@ const App: FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <Styled.GlobalStyles />
-      {/* <Login /> */}
-      <Signup />
+      <Login />
+      {/* <Signup /> */}
     </ThemeProvider>
   );
 };

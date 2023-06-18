@@ -1,34 +1,22 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { FC } from 'react';
 
-import { AiOutlineArrowLeft } from 'react-icons/ai';
-
+import { Input } from '../../Input';
+import { Button } from '../../Button';
+import { SignNavigation } from '../SignNavigation/SignNavigation';
 import {
-  SignupStyled,
-  SignupContent,
-  SignupHeader,
+  ContentDesktopsStyled,
+  ContentWrapper,
   Title,
   Link,
   Form,
-  SignupImage,
-} from './SignupDesktops.styled';
-import { Logo } from '../Logo';
-import { Input } from '../Input';
-import { Button } from '../Button';
+  ContentImage,
+} from '../CommonContent';
 
 export const SignupDesktops: FC = () => {
   return (
-    <SignupStyled>
-      <SignupContent>
-        <SignupHeader>
-          <a href="#">
-            <AiOutlineArrowLeft />
-            <span>Back</span>
-          </a>
-          <div>
-            <Logo />
-          </div>
-        </SignupHeader>
+    <ContentDesktopsStyled>
+      <ContentWrapper>
+        <SignNavigation />
         <div>
           <Title>Create an account</Title>
           <p>
@@ -62,8 +50,8 @@ export const SignupDesktops: FC = () => {
             <Button type="submit">Sign up</Button>
           </Form>
         </div>
-      </SignupContent>
-      <SignupImage></SignupImage>
-    </SignupStyled>
+      </ContentWrapper>
+      <ContentImage></ContentImage>
+    </ContentDesktopsStyled>
   );
 };
