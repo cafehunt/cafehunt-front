@@ -9,6 +9,7 @@ import {
   Title,
   Link,
   Form,
+  FormContainer,
   ContentImage,
 } from '../CommonContent';
 
@@ -25,28 +26,30 @@ export const SignupDesktops: FC = () => {
         </div>
         <div>
           <Form>
-            <Input
-              type="email"
-              label="Enter your email"
-              name="email"
-              placeholder="m.brown@gmail.com"
-            />
-            <Input
-              type="text"
-              label="Enter your name"
-              name="name"
-              placeholder="Marry Brown"
-            />
-            <Input
-              type="password"
-              label="Create your password (min 8 chars)"
-              name="password"
-            />
-            <Input
-              type="password"
-              label="Repeat your password"
-              name="password-repeat"
-            />
+            <FormContainer>
+              <Input
+                type="email"
+                label="Enter your email"
+                name="email"
+                placeholder="m.brown@gmail.com"
+              />
+              <Input
+                type="text"
+                label="Enter your name"
+                name="name"
+                placeholder="Marry Brown"
+              />
+              <Input
+                type="password"
+                label="Create your password (min 8 chars)"
+                name="password"
+              />
+              <Input
+                type="password"
+                label="Repeat your password"
+                name="password-repeat"
+              />
+            </FormContainer>
             <Button type="submit">Sign up</Button>
           </Form>
         </div>

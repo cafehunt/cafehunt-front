@@ -6,8 +6,9 @@ import loginBg from '../../../assets/img/login-bg.jpg';
 
 export const ContentDesktopsStyled = styled.div`
   display: flex;
-  gap: 90px;
-  padding: 40px 0 40px 60px;
+  gap: 200px;
+  height: 90vh;
+  padding: 5vh 0 5vh 200px;
 `;
 
 export const ContentPhonesStyled = styled.div`
@@ -15,7 +16,7 @@ export const ContentPhonesStyled = styled.div`
   flex-direction: column;
   gap: 40px;
   width: 100%;
-  max-width: 428px;
+  max-width: 424px;
   margin: 0 auto;
   padding: 40px 20px;
 `;
@@ -26,15 +27,14 @@ export const ContentWrapper = styled.div`
   gap: 40px;
   width: 100%;
   max-width: 428px;
-  margin: 0 0 0 auto;
 `;
 
 export const Title = styled.h2`
   margin-bottom: 16px;
 
-  font-size: ${FONT_SIZES.l};
+  font-size: ${FONT_SIZES.s40};
   font-weight: ${FONT_WEIGHTS.bold};
-  line-height: ${LINE_HEIGHTS.l};
+  line-height: ${LINE_HEIGHTS.h48};
   color: ${COLORS.black};
 `;
 
@@ -49,6 +49,19 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 24px;
+  margin-bottom: 30px;
+`;
+
+export const FormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;
+
+export const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 `;
 
 export const ResetPassword = styled.a`
@@ -60,9 +73,7 @@ export const ResetPassword = styled.a`
 
 export const ContentImage = styled.div`
   flex: 1;
-  max-width: 850px;
-  min-height: 700px;
-  height: 80vh;
+  height: 90vh;
 
   border-top-left-radius: 32px;
   border-bottom-left-radius: 32px;

@@ -9,13 +9,15 @@ export const FONT_WEIGHTS = {
 };
 
 export const FONT_SIZES = {
-  l: '40px',
-  m: '16px',
-  s: '12px',
+  s40: '40px',
+  s24: '24px',
+  s16: '16px',
+  s14: '14px',
 };
 
 export const LINE_HEIGHTS = {
-  l: '48px',
-  m: '22px',
-  s: '14px',
+  h48: '48px',
+  h34: '34px',
+  h22: '22px',
+  h20: '20px',
 };
