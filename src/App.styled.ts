@@ -62,8 +62,8 @@ export const GlobalStyles = createGlobalStyle`
   body {
     min-height: 100vh;
     font-family: ${FONTS.primary};
-    font-size: ${FONT_SIZES.m};
-    line-height: ${LINE_HEIGHTS.m};
+    font-size: ${FONT_SIZES.s16};
+    line-height: ${LINE_HEIGHTS.h22};
     text-rendering: optimizeSpeed;
     color: ${COLORS.black};
   }
