@@ -1,13 +1,17 @@
 import { FC } from 'react';
-import { AiFillStar } from 'react-icons/ai';
+import { AiFillStar, AiOutlineHeart } from 'react-icons/ai';
+import { SlLocationPin } from 'react-icons/sl';
 import {
   ItemCardSmallStyled,
+  ItemFavorite,
   ItemInfo,
+  ItemLocation,
   ItemPhoto,
   ItemRating,
+  ItemSchedule,
   ItemTitle,
+  ItemTitleWrapper,
   RatingIcon,
-  RatingNumber,
 } from './ItemCardSmall.styled';
 
 import itemPhoto from '../../assets/img/item-small.jpg';
@@ -17,15 +21,25 @@ export const ItemCardSmall: FC = () => {
     <ItemCardSmallStyled>
       <ItemPhoto>
         <img src={itemPhoto} alt="The Cake" />
+        <ItemFavorite>
+          <AiOutlineHeart />
+        </ItemFavorite>
       </ItemPhoto>
       <ItemInfo>
-        <ItemTitle>The Cake</ItemTitle>
-        <ItemRating>
-          <RatingIcon>
-            <AiFillStar />
-          </RatingIcon>
-          <RatingNumber>4.2</RatingNumber>
-        </ItemRating>
+        <ItemTitleWrapper>
+          <ItemTitle>The Cake</ItemTitle>
+          <ItemRating>
+            <RatingIcon>
+              <AiFillStar />
+            </RatingIcon>
+            <span>4.2</span>
+          </ItemRating>
+        </ItemTitleWrapper>
+        <ItemLocation href="#">
+          <SlLocationPin />
+          <span>Velyka Vasylkivska str., Kyiv, Ukraine</span>
+        </ItemLocation>
+        <ItemSchedule>$$ &#183; Open now (8 AM - 22 PM)</ItemSchedule>
       </ItemInfo>
     </ItemCardSmallStyled>
   );
