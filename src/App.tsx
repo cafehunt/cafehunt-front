@@ -5,7 +5,7 @@ import * as Styled from './App.styled';
 import * as theme from './theme';
 import { Login } from './pages/Login';
 import { Signup } from './pages/Signup';
-import { ItemCardSmall } from './components/ItemCardSmall/ItemCardSmall';
+import { ItemCardSmall } from './components/ItemCardSmall';
 
 const App: FC = () => {
   return (

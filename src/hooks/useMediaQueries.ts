@@ -1,4 +1,5 @@
 import { useMemo, useState, useEffect } from 'react';
+import { MEDIA } from '../theme';
 
 const useMediaQuery = (query: string) => {
   const mediaQuery = useMemo(() => window.matchMedia(query), [query]);
@@ -17,9 +18,9 @@ const useMediaQuery = (query: string) => {
 };
 
 export const useMediaQueries = () => {
-  const sm = useMediaQuery('(min-width: 768)');
-  const md = useMediaQuery('(min-width: 1024px)');
-  const lg = useMediaQuery('(min-width: 1200px)');
+  const sm = useMediaQuery(`(min-width: ${MEDIA.tablets})`);
+  const md = useMediaQuery(`(min-width: ${MEDIA.desktops})`);
+  const lg = useMediaQuery(`(min-width: ${MEDIA.ultraDesktops})`);
 
   return { sm, md, lg };
 };
