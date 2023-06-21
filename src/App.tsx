@@ -6,14 +6,16 @@ import * as theme from './theme';
 import { Login } from './pages/Login';
 import { Signup } from './pages/Signup';
 import { ItemCardSmall } from './components/ItemCardSmall';
+import { ItemCard } from './components/ItemCard';
 
 const App: FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <Styled.GlobalStyles />
       {/* <Login /> */}
-      <Signup />
+      {/* <Signup /> */}
       {/* <ItemCardSmall /> */}
+      <ItemCard />
     </ThemeProvider>
   );
 };

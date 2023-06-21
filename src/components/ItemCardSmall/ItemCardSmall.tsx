@@ -14,7 +14,7 @@ import {
   RatingIcon,
 } from './ItemCardSmall.styled';
 
-import itemPhoto from '../../assets/img/item-small.jpg';
+import itemPhoto from '../../assets/img/item-card.jpg';
 
 export const ItemCardSmall: FC = () => {
   return (
