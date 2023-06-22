@@ -7,6 +7,7 @@ import { Login } from './pages/Login';
 import { Signup } from './pages/Signup';
 import { ItemCardSmall } from './components/ItemCardSmall';
 import { ItemCard } from './components/ItemCard';
+import { Home } from './pages/Home';
 
 const App: FC = () => {
   return (
@@ -15,7 +16,8 @@ const App: FC = () => {
       {/* <Login /> */}
       {/* <Signup /> */}
       {/* <ItemCardSmall /> */}
-      <ItemCard />
+      {/* <ItemCard /> */}
+      <Home />
     </ThemeProvider>
   );
 };
