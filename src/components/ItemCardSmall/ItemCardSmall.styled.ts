@@ -13,6 +13,9 @@ export const ItemCardSmallStyled = styled.article`
 export const ItemPhoto = styled.div`
   position: relative;
 
+  border-radius: 16px;
+  overflow: hidden;
+
   img {
     width: 100%;
   }
