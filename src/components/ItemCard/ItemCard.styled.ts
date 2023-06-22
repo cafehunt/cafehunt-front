@@ -90,7 +90,7 @@ export const ItemCardRating = styled.p`
   display: flex;
   align-items: center;
 
-  font-size: ${FONT_SIZES.s14};
+  font-size: ${FONT_SIZES.s16};
   font-weight: ${FONT_WEIGHTS.regular};
   line-height: ${LINE_HEIGHTS.h20};
 `;
@@ -101,6 +101,6 @@ export const RatingIcon = styled.span`
   align-items: center;
   margin-right: 6px;
 
-  font-size: ${FONT_SIZES.s16};
+  font-size: ${FONT_SIZES.s24};
   color: ${COLORS.orange};
 `;
