@@ -66,6 +66,8 @@ export const GlobalStyles = createGlobalStyle`
     line-height: ${LINE_HEIGHTS.h22};
     text-rendering: optimizeSpeed;
     color: ${COLORS.black};
+
+    background-color: ${COLORS.grey};
   }
 
   a:not([class]) {
