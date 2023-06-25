@@ -11,17 +11,16 @@ import {
   ItemCardTitle,
   ItemCardFavorite,
   ItemCardFeaturesList,
-  ItemCardFeatureItem,
   ItemCardFooter,
   ItemCardRating,
   RatingIcon,
 } from './ItemCard.styled';
 import { Schedule } from '../Schedule';
-
 import { Location } from '../Location';
+import { Button } from '../Button';
+import { CafeTag } from '../CafeTag';
 
 import itemPhoto from '../../assets/img/item-card.jpg';
-import { Button } from '../Button';
 
 export const ItemCard: FC = () => {
   return (
@@ -44,8 +43,8 @@ export const ItemCard: FC = () => {
             </Location>
             <Schedule>$$ &#183; Open now (8 AM - 22 PM)</Schedule>
             <ItemCardFeaturesList>
-              <ItemCardFeatureItem>Vegan menu</ItemCardFeatureItem>
-              <ItemCardFeatureItem>Free WI-FI</ItemCardFeatureItem>
+              <CafeTag>Vegan menu</CafeTag>
+              <CafeTag>Free WI-FI</CafeTag>
             </ItemCardFeaturesList>
           </ItemCardDescription>
           <ItemCardFooter>

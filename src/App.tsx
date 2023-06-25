@@ -8,15 +8,17 @@ import { Signup } from './pages/Signup';
 import { ItemCardSmall } from './components/ItemCardSmall';
 import { ItemCard } from './components/ItemCard';
 import { Home } from './pages/Home';
+import { Cafe } from './pages/Cafe';
 
 const App: FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <Styled.GlobalStyles />
-      <Login />
+      {/* <Login /> */}
       {/* <Signup /> */}
       {/* <ItemCardSmall /> */}
       {/* <ItemCard /> */}
+      <Cafe />
       {/* <Home /> */}
     </ThemeProvider>
   );
