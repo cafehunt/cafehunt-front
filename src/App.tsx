@@ -15,8 +15,8 @@ const App: FC = () => {
       <Styled.GlobalStyles />
       {/* <Login /> */}
       {/* <Signup /> */}
-      {/* <ItemCardSmall /> */}
-      <ItemCard />
+      <ItemCardSmall />
+      {/* <ItemCard /> */}
       {/* <Home /> */}
     </ThemeProvider>
   );

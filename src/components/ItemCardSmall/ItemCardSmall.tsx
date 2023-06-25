@@ -7,11 +7,11 @@ import {
   ItemInfo,
   ItemPhoto,
   ItemRating,
-  ItemSchedule,
   ItemTitle,
   ItemTitleWrapper,
   RatingIcon,
 } from './ItemCardSmall.styled';
+import { Schedule } from '../Schedule';
 
 import { Location } from '../Location';
 
@@ -40,7 +40,7 @@ export const ItemCardSmall: FC = () => {
           <SlLocationPin />
           <span>Velyka Vasylkivska str., Kyiv, Ukraine</span>
         </Location>
-        <ItemSchedule>$$ &#183; Open now (8 AM - 22 PM)</ItemSchedule>
+        <Schedule variant="small">$$ &#183; Open now (8 AM - 22 PM)</Schedule>
       </ItemInfo>
     </ItemCardSmallStyled>
   );
