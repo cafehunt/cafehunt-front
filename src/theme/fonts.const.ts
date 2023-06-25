@@ -12,6 +12,7 @@ export const FONT_SIZES = {
   s40: '40px',
   s24: '24px',
   s20: '20px',
+  s18: '18px',
   s16: '16px',
   s14: '14px',
 };
@@ -21,4 +22,5 @@ export const LINE_HEIGHTS = {
   h34: '34px',
   h22: '22px',
   h20: '20px',
+  h140: '1.4',
 };

@@ -5,7 +5,6 @@ import {
   ItemCardSmallStyled,
   ItemFavorite,
   ItemInfo,
-  ItemLocation,
   ItemPhoto,
   ItemRating,
   ItemSchedule,
@@ -13,6 +12,8 @@ import {
   ItemTitleWrapper,
   RatingIcon,
 } from './ItemCardSmall.styled';
+
+import { Location } from '../Location';
 
 import itemPhoto from '../../assets/img/item-card.jpg';
 
@@ -35,10 +36,10 @@ export const ItemCardSmall: FC = () => {
             <span>4.2</span>
           </ItemRating>
         </ItemTitleWrapper>
-        <ItemLocation href="#">
+        <Location variant="small" href="#">
           <SlLocationPin />
           <span>Velyka Vasylkivska str., Kyiv, Ukraine</span>
-        </ItemLocation>
+        </Location>
         <ItemSchedule>$$ &#183; Open now (8 AM - 22 PM)</ItemSchedule>
       </ItemInfo>
     </ItemCardSmallStyled>

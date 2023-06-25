@@ -5,7 +5,7 @@ import { AiFillStar, AiOutlineHeart } from 'react-icons/ai';
 import {
   ItemCardContent,
   ItemCardHeader,
-  ItemCardLocation,
+  ItemCardDescription,
   ItemCardPhoto,
   ItemCardStyled,
   ItemCardTitle,
@@ -17,6 +17,8 @@ import {
   ItemCardRating,
   RatingIcon,
 } from './ItemCard.styled';
+
+import { Location } from '../Location';
 
 import itemPhoto from '../../assets/img/item-card.jpg';
 import { Button } from '../Button';
@@ -35,15 +37,19 @@ export const ItemCard: FC = () => {
               <AiOutlineHeart />
             </ItemCardFavorite>
           </ItemCardHeader>
-          <ItemCardLocation href="#">
-            <SlLocationPin />
-            <span>Velyka Vasylkivska str., Kyiv, Ukraine</span>
-          </ItemCardLocation>
-          <ItemCardSchedule>$$ &#183; Open now (8 AM - 22 PM)</ItemCardSchedule>
-          <ItemCardFeaturesList>
-            <ItemCardFeatureItem>Vegan menu</ItemCardFeatureItem>
-            <ItemCardFeatureItem>Free WI-FI</ItemCardFeatureItem>
-          </ItemCardFeaturesList>
+          <ItemCardDescription>
+            <Location href="#">
+              <SlLocationPin />
+              <span>Velyka Vasylkivska str., Kyiv, Ukraine</span>
+            </Location>
+            <ItemCardSchedule>
+              $$ &#183; Open now (8 AM - 22 PM)
+            </ItemCardSchedule>
+            <ItemCardFeaturesList>
+              <ItemCardFeatureItem>Vegan menu</ItemCardFeatureItem>
+              <ItemCardFeatureItem>Free WI-FI</ItemCardFeatureItem>
+            </ItemCardFeaturesList>
+          </ItemCardDescription>
           <ItemCardFooter>
             <ItemCardRating>
               <RatingIcon>

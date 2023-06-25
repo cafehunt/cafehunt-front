@@ -16,8 +16,8 @@ const App: FC = () => {
       {/* <Login /> */}
       {/* <Signup /> */}
       {/* <ItemCardSmall /> */}
-      {/* <ItemCard /> */}
-      <Home />
+      <ItemCard />
+      {/* <Home /> */}
     </ThemeProvider>
   );
 };

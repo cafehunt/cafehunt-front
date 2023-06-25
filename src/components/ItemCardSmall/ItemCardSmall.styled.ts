@@ -83,15 +83,6 @@ export const RatingIcon = styled.span`
   }
 `;
 
-export const ItemLocation = styled.a`
-  display: flex;
-  align-items: center;
-  gap: 6px;
-
-  color: ${COLORS.main};
-  text-decoration: none;
-`;
-
 export const ItemSchedule = styled.p`
   font-size: ${FONT_SIZES.s14};
   line-height: ${LINE_HEIGHTS.h20};
