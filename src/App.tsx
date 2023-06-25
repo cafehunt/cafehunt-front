@@ -13,9 +13,9 @@ const App: FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <Styled.GlobalStyles />
-      {/* <Login /> */}
+      <Login />
       {/* <Signup /> */}
-      <ItemCardSmall />
+      {/* <ItemCardSmall /> */}
       {/* <ItemCard /> */}
       {/* <Home /> */}
     </ThemeProvider>

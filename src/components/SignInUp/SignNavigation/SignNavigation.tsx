@@ -6,10 +6,10 @@ import { SignNavigationStyled } from './SignNavigation.styled';
 export const SignNavigation: FC = () => {
   return (
     <SignNavigationStyled>
-      <BackButton />
       <div>
         <Logo />
       </div>
+      <BackButton />
     </SignNavigationStyled>
   );
 };
