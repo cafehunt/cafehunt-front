@@ -1,10 +1,12 @@
 import styled, { css } from 'styled-components';
-import { COLORS, FONT_WEIGHTS } from '../../theme';
+import { COLORS, FONT_WEIGHTS, LINE_HEIGHTS } from '../../theme';
 
 type Props = {
   width?: string;
   variant?: 'primary' | 'secondary';
   disabled?: boolean;
+  hp?: string;
+  vp?: string;
 };
 
 const primaryButtonStyles = css`
@@ -40,9 +42,11 @@ const secondaryButtonStyles = css`
 
 export const Button = styled.button<Props>`
   width: ${({ width }) => width || '100%'};
-  padding: 12px 0;
+  padding-block: ${({ vp }) => vp || '12px'};
+  padding-inline: ${({ hp }) => hp || '0'}; 
 
   font-weight: ${FONT_WEIGHTS.medium};
+  line-height: ${LINE_HEIGHTS.h20};
   color: ${COLORS.white};
 
   border: 1px solid transparent;
