@@ -5,6 +5,8 @@ type Props = {
   jc?: 'flex-start' | 'space-between' | 'space-around' | 'center';
   ai?: 'flex-start' | 'center' | 'flex-end';
   gap?: string;
+  width?: string;
+  height?: string;
 };
 
 export const FlexContainer = styled.div<Props>`
@@ -12,6 +14,8 @@ export const FlexContainer = styled.div<Props>`
   flex-direction: ${({ fd }) => fd || 'row'};
   justify-content: ${({ jc }) => jc || 'flex-start'};
   align-items: ${({ ai }) => ai || 'flex-start'};
+  width: ${({ width }) => width || 'auto'};
+  height: ${({ height }) => height || 'auto'};
 
   gap: ${({ gap }) => gap || '0px'};
 `;

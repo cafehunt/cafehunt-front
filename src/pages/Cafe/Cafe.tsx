@@ -1,8 +1,6 @@
 import { FC } from 'react';
 
-import Grid from '@mui/material/Grid';
-import { AiOutlineHeart } from 'react-icons/ai';
-import { SlLocationPin } from 'react-icons/sl';
+import { AiOutlineHeart, AiOutlinePhone, AiFillStar } from 'react-icons/ai';
 
 import { FlexContainer } from '../../components/FlexContainer';
 import {
@@ -15,6 +13,14 @@ import {
   CafeTitleSecondary,
   PhotoContainer,
   CafeGalleryContainer,
+  CafeInfo,
+  CafeInfoItem,
+  CafeTitleTertiary,
+  CafePhone,
+  CafePhoneNumber,
+  CafeInfoLink,
+  CafeInfoReviews,
+  CafeInfoRating,
 } from './Cafe.styled';
 import { BackButton } from '../../components/BackButton';
 import { Location } from '../../components/Location';
@@ -24,6 +30,7 @@ import { CafeRating } from '../../components/CafeRating';
 import { Button } from '../../components/Button';
 
 import photoImg from '../../assets/img/item-card.jpg';
+import { COLORS } from '../../theme';
 
 export const Cafe: FC = () => {
   return (
@@ -40,11 +47,8 @@ export const Cafe: FC = () => {
         </CafeTitleWrapper>
         <FlexContainer jc="space-between" ai="center">
           <FlexContainer fd="column" gap="8px">
-            <Location variant="big" href="#">
-              <SlLocationPin />
-              <span>Velyka Vasylkivska str., Kyiv, Ukraine</span>
-            </Location>
-            <Schedule>$$ &#183; Open now (8 AM - 22 PM)</Schedule>
+            <Location variant="big" />
+            <Schedule variant="big">$$ &#183; Open now (8 AM - 22 PM)</Schedule>
             <FlexContainer gap="8px">
               <CafeTag>Vegan menu</CafeTag>
               <CafeTag>Free WI-FI</CafeTag>
@@ -76,6 +80,38 @@ export const Cafe: FC = () => {
           </PhotoContainer>
         </CafeGalleryContainer>
       </CafeGallery>
+      <CafeInfo>
+        <CafeInfoItem>
+          <CafeTitleTertiary>Location & Contacts</CafeTitleTertiary>
+          <FlexContainer fd="column" gap="8px">
+            <Location color={COLORS.black} />
+            <CafePhone>
+              <AiOutlinePhone />
+              <CafePhoneNumber>+38 (050) 123 45 67</CafePhoneNumber>
+            </CafePhone>
+          </FlexContainer>
+          <FlexContainer gap="8px">
+            <CafeInfoLink>Website</CafeInfoLink>
+            <CafeInfoLink>Menu</CafeInfoLink>
+          </FlexContainer>
+        </CafeInfoItem>
+        <CafeInfoItem>
+          <FlexContainer fd="column" jc="space-between" height="100%">
+            <CafeTitleTertiary>Rating & Reviews</CafeTitleTertiary>
+            <FlexContainer jc="space-between" ai="center" width="100%">
+              <CafeInfoReviews>372 reviews</CafeInfoReviews>
+              <CafeInfoRating>
+                <AiFillStar />
+                <span>4.2</span>
+              </CafeInfoRating>
+            </FlexContainer>
+          </FlexContainer>
+        </CafeInfoItem>
+        <CafeInfoItem>
+          <CafeTitleTertiary>General Information</CafeTitleTertiary>
+          <p>General information about a place</p>
+        </CafeInfoItem>
+      </CafeInfo>
     </CafeStyled>
   );
 };

@@ -1,1 +1,1 @@
-export * from './Location.styled';
+export * from './Location';

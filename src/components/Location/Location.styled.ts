@@ -16,21 +16,33 @@ const smallLocationStyles = css`
   gap: 4px;
 
   font-size: ${FONT_SIZES.s14};
+
+  svg {
+    font-size: ${FONT_SIZES.s18};
+  }
 `;
 
 const regularLocationStyles = css`
   gap: 8px;
 
   font-size: ${FONT_SIZES.s18};
+
+  svg {
+    font-size: ${FONT_SIZES.s20};
+  }
 `;
 
 const bigLocationStyles = css`
   gap: 8px;
 
   font-size: ${FONT_SIZES.s24};
+
+  svg {
+    font-size: ${FONT_SIZES.s24};
+  }
 `;
 
-export const Location = styled.a<Props>`
+export const LocationStyled = styled.a<Props>`
   display: inline-flex;
   align-items: center;
 

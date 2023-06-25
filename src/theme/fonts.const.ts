@@ -9,6 +9,7 @@ export const FONT_WEIGHTS = {
 };
 
 export const FONT_SIZES = {
+  s72: '72px',
   s56: '56px',
   s40: '40px',
   s32: '32px',

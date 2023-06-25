@@ -36,10 +36,7 @@ export const ItemCardSmall: FC = () => {
             <span>4.2</span>
           </ItemRating>
         </ItemTitleWrapper>
-        <Location variant="small" href="#">
-          <SlLocationPin />
-          <span>Velyka Vasylkivska str., Kyiv, Ukraine</span>
-        </Location>
+        <Location variant="small" />
         <Schedule variant="small">$$ &#183; Open now (8 AM - 22 PM)</Schedule>
       </ItemInfo>
     </ItemCardSmallStyled>

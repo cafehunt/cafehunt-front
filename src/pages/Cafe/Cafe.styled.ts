@@ -108,3 +108,81 @@ export const PhotoContainer = styled.div`
     object-fit: cover;
   }
 `;
+
+export const CafeInfo = styled.div`
+  display: flex;
+  gap: 24px;
+`;
+
+export const CafeInfoItem = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+
+  font-size: ${FONT_SIZES.s18};
+
+  border: 1px solid ${COLORS.grey};
+  border-radius: 16px;
+  background-color: ${COLORS.white};
+
+  &:nth-child(2) {
+    color: ${COLORS.white};
+
+    border: none;
+    background-color: ${COLORS.main};
+  }
+`;
+
+export const CafeTitleTertiary = styled.h4`
+  font-size: ${FONT_SIZES.s24};
+  font-weight: ${FONT_WEIGHTS.medium};
+  line-height: ${LINE_HEIGHTS.h140};
+`;
+
+export const CafePhone = styled.p`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  svg {
+    font-size: ${FONT_SIZES.s20};
+  }
+`;
+
+export const CafePhoneNumber = styled.p`
+  font-size: ${FONT_SIZES.s18};
+  line-height: ${LINE_HEIGHTS.h140};
+`;
+
+export const CafeInfoLink = styled.a`
+  font-size: ${FONT_SIZES.s16};
+  font-weight: ${FONT_WEIGHTS.medium};
+  line-height: ${LINE_HEIGHTS.h140};
+  text-decoration: underline;
+  color: ${COLORS.main};
+
+  cursor: pointer;
+`;
+
+export const CafeInfoReviews = styled.span`
+  font-size: ${FONT_SIZES.s18};
+`;
+
+export const CafeInfoRating = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  svg {
+    font-size: ${FONT_SIZES.s56};
+    color: ${COLORS.orange};
+  }
+
+  span {
+    font-size: ${FONT_SIZES.s72};
+    font-weight: ${FONT_WEIGHTS.medium};
+  }
+`;

@@ -37,10 +37,7 @@ export const ItemCard: FC = () => {
             </ItemCardFavorite>
           </ItemCardHeader>
           <ItemCardDescription>
-            <Location href="#">
-              <SlLocationPin />
-              <span>Velyka Vasylkivska str., Kyiv, Ukraine</span>
-            </Location>
+            <Location />
             <Schedule>$$ &#183; Open now (8 AM - 22 PM)</Schedule>
             <ItemCardFeaturesList>
               <CafeTag>Vegan menu</CafeTag>
