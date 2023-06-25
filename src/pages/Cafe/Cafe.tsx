@@ -1,4 +1,6 @@
 import { FC } from 'react';
+
+import Grid from '@mui/material/Grid';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { SlLocationPin } from 'react-icons/sl';
 
@@ -9,6 +11,10 @@ import {
   CafeTitleWrapper,
   CafeTitle,
   Favorite,
+  CafeGallery,
+  CafeTitleSecondary,
+  PhotoContainer,
+  CafeGalleryContainer,
 } from './Cafe.styled';
 import { BackButton } from '../../components/BackButton';
 import { Location } from '../../components/Location';
@@ -16,6 +22,8 @@ import { Schedule } from '../../components/Schedule';
 import { CafeTag } from '../../components/CafeTag';
 import { CafeRating } from '../../components/CafeRating';
 import { Button } from '../../components/Button';
+
+import photoImg from '../../assets/img/item-card.jpg';
 
 export const Cafe: FC = () => {
   return (
@@ -48,6 +56,26 @@ export const Cafe: FC = () => {
           </FlexContainer>
         </FlexContainer>
       </CafeHeader>
+      <CafeGallery>
+        <CafeTitleSecondary>Photos</CafeTitleSecondary>
+        <CafeGalleryContainer>
+          <PhotoContainer>
+            <img src={photoImg} alt="Cafe" />
+          </PhotoContainer>
+          <PhotoContainer>
+            <img src={photoImg} alt="Cafe" />
+          </PhotoContainer>
+          <PhotoContainer>
+            <img src={photoImg} alt="Cafe" />
+          </PhotoContainer>
+          <PhotoContainer>
+            <img src={photoImg} alt="Cafe" />
+          </PhotoContainer>
+          <PhotoContainer>
+            <img src={photoImg} alt="Cafe" />
+          </PhotoContainer>
+        </CafeGalleryContainer>
+      </CafeGallery>
     </CafeStyled>
   );
 };

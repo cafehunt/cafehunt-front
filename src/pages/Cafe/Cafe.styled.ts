@@ -71,3 +71,40 @@ export const Favorite = styled.button`
 
   cursor: pointer;
 `;
+
+export const CafeGallery = styled.div``;
+
+export const CafeTitleSecondary = styled.h3`
+  margin-bottom: 20px;
+
+  font-size: ${FONT_SIZES.s32};
+  font-weight: ${FONT_WEIGHTS.bold};
+  line-height: ${LINE_HEIGHTS.h120};
+  color: ${COLORS.black};
+`;
+
+export const CafeGalleryContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-gap: 24px;
+`;
+
+export const PhotoContainer = styled.div`
+  grid-column: span 1;
+  grid-row: span 1;
+
+  border-radius: 16px;
+  overflow: hidden;
+
+  &:nth-child(1) {
+    grid-row: span 2;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+  }
+`;
