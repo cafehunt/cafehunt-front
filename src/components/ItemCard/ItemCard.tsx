@@ -10,13 +10,13 @@ import {
   ItemCardStyled,
   ItemCardTitle,
   ItemCardFavorite,
-  ItemCardSchedule,
   ItemCardFeaturesList,
   ItemCardFeatureItem,
   ItemCardFooter,
   ItemCardRating,
   RatingIcon,
 } from './ItemCard.styled';
+import { Schedule } from '../Schedule';
 
 import { Location } from '../Location';
 
@@ -42,9 +42,7 @@ export const ItemCard: FC = () => {
               <SlLocationPin />
               <span>Velyka Vasylkivska str., Kyiv, Ukraine</span>
             </Location>
-            <ItemCardSchedule>
-              $$ &#183; Open now (8 AM - 22 PM)
-            </ItemCardSchedule>
+            <Schedule>$$ &#183; Open now (8 AM - 22 PM)</Schedule>
             <ItemCardFeaturesList>
               <ItemCardFeatureItem>Vegan menu</ItemCardFeatureItem>
               <ItemCardFeatureItem>Free WI-FI</ItemCardFeatureItem>

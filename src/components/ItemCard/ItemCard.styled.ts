@@ -57,11 +57,6 @@ export const ItemCardFavorite = styled.div`
   cursor: pointer;
 `;
 
-export const ItemCardSchedule = styled.p`
-  font-size: ${FONT_SIZES.s16};
-  line-height: ${LINE_HEIGHTS.h22};
-`;
-
 export const ItemCardFeaturesList = styled.div`
   display: flex;
   gap: 8px;

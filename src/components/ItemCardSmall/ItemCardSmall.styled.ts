@@ -82,8 +82,3 @@ export const RatingIcon = styled.span`
     font-size: 14px;
   }
 `;
-
-export const ItemSchedule = styled.p`
-  font-size: ${FONT_SIZES.s14};
-  line-height: ${LINE_HEIGHTS.h20};
-`;
