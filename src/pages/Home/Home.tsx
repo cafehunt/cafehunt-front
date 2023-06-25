@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import {
-  Container,
   HomeHeader,
   ExploreList,
   HomeStyled,

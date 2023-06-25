@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { COLORS, FONT_WEIGHTS } from '../../theme';
+import { COLORS, FONT_WEIGHTS, LINE_HEIGHTS } from '../../theme';
 
 type Props = {
   width?: string;
@@ -43,6 +43,7 @@ export const Button = styled.button<Props>`
   padding: 12px 0;
 
   font-weight: ${FONT_WEIGHTS.medium};
+  line-height: ${LINE_HEIGHTS.h20};
   color: ${COLORS.white};
 
   border: 1px solid transparent;
@@ -54,6 +55,5 @@ export const Button = styled.button<Props>`
 
   ${({ variant }) => variant === 'secondary' && secondaryButtonStyles};
 
-  ${({ variant }) =>
-    (variant !== 'secondary' || !variant) && primaryButtonStyles};
+  ${({ variant }) => !variant && primaryButtonStyles};
 `;

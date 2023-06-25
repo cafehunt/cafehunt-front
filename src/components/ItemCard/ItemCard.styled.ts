@@ -30,6 +30,13 @@ export const ItemCardHeader = styled.div`
   justify-content: space-between;
 `;
 
+export const ItemCardDescription = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 48px;
+`;
+
 export const ItemCardTitle = styled.h3`
   margin-bottom: 10px;
 
@@ -50,19 +57,7 @@ export const ItemCardFavorite = styled.div`
   cursor: pointer;
 `;
 
-export const ItemCardLocation = styled.a`
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 8px;
-
-  color: ${COLORS.main};
-  text-decoration: none;
-`;
-
 export const ItemCardSchedule = styled.p`
-  margin-bottom: 8px;
-
   font-size: ${FONT_SIZES.s16};
   line-height: ${LINE_HEIGHTS.h22};
 `;
@@ -70,7 +65,6 @@ export const ItemCardSchedule = styled.p`
 export const ItemCardFeaturesList = styled.div`
   display: flex;
   gap: 8px;
-  margin-bottom: 48px;
 `;
 
 export const ItemCardFeatureItem = styled.p`

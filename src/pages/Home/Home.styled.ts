@@ -17,14 +17,6 @@ export const HomeStyled = styled.div`
   }
 `;
 
-export const Container = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1320px;
-  margin: 0 auto;
-`;
-
 export const HomeHeader = styled.header`
   display: flex;
   justify-content: space-between;
@@ -61,9 +53,9 @@ export const ExploreList = styled.div`
 
   grid-template-columns: repeat(2, 1fr);
 
-  @media (min-width: ${MEDIA.desktops}) {
+  /* @media (min-width: ${MEDIA.desktops}) {
     grid-template-columns: repeat(3, 1fr);
-  }
+  } */
 
   @media (min-width: ${MEDIA.ultraDesktops}) {
     grid-template-columns: repeat(4, 1fr);
