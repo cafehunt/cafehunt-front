@@ -1,9 +1,9 @@
 import { FC } from 'react';
-import { CustomSelect, Option } from '../CustomSelect';
-import { Input } from '../Input';
-import { BasicRating } from '../Rating/Rating';
-import { Button } from '../../Button';
-import { Checkbox } from '../Checkbox';
+import { CustomSelect, Option } from './CustomSelect';
+import { Input } from './Input';
+import { BasicRating } from './Rating';
+import { Button } from '../Button';
+import { Checkbox } from './Checkbox';
 import {
   Border,
   ButtonContainer,
@@ -13,7 +13,7 @@ import {
   ItemsWrapper,
   StyledLink,
   StyledTitle,
-} from './Filter.styled';
+} from './Filters.styled';
 
 const options: Option[] = [
   { value: 'option1', label: 'Option 1' },
@@ -21,7 +21,7 @@ const options: Option[] = [
   { value: 'option3', label: 'Option 3' },
 ];
 
-export const Filter: FC = () => {
+export const Filters: FC = () => {
   const handleCheckboxChange = (newValue: boolean) => {
     console.log('Checkbox value:', newValue);
   };
