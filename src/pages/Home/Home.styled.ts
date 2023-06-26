@@ -8,28 +8,36 @@ import {
 } from '../../theme';
 
 export const HomeStyled = styled.div`
-  padding: 40px 20px;
-
-  background-color: ${COLORS.white};
-
-  @media (min-width: ${MEDIA.tablets}) {
-    padding: 40px 60px;
-  }
+  padding-bottom: 56px;
 `;
 
 export const HomeHeader = styled.header`
+  padding: 48px 0;
+
+  background-color: ${COLORS.white};
+`;
+
+export const HomeHeaderWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   max-width: 1320px;
+  width: 100%;
   margin: 0 auto;
 
   @media (min-width: ${MEDIA.tablets}) {
-    margin: 0 auto 48px;
+    margin: 0 auto;
   }
 `;
 
 export const HomeExplore = styled.section`
+  margin-bottom: 40px;
+  padding-bottom: 40px;
+
+  background-color: ${COLORS.white};
+`;
+
+export const HomeExploreWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -53,11 +61,21 @@ export const ExploreList = styled.div`
 
   grid-template-columns: repeat(2, 1fr);
 
-  /* @media (min-width: ${MEDIA.desktops}) {
-    grid-template-columns: repeat(3, 1fr);
-  } */
-
   @media (min-width: ${MEDIA.ultraDesktops}) {
     grid-template-columns: repeat(4, 1fr);
   }
+`;
+
+export const HomeContent = styled.section`
+  display: flex;
+  gap: 24px;
+  max-width: 1320px;
+  margin: 0 auto;
+`;
+
+export const CafeResults = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 28px;
 `;

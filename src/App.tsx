@@ -18,8 +18,8 @@ const App: FC = () => {
       {/* <Signup /> */}
       {/* <ItemCardSmall /> */}
       {/* <ItemCard /> */}
-      <Cafe />
-      {/* <Home /> */}
+      {/* <Cafe /> */}
+      <Home />
     </ThemeProvider>
   );
 };
