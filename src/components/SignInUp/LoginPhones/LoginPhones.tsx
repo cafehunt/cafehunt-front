@@ -1,15 +1,17 @@
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 
 import {
   ContentPhonesStyled,
   Title,
-  Link,
+  LinkStyled,
   Form,
   ResetPassword,
 } from '../CommonContent';
 import { Input } from '../../Input';
 import { Button } from '../../Button';
 import { SignNavigation } from '../SignNavigation/SignNavigation';
+import { appRoutes } from '../../../routes/Routes';
 
 export const LoginPhones: FC = () => {
   return (
@@ -18,7 +20,10 @@ export const LoginPhones: FC = () => {
       <div>
         <Title>Welcome back!</Title>
         <p>
-          Still don’t have an account? <Link href="#">Sign up</Link>
+          Still don’t have an account?{' '}
+          <Link to={appRoutes.register}>
+            <LinkStyled>Sign up</LinkStyled>
+          </Link>
         </p>
       </div>
       <div>

@@ -38,7 +38,7 @@ export const Title = styled.h2`
   color: ${COLORS.black};
 `;
 
-export const Link = styled.a`
+export const LinkStyled = styled.span`
   font: inherit;
   font-weight: ${FONT_WEIGHTS.medium};
   text-decoration: none;

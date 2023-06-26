@@ -1,10 +1,11 @@
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 
 import {
   ContentDesktopsStyled,
   ContentWrapper,
   Title,
-  Link,
+  LinkStyled,
   Form,
   FormContainer,
   InputContainer,
@@ -14,6 +15,7 @@ import {
 import { Input } from '../../Input';
 import { Button } from '../../Button';
 import { SignNavigation } from '../SignNavigation/SignNavigation';
+import { appRoutes } from '../../../routes/Routes';
 
 export const LoginDesktops: FC = () => {
   return (
@@ -23,7 +25,10 @@ export const LoginDesktops: FC = () => {
         <div>
           <Title>Welcome back!</Title>
           <p>
-            Still don’t have an account? <Link href="#">Sign up</Link>
+            Still don’t have an account?{' '}
+            <Link to={appRoutes.register}>
+              <LinkStyled>Sign up</LinkStyled>
+            </Link>
           </p>
         </div>
         <div>
