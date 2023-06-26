@@ -11,25 +11,6 @@ export const HomeStyled = styled.div`
   padding-bottom: 56px;
 `;
 
-export const HomeHeader = styled.header`
-  padding: 48px 0;
-
-  background-color: ${COLORS.white};
-`;
-
-export const HomeHeaderWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1320px;
-  width: 100%;
-  margin: 0 auto;
-
-  @media (min-width: ${MEDIA.tablets}) {
-    margin: 0 auto;
-  }
-`;
-
 export const HomeExplore = styled.section`
   margin-bottom: 40px;
   padding-bottom: 40px;

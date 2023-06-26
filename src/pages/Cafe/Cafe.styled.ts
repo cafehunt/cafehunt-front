@@ -10,17 +10,21 @@ import {
 import cafeBg from '../../assets/img/login-bg.jpg';
 
 export const CafeStyled = styled.section`
+  background-color: ${COLORS.white};
+`;
+
+export const CafeWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 64px;
   max-width: 1320px;
   margin: 0 auto;
-  padding: 40px 20px;
+  padding-bottom: 40px;
 
   background-color: ${COLORS.white};
 
   @media (min-width: ${MEDIA.tablets}) {
-    padding: 40px 60px;
+    padding-bottom: 40px;
   }
 `;
 

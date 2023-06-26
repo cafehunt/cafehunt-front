@@ -1,10 +1,12 @@
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 
-import { ContentPhonesStyled, Title, Link, Form } from '../CommonContent';
+import { ContentPhonesStyled, Title, LinkStyled, Form } from '../CommonContent';
 
 import { Input } from '../../Input';
 import { Button } from '../../Button';
 import { SignNavigation } from '../SignNavigation/SignNavigation';
+import { appRoutes } from '../../../routes/Routes';
 
 export const SignupPhones: FC = () => {
   return (
@@ -13,7 +15,10 @@ export const SignupPhones: FC = () => {
       <div>
         <Title>Create an account</Title>
         <p>
-          Already have an account? <Link href="#">Log in</Link>
+          Already have an account?{' '}
+          <Link to={appRoutes.login}>
+            <LinkStyled>Log in</LinkStyled>
+          </Link>
         </p>
       </div>
       <div>

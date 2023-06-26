@@ -1,5 +1,6 @@
 import { FC } from 'react';
-import { SlLocationPin } from 'react-icons/sl';
+import { Link } from 'react-router-dom';
+
 import { AiFillStar, AiOutlineHeart } from 'react-icons/ai';
 
 import {
@@ -21,6 +22,7 @@ import { Button } from '../Button';
 import { CafeTag } from '../CafeTag';
 
 import itemPhoto from '../../assets/img/item-card.jpg';
+import { appRoutes } from '../../routes/Routes';
 
 export const ItemCard: FC = () => {
   return (
@@ -51,9 +53,11 @@ export const ItemCard: FC = () => {
               </RatingIcon>
               <span>4.2</span>
             </ItemCardRating>
-            <Button variant="secondary" width="130px">
-              View
-            </Button>
+            <Link to={appRoutes.cafes}>
+              <Button variant="secondary" width="130px">
+                View
+              </Button>
+            </Link>
           </ItemCardFooter>
         </div>
       </ItemCardContent>

@@ -71,7 +71,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   a:not([class]) {
-    text-decoration-skip-ink: auto;
+    text-decoration: none;
   }
 
   img {

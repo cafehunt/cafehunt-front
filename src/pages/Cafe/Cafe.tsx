@@ -5,6 +5,7 @@ import { AiOutlineHeart, AiOutlinePhone, AiFillStar } from 'react-icons/ai';
 import { FlexContainer } from '../../components/FlexContainer';
 import {
   CafeStyled,
+  CafeWrapper,
   CafeHeader,
   CafeTitleWrapper,
   CafeTitle,
@@ -33,96 +34,104 @@ import { Button } from '../../components/Button';
 import photoImg from '../../assets/img/item-card.jpg';
 import { COLORS } from '../../theme';
 import { ItemCardSmall } from '../../components/ItemCardSmall';
+import { Header } from '../../components/Header';
 
 export const Cafe: FC = () => {
   return (
     <CafeStyled>
-      <CafeHeader>
-        <nav>
-          <BackButton />
-        </nav>
-        <CafeTitleWrapper>
-          <CafeTitle>Very Well Cafe</CafeTitle>
-          <Favorite>
-            <AiOutlineHeart />
-          </Favorite>
-        </CafeTitleWrapper>
-        <FlexContainer jc="space-between" ai="center">
-          <FlexContainer fd="column" gap="8px">
-            <Location variant="big" />
-            <Schedule variant="big">$$ &#183; Open now (8 AM - 22 PM)</Schedule>
+      <CafeWrapper>
+        <CafeHeader>
+          <FlexContainer fd="column">
+            <Header />
+            <nav>
+              <BackButton />
+            </nav>
+          </FlexContainer>
+          <CafeTitleWrapper>
+            <CafeTitle>Very Well Cafe</CafeTitle>
+            <Favorite>
+              <AiOutlineHeart />
+            </Favorite>
+          </CafeTitleWrapper>
+          <FlexContainer jc="space-between" ai="center">
+            <FlexContainer fd="column" gap="8px">
+              <Location variant="big" />
+              <Schedule variant="big">
+                $$ &#183; Open now (8 AM - 22 PM)
+              </Schedule>
+              <FlexContainer gap="8px">
+                <CafeTag>Vegan menu</CafeTag>
+                <CafeTag>Free WI-FI</CafeTag>
+              </FlexContainer>
+            </FlexContainer>
+            <FlexContainer fd="column" ai="flex-end" gap="8px">
+              <CafeRating />
+              <Button width="200px">Book</Button>
+            </FlexContainer>
+          </FlexContainer>
+        </CafeHeader>
+        <CafeGallery>
+          <CafeTitleSecondary>Photos</CafeTitleSecondary>
+          <CafeGalleryContainer>
+            <PhotoContainer>
+              <img src={photoImg} alt="Cafe" />
+            </PhotoContainer>
+            <PhotoContainer>
+              <img src={photoImg} alt="Cafe" />
+            </PhotoContainer>
+            <PhotoContainer>
+              <img src={photoImg} alt="Cafe" />
+            </PhotoContainer>
+            <PhotoContainer>
+              <img src={photoImg} alt="Cafe" />
+            </PhotoContainer>
+            <PhotoContainer>
+              <img src={photoImg} alt="Cafe" />
+            </PhotoContainer>
+          </CafeGalleryContainer>
+        </CafeGallery>
+        <CafeInfo>
+          <CafeInfoItem>
+            <CafeTitleTertiary>Location & Contacts</CafeTitleTertiary>
+            <FlexContainer fd="column" gap="8px">
+              <Location color={COLORS.black} />
+              <CafePhone>
+                <AiOutlinePhone />
+                <CafePhoneNumber>+38 (050) 123 45 67</CafePhoneNumber>
+              </CafePhone>
+            </FlexContainer>
             <FlexContainer gap="8px">
-              <CafeTag>Vegan menu</CafeTag>
-              <CafeTag>Free WI-FI</CafeTag>
+              <CafeInfoLink>Website</CafeInfoLink>
+              <CafeInfoLink>Menu</CafeInfoLink>
             </FlexContainer>
-          </FlexContainer>
-          <FlexContainer fd="column" ai="flex-end" gap="8px">
-            <CafeRating />
-            <Button width="200px">Book</Button>
-          </FlexContainer>
-        </FlexContainer>
-      </CafeHeader>
-      <CafeGallery>
-        <CafeTitleSecondary>Photos</CafeTitleSecondary>
-        <CafeGalleryContainer>
-          <PhotoContainer>
-            <img src={photoImg} alt="Cafe" />
-          </PhotoContainer>
-          <PhotoContainer>
-            <img src={photoImg} alt="Cafe" />
-          </PhotoContainer>
-          <PhotoContainer>
-            <img src={photoImg} alt="Cafe" />
-          </PhotoContainer>
-          <PhotoContainer>
-            <img src={photoImg} alt="Cafe" />
-          </PhotoContainer>
-          <PhotoContainer>
-            <img src={photoImg} alt="Cafe" />
-          </PhotoContainer>
-        </CafeGalleryContainer>
-      </CafeGallery>
-      <CafeInfo>
-        <CafeInfoItem>
-          <CafeTitleTertiary>Location & Contacts</CafeTitleTertiary>
-          <FlexContainer fd="column" gap="8px">
-            <Location color={COLORS.black} />
-            <CafePhone>
-              <AiOutlinePhone />
-              <CafePhoneNumber>+38 (050) 123 45 67</CafePhoneNumber>
-            </CafePhone>
-          </FlexContainer>
-          <FlexContainer gap="8px">
-            <CafeInfoLink>Website</CafeInfoLink>
-            <CafeInfoLink>Menu</CafeInfoLink>
-          </FlexContainer>
-        </CafeInfoItem>
-        <CafeInfoItem>
-          <FlexContainer fd="column" jc="space-between" height="100%">
-            <CafeTitleTertiary>Rating & Reviews</CafeTitleTertiary>
-            <FlexContainer jc="space-between" ai="flex-end" width="100%">
-              <CafeInfoReviews>372 reviews</CafeInfoReviews>
-              <CafeInfoRating>
-                <AiFillStar />
-                <span>4.2</span>
-              </CafeInfoRating>
+          </CafeInfoItem>
+          <CafeInfoItem>
+            <FlexContainer fd="column" jc="space-between" height="100%">
+              <CafeTitleTertiary>Rating & Reviews</CafeTitleTertiary>
+              <FlexContainer jc="space-between" ai="flex-end" width="100%">
+                <CafeInfoReviews>372 reviews</CafeInfoReviews>
+                <CafeInfoRating>
+                  <AiFillStar />
+                  <span>4.2</span>
+                </CafeInfoRating>
+              </FlexContainer>
             </FlexContainer>
+          </CafeInfoItem>
+          <CafeInfoItem>
+            <CafeTitleTertiary>General Information</CafeTitleTertiary>
+            <p>General information about a place</p>
+          </CafeInfoItem>
+        </CafeInfo>
+        <CafeSuggestions>
+          <CafeTitleSecondary>You might also like</CafeTitleSecondary>
+          <FlexContainer gap="24px">
+            <ItemCardSmall />
+            <ItemCardSmall />
+            <ItemCardSmall />
+            <ItemCardSmall />
           </FlexContainer>
-        </CafeInfoItem>
-        <CafeInfoItem>
-          <CafeTitleTertiary>General Information</CafeTitleTertiary>
-          <p>General information about a place</p>
-        </CafeInfoItem>
-      </CafeInfo>
-      <CafeSuggestions>
-        <CafeTitleSecondary>You might also like</CafeTitleSecondary>
-        <FlexContainer gap="24px">
-          <ItemCardSmall />
-          <ItemCardSmall />
-          <ItemCardSmall />
-          <ItemCardSmall />
-        </FlexContainer>
-      </CafeSuggestions>
+        </CafeSuggestions>
+      </CafeWrapper>
     </CafeStyled>
   );
 };
