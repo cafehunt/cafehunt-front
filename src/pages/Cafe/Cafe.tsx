@@ -21,6 +21,7 @@ import {
   CafeInfoLink,
   CafeInfoReviews,
   CafeInfoRating,
+  CafeSuggestions,
 } from './Cafe.styled';
 import { BackButton } from '../../components/BackButton';
 import { Location } from '../../components/Location';
@@ -31,6 +32,7 @@ import { Button } from '../../components/Button';
 
 import photoImg from '../../assets/img/item-card.jpg';
 import { COLORS } from '../../theme';
+import { ItemCardSmall } from '../../components/ItemCardSmall';
 
 export const Cafe: FC = () => {
   return (
@@ -98,7 +100,7 @@ export const Cafe: FC = () => {
         <CafeInfoItem>
           <FlexContainer fd="column" jc="space-between" height="100%">
             <CafeTitleTertiary>Rating & Reviews</CafeTitleTertiary>
-            <FlexContainer jc="space-between" ai="center" width="100%">
+            <FlexContainer jc="space-between" ai="flex-end" width="100%">
               <CafeInfoReviews>372 reviews</CafeInfoReviews>
               <CafeInfoRating>
                 <AiFillStar />
@@ -112,6 +114,15 @@ export const Cafe: FC = () => {
           <p>General information about a place</p>
         </CafeInfoItem>
       </CafeInfo>
+      <CafeSuggestions>
+        <CafeTitleSecondary>You might also like</CafeTitleSecondary>
+        <FlexContainer gap="24px">
+          <ItemCardSmall />
+          <ItemCardSmall />
+          <ItemCardSmall />
+          <ItemCardSmall />
+        </FlexContainer>
+      </CafeSuggestions>
     </CafeStyled>
   );
 };

@@ -186,3 +186,8 @@ export const CafeInfoRating = styled.div`
     font-weight: ${FONT_WEIGHTS.medium};
   }
 `;
+
+export const CafeSuggestions = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
