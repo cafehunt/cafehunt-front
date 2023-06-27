@@ -62,14 +62,6 @@ export const ItemCardFeaturesList = styled.div`
   gap: 8px;
 `;
 
-export const ItemCardFeatureItem = styled.p`
-  padding: 4px 8px;
-  color: ${COLORS.main};
-
-  border-radius: 4px;
-  background-color: ${COLORS.light_grey};
-`;
-
 export const ItemCardFooter = styled.div`
   display: flex;
   justify-content: space-between;

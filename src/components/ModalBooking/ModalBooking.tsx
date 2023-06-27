@@ -5,7 +5,7 @@ import { FC } from 'react';
 import { Input } from '../Input';
 import { DatePicker } from '@mui/x-date-pickers';
 import { CustomSelect } from '../Filters/CustomSelect';
-import { options } from '../Filters/Filter';
+import { options } from '../Filters';
 import { Button } from '../Button';
 
 export const StyledTitle = styled.h3`

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { COLORS } from '../../theme';
 
-export const BackButtonStyled = styled.a`
+export const BackButtonStyled = styled.p`
   display: flex;
   align-items: center;
   gap: 8px;

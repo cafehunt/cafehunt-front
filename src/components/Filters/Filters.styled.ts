@@ -1,12 +1,14 @@
 import styled from 'styled-components';
-import { COLORS, FONT_SIZES, FONT_WEIGHTS } from '../../../theme';
+import { COLORS, FONT_SIZES, FONT_WEIGHTS } from '../../theme';
 
 export const FilterContainer = styled.div`
   width: 424px;
+  padding: 32px 24px;
+  align-self: flex-start;
+
   border-radius: 24px;
   border: 1px solid ${COLORS.light_grey};
   background-color: ${COLORS.white};
-  padding: 32px 24px;
 `;
 
 export const FiltersItem = styled.h2`

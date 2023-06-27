@@ -67,11 +67,11 @@ export const GlobalStyles = createGlobalStyle`
     text-rendering: optimizeSpeed;
     color: ${COLORS.black};
 
-    background-color: ${COLORS.grey};
+    background-color: ${COLORS.background};
   }
 
   a:not([class]) {
-    text-decoration-skip-ink: auto;
+    text-decoration: none;
   }
 
   img {

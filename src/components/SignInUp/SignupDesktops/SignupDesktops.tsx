@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 
 import { Input } from '../../Input';
 import { Button } from '../../Button';
@@ -7,11 +8,12 @@ import {
   ContentDesktopsStyled,
   ContentWrapper,
   Title,
-  Link,
+  LinkStyled,
   Form,
   FormContainer,
   ContentImage,
 } from '../CommonContent';
+import { appRoutes } from '../../../routes/Routes';
 
 export const SignupDesktops: FC = () => {
   return (
@@ -21,7 +23,10 @@ export const SignupDesktops: FC = () => {
         <div>
           <Title>Create an account</Title>
           <p>
-            Already have an account? <Link href="#">Log in</Link>
+            Already have an account?{' '}
+            <Link to={appRoutes.login}>
+              <LinkStyled>Log in</LinkStyled>
+            </Link>
           </p>
         </div>
         <div>
