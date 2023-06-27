@@ -66,7 +66,7 @@ export const Cafe: FC = () => {
             </FlexContainer>
             <FlexContainer fd="column" ai="flex-end" gap="8px">
               <CafeRating />
-              <Button width="200px">Book</Button>
+              <Button width="200px">Reserve</Button>
             </FlexContainer>
           </FlexContainer>
         </CafeHeader>
