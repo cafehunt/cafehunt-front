@@ -1,4 +1,6 @@
 import { FC } from 'react';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { ThemeProvider } from 'styled-components';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
@@ -23,21 +25,23 @@ const queryClient = new QueryClient({
 
 const App: FC = () => {
   return (
-    <ThemeProvider theme={theme}>
-      <Styled.GlobalStyles />
-      <BrowserRouter>
-        <ScrollToTop>
-          <QueryClientProvider client={queryClient}>
-            <Routes>
-              <Route path={appRoutes.home} element={<Home />} />
-              <Route path={appRoutes.login} element={<Login />} />
-              <Route path={appRoutes.register} element={<Signup />} />
-              <Route path={appRoutes.cafes} element={<Cafe />} />
-            </Routes>
-          </QueryClientProvider>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <ThemeProvider theme={theme}>
+        <Styled.GlobalStyles />
+        <BrowserRouter>
+          <ScrollToTop>
+            <QueryClientProvider client={queryClient}>
+              <Routes>
+                <Route path={appRoutes.home} element={<Home />} />
+                <Route path={appRoutes.login} element={<Login />} />
+                <Route path={appRoutes.register} element={<Signup />} />
+                <Route path={appRoutes.cafes} element={<Cafe />} />
+              </Routes>
+        </QueryClientProvider>  
         </ScrollToTop>
-      </BrowserRouter>
-    </ThemeProvider>
+        </BrowserRouter>
+      </ThemeProvider>
+    </LocalizationProvider>
   );
 };
 
