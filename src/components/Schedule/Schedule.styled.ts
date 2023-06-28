@@ -24,6 +24,8 @@ const bigScheduleStyles = css`
 `;
 
 export const Schedule = styled.p<Props>`
+  padding-left: 6px;
+
   line-height: ${LINE_HEIGHTS.h22};
 
   ${({ variant }) => variant === ScheduleVariants.small && smallScheduleStyles};
