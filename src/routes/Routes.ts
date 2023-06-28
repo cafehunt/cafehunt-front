@@ -1,6 +1,6 @@
 export const appRoutes = {
   home: '/',
-  login: '/auth/jwt/login',
-  register: '/auth/register',
+  login: '/login',
+  register: '/register',
   cafes: '/cafes',
 };

@@ -1,17 +1,16 @@
-import { QueryFunction, QueryFunctionContext } from 'react-query';
+import { QueryFunction } from 'react-query';
 import { CafesAPIResponse } from '../types/Cafe.type';
 
-export const fetchCafes: QueryFunction<CafesAPIResponse, 'cafes'> = async (
-  context: QueryFunctionContext<'cafes', number>
-) => {
-  const { pageParam = 1 } = context;
+export const fetchCafes: QueryFunction<
+  CafesAPIResponse,
+  ['cafes', number]
+> = async ({ queryKey }) => {
+  const page = queryKey[1];
 
-  const apiRes = await fetch(
-    `https://frontend-test-assignment-api.abz.agency/api/v1/users?page=${pageParam}&count=6`
-  );
+  const apiRes = await fetch(`http://localhost:8000/cafes?page=${page}&size=5`);
 
   if (!apiRes.ok) {
-    throw new Error('Users fetch not ok');
+    throw new Error(`Cafes fetch not ok, page:${page}`);
   }
 
   return apiRes.json();

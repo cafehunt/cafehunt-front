@@ -1,8 +1,12 @@
+interface Image {
+  url: string;
+}
+
 export interface Cafe {
   id: number;
   name: string;
   places: number;
-  images: string[];
+  images: Image[];
   rating: number;
   reviews: number;
   average_bill: '$' | '$$' | '$$$';

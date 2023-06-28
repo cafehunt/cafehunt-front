@@ -1,4 +1,7 @@
-import { FC } from 'react';
+import { FC, useState, ChangeEvent } from 'react';
+
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 
 import {
   ExploreList,
@@ -7,16 +10,25 @@ import {
   HomeExplore,
   HomeExploreWrapper,
   HomeContent,
-  CafeResults,
 } from './Home.styled';
 import { useMediaQueries } from '../../hooks/useMediaQueries';
 import { ItemCardSmall } from '../../components/ItemCardSmall';
 import { Filters } from '../../components/Filters';
-import { ItemCard } from '../../components/ItemCard';
 import { Header } from '../../components/Header';
+import { CafesList } from '../../components/CafesList';
+import { useCafesList } from '../../hooks/useCafesList';
+import { FlexContainer } from '../../components/FlexContainer';
 
 export const Home: FC = () => {
+  const [page, setPage] = useState(1);
   const { sm } = useMediaQueries();
+  const [data, status] = useCafesList(page);
+
+  const handleChange = (event: ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+  };
+
+  console.log('Data:', data);
 
   return (
     <HomeStyled>
@@ -38,14 +50,18 @@ export const Home: FC = () => {
       </HomeExplore>
       <HomeContent>
         <Filters />
-        <CafeResults>
-          <ItemCard />
-          <ItemCard />
-          <ItemCard />
-          <ItemCard />
-          <ItemCard />
-          <ItemCard />
-        </CafeResults>
+        <FlexContainer width="100%" fd="column" ai="center" gap="24px">
+          <CafesList cafes={data.items} />
+          <Stack spacing={2}>
+            <Pagination
+              count={data.pages}
+              siblingCount={0}
+              boundaryCount={1}
+              shape="rounded"
+              onChange={handleChange}
+            />
+          </Stack>
+        </FlexContainer>
       </HomeContent>
     </HomeStyled>
   );

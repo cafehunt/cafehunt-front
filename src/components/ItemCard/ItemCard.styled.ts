@@ -12,6 +12,7 @@ export const ItemCardStyled = styled.article`
 
 export const ItemCardPhoto = styled.div`
   width: 280px;
+  aspect-ratio: 1;
 
   img {
     width: 100%;
@@ -65,23 +66,4 @@ export const ItemCardFeaturesList = styled.div`
 export const ItemCardFooter = styled.div`
   display: flex;
   justify-content: space-between;
-`;
-
-export const ItemCardRating = styled.p`
-  display: flex;
-  align-items: center;
-
-  font-size: ${FONT_SIZES.s16};
-  font-weight: ${FONT_WEIGHTS.regular};
-  line-height: ${LINE_HEIGHTS.h20};
-`;
-
-export const RatingIcon = styled.span`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 6px;
-
-  font-size: ${FONT_SIZES.s24};
-  color: ${COLORS.orange};
 `;
