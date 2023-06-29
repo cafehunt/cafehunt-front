@@ -5,6 +5,7 @@ export const InputStyled = styled.label`
   display: flex;
   flex-direction: column;
   gap: 8px;
+  flex: 1;
 
   span {
     color: ${COLORS.dark_grey};
