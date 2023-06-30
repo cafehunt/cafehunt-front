@@ -53,10 +53,3 @@ export const HomeContent = styled.section`
   max-width: 1320px;
   margin: 0 auto;
 `;
-
-export const CafeResults = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  gap: 28px;
-`;
