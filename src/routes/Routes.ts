@@ -3,4 +3,5 @@ export const appRoutes = {
   login: '/login',
   register: '/register',
   cafes: '/cafes',
+  account: '/account',
 };

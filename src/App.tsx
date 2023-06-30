@@ -13,6 +13,7 @@ import { Home } from './pages/Home';
 import { appRoutes } from './routes/Routes';
 import { Cafe } from './pages/Cafe';
 import { ScrollToTop } from './helpers/ScrollToTop';
+import { Account } from './pages/Account';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -36,6 +37,7 @@ const App: FC = () => {
                 <Route path={appRoutes.login} element={<Login />} />
                 <Route path={appRoutes.register} element={<Signup />} />
                 <Route path={appRoutes.cafes} element={<Cafe />} />
+                <Route path={appRoutes.account} element={<Account />} />
               </Routes>
             </QueryClientProvider>
           </ScrollToTop>
