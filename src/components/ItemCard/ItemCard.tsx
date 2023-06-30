@@ -23,13 +23,30 @@ import { CafeRating } from '../CafeRating';
 
 import { appRoutes } from '../../routes/Routes';
 import { Carousel } from '../Carousel';
+import { normalizeWorkingTime } from '../../utils/normalizeWorkingTime';
+import { createFeaturesList } from '../../utils/createFeaturesList';
+import { isCafeOpen } from '../../utils/isCafeOpen';
 
 type Props = {
   cafe: Cafe;
 };
 
 export const ItemCard: FC<Props> = ({ cafe }) => {
-  const { name, images, average_bill, rating, reviews } = cafe;
+  const {
+    name,
+    images,
+    average_bill,
+    work_time_start,
+    work_time_end,
+    rating,
+    reviews,
+  } = cafe;
+
+  const features = createFeaturesList(cafe);
+  const normalizedStartTime = normalizeWorkingTime(work_time_start);
+  const normalizedEndTime = normalizeWorkingTime(work_time_end);
+
+  const isOpen = isCafeOpen(normalizedStartTime, normalizedEndTime);
 
   return (
     <ItemCardStyled>
@@ -46,10 +63,15 @@ export const ItemCard: FC<Props> = ({ cafe }) => {
           </ItemCardHeader>
           <ItemCardDescription>
             <Location />
-            <Schedule>{average_bill} &#183; Open now (8 AM - 22 PM)</Schedule>
+            <Schedule>
+              {average_bill} &#183; {isOpen ? 'Open now' : 'Closed'} (
+              {normalizedStartTime}&nbsp;-&nbsp;
+              {normalizedEndTime})
+            </Schedule>
             <ItemCardFeaturesList>
-              <CafeTag>Vegan menu</CafeTag>
-              <CafeTag>Free WI-FI</CafeTag>
+              {features.map((feature, index) => (
+                <CafeTag key={index}>{feature}</CafeTag>
+              ))}
             </ItemCardFeaturesList>
           </ItemCardDescription>
           <ItemCardFooter>

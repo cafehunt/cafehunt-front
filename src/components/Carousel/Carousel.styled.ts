@@ -11,6 +11,7 @@ export const CarouselStyled = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+  height: 100%;
 
   user-select: none;
 `;
@@ -18,6 +19,7 @@ export const CarouselStyled = styled.div`
 export const Slide = styled.div<Props>`
   display: ${({ active }) => (active ? 'block' : 'none')};
   width: 100%;
+  height: 100%;
   aspect-ratio: 1;
 
   img {
