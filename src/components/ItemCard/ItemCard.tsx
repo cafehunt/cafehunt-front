@@ -43,8 +43,8 @@ export const ItemCard: FC<Props> = ({ cafe }) => {
   } = cafe;
 
   const features = createFeaturesList(cafe);
-  const normalizedStartTime = normalizeWorkingTime(work_time_start);
-  const normalizedEndTime = normalizeWorkingTime(work_time_end);
+  const normalizedStartTime = normalizeWorkingTime(String(work_time_start));
+  const normalizedEndTime = normalizeWorkingTime(String(work_time_end));
 
   const isOpen = isCafeOpen(normalizedStartTime, normalizedEndTime);
 
