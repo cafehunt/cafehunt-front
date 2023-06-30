@@ -14,11 +14,11 @@ export const ItemCardPhoto = styled.div`
   width: 280px;
   aspect-ratio: 1;
 
-  img {
+  /* img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-  }
+  } */
 `;
 
 export const ItemCardContent = styled.div`

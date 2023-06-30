@@ -37,8 +37,8 @@ const App: FC = () => {
                 <Route path={appRoutes.register} element={<Signup />} />
                 <Route path={appRoutes.cafes} element={<Cafe />} />
               </Routes>
-        </QueryClientProvider>  
-        </ScrollToTop>
+            </QueryClientProvider>
+          </ScrollToTop>
         </BrowserRouter>
       </ThemeProvider>
     </LocalizationProvider>

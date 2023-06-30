@@ -22,6 +22,7 @@ import { Cafe } from '../../types/Cafe.type';
 import { CafeRating } from '../CafeRating';
 
 import { appRoutes } from '../../routes/Routes';
+import { Carousel } from '../Carousel';
 
 type Props = {
   cafe: Cafe;
@@ -33,7 +34,7 @@ export const ItemCard: FC<Props> = ({ cafe }) => {
   return (
     <ItemCardStyled>
       <ItemCardPhoto>
-        <img src={images[0].url} alt={name} />
+        <Carousel data={images} />
       </ItemCardPhoto>
       <ItemCardContent>
         <div>

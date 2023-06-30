@@ -28,7 +28,9 @@ export const Home: FC = () => {
     setPage(value);
   };
 
-  console.log('Data:', data);
+  if (status === 'loading') {
+    return <div>Loading...</div>;
+  }
 
   return (
     <HomeStyled>
