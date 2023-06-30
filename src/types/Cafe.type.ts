@@ -5,6 +5,7 @@ export interface Image {
 export interface Cafe {
   id: number;
   name: string;
+  street: string;
   places: number;
   images: Image[];
   rating: number;
