@@ -35,6 +35,7 @@ export const ItemCard: FC<Props> = ({ cafe }) => {
   const {
     name,
     images,
+    street,
     average_bill,
     work_time_start,
     work_time_end,
@@ -62,7 +63,7 @@ export const ItemCard: FC<Props> = ({ cafe }) => {
             </ItemCardFavorite>
           </ItemCardHeader>
           <ItemCardDescription>
-            <Location />
+            <Location street={street} />
             <Schedule>
               {average_bill} &#183; {isOpen ? 'Open now' : 'Closed'} (
               {normalizedStartTime}&nbsp;-&nbsp;
