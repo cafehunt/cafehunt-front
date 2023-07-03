@@ -12,32 +12,55 @@ import {
   RatingIcon,
 } from './ItemCardSmall.styled';
 import { Schedule } from '../Schedule';
-
 import { Location } from '../Location';
+import { Cafe } from '../../types/Cafe.type';
+import { normalizeWorkingTime } from '../../utils/normalizeWorkingTime';
+import { isCafeOpen } from '../../utils/isCafeOpen';
 
-import itemPhoto from '../../assets/img/item-card.jpg';
+type Props = {
+  cafe: Cafe;
+};
 
-export const ItemCardSmall: FC = () => {
+export const ItemCardSmall: FC<Props> = ({ cafe }) => {
+  const {
+    name,
+    images,
+    street,
+    average_bill,
+    work_time_start,
+    work_time_end,
+    rating,
+  } = cafe;
+
+  const normalizedStartTime = normalizeWorkingTime(String(work_time_start));
+  const normalizedEndTime = normalizeWorkingTime(String(work_time_end));
+
+  const isOpen = isCafeOpen(normalizedStartTime, normalizedEndTime);
+
   return (
     <ItemCardSmallStyled>
       <ItemPhoto>
-        <img src={itemPhoto} alt="The Cake" />
+        <img src={images[0].url} alt="The Cake" />
         <ItemFavorite>
           <AiOutlineHeart />
         </ItemFavorite>
       </ItemPhoto>
       <ItemInfo>
         <ItemTitleWrapper>
-          <ItemTitle>The Cake</ItemTitle>
+          <ItemTitle title={name}>{name}</ItemTitle>
           <ItemRating>
             <RatingIcon>
               <AiFillStar />
             </RatingIcon>
-            <span>4.2</span>
+            <span>{rating}</span>
           </ItemRating>
         </ItemTitleWrapper>
-        <Location variant="small" />
-        <Schedule variant="small">$$ &#183; Open now (8 AM - 22 PM)</Schedule>
+        <Location variant="small" street={street} />
+        <Schedule variant="small">
+          {average_bill} &#183; {isOpen ? 'Open now' : 'Closed'} (
+          {normalizedStartTime}&nbsp;-&nbsp;
+          {normalizedEndTime})
+        </Schedule>
       </ItemInfo>
     </ItemCardSmallStyled>
   );
