@@ -16,15 +16,23 @@ import { Header } from '../../components/Header';
 import { CafesList } from '../../components/CafesList';
 import { useCafesList } from '../../hooks/useCafesList';
 import { FlexContainer } from '../../components/FlexContainer';
+import { FiltersType } from '../../types/Filters.type';
 import { ExploreList } from '../../components/ExploreList';
 
 export const Home: FC = () => {
   const [page, setPage] = useState(1);
+  const [filters, setFilters] = useState<FiltersType>();
   const { sm } = useMediaQueries();
-  const [data, status] = useCafesList(page);
+  const [data, status] = useCafesList(page, filters);
 
-  const handleChange = (event: ChangeEvent<unknown>, value: number) => {
+  const handlePageChange = (event: ChangeEvent<unknown>, value: number) => {
     setPage(value);
+  };
+
+  const handleFiltersChange = (newFilters: FiltersType) => {
+    setFilters((currentFilters) => {
+      return { ...currentFilters, ...newFilters };
+    });
   };
 
   if (status === 'loading') {
@@ -45,7 +53,7 @@ export const Home: FC = () => {
         </HomeExploreWrapper>
       </HomeExplore>
       <HomeContent>
-        <Filters />
+        <Filters onFiltersChange={handleFiltersChange} />
         <FlexContainer width="100%" fd="column" ai="center" gap="24px">
           <CafesList cafes={data.items} />
           <Stack spacing={2}>
@@ -54,7 +62,7 @@ export const Home: FC = () => {
               siblingCount={0}
               boundaryCount={1}
               shape="rounded"
-              onChange={handleChange}
+              onChange={handlePageChange}
             />
           </Stack>
         </FlexContainer>

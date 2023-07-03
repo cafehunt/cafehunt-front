@@ -10,22 +10,22 @@ import {
 type Props = {
   label: string;
   checked: boolean;
-  onChange: (checked: boolean) => void;
+  name: string;
 };
 
-export const Checkbox: FC<Props> = ({ label, checked, onChange }) => {
+export const Checkbox: FC<Props> = ({ label, checked, name }) => {
   const [isChecked, setIsChecked] = useState(checked);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.checked;
     setIsChecked(newValue);
-    onChange(newValue);
   };
 
   return (
     <CheckboxContainer>
       <CheckboxInput
         type="checkbox"
+        name={name}
         checked={isChecked}
         onChange={handleChange}
       />

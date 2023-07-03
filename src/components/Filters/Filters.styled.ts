@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { COLORS, FONT_SIZES, FONT_WEIGHTS } from '../../theme';
 
-export const FilterContainer = styled.div`
+export const FilterContainer = styled.form`
   width: 424px;
   padding: 32px 24px;
   align-self: flex-start;
@@ -17,12 +17,17 @@ export const FiltersItem = styled.h2`
   line-height: 140%;
 `;
 
-export const StyledLink = styled.a`
+export const ClearButton = styled.button`
   font-size: ${FONT_SIZES.s16};
   font-weight: ${FONT_WEIGHTS.medium};
   line-height: 140%;
   color: ${COLORS.main};
   text-decoration: none;
+
+  border: none;
+  background-color: transparent;
+
+  cursor: pointer;
 `;
 
 export const ItemsWrapper = styled.div`
@@ -44,11 +49,11 @@ export const StyledTitle = styled.h2`
   margin-bottom: 16px;
 `;
 
-export const ButtonContainer = styled.div`
-  display: inline-flex;
-  gap: 8px;
-  margin-bottom: 26px;
-`;
+// export const ButtonContainer = styled.div`
+//   display: inline-flex;
+//   gap: 8px;
+//   margin-bottom: 26px;
+// `;
 
 export const CheckBoxContainer = styled.div`
   margin-bottom: 26px;

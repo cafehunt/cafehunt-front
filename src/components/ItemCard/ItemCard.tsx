@@ -63,7 +63,7 @@ export const ItemCard: FC<Props> = ({ cafe }) => {
             </ItemCardFavorite>
           </ItemCardHeader>
           <ItemCardDescription>
-            <Location street={street} />
+            <Location street={String(street)} />
             <Schedule>
               {average_bill} &#183; {isOpen ? 'Open now' : 'Closed'} (
               {normalizedStartTime}&nbsp;-&nbsp;

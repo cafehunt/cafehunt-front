@@ -1,9 +1,13 @@
-import * as React from 'react';
+import { FC, useState } from 'react';
 import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
 
-export const BasicRating = () => {
-  const [value, setValue] = React.useState<number | null>(1);
+type Props = {
+  name: string;
+};
+
+export const BasicRating: FC<Props> = ({ name }) => {
+  const [value, setValue] = useState<number | null>(0);
 
   return (
     <Box
@@ -13,7 +17,7 @@ export const BasicRating = () => {
       }}
     >
       <Rating
-        name="simple-controlled"
+        name={name}
         value={value}
         onChange={(event, newValue) => {
           setValue(newValue);
@@ -21,4 +25,4 @@ export const BasicRating = () => {
       />
     </Box>
   );
-}
+};

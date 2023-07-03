@@ -1,93 +1,90 @@
-import { FC } from 'react';
-import { CustomSelect, Option } from './CustomSelect';
+import { FC, useState, FormEvent } from 'react';
+
+import { CustomSelect } from './CustomSelect';
 import { Input } from './Input';
 import { BasicRating } from './Rating';
 import { Button } from '../Button';
 import { Checkbox } from './Checkbox';
 import {
   Border,
-  ButtonContainer,
   CheckBoxContainer,
   FilterContainer,
   FiltersItem,
   ItemsWrapper,
-  StyledLink,
+  ClearButton,
   StyledTitle,
 } from './Filters.styled';
+import { useCitiesList } from '../../hooks/useCitiesList';
+import { Select2 } from './Select2';
+import { FiltersType } from '../../types/Filters.type';
+import { RadioGroup } from './RadioGroup';
 
-export const options: Option[] = [
-  { value: 'option1', label: 'Option 1' },
-  { value: 'option2', label: 'Option 2' },
-  { value: 'option3', label: 'Option 3' },
-];
+type Props = {
+  onFiltersChange: (newFilters: FiltersType) => void;
+};
 
-export const Filters: FC = () => {
-  const handleCheckboxChange = (newValue: boolean) => {
-    console.log('Checkbox value:', newValue);
+export const Filters: FC<Props> = ({ onFiltersChange }) => {
+  const [data, status] = useCitiesList();
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.target as HTMLFormElement);
+
+    const newData: FiltersType = {
+      city: Number(formData.get('city')),
+      name: (String(formData.get('name')) ?? '').trim(),
+      rating: Number(formData.get('rating')),
+      averageBill: String(formData.get('average-bill') ?? ''),
+      hasWiFi: Boolean(formData.get('wifi')),
+      hasCoworking: Boolean(formData.get('coworking')),
+      petsAllowed: Boolean(formData.get('pets')),
+      hasTerrace: Boolean(formData.get('terrace')),
+      hasVegan: Boolean(formData.get('vegan')),
+    };
+
+    onFiltersChange(newData);
   };
 
-  return (
-    <FilterContainer>
-      <ItemsWrapper>
-        <FiltersItem>Filters</FiltersItem>
-        <StyledLink href="#">Clear all</StyledLink>
-      </ItemsWrapper>
-      <Border />
-      <StyledTitle>Location</StyledTitle>
-      <CustomSelect
-        options={options}
-        label="Choose location"
-        placeholder="Choose city"
-      />
-      <Border />
-      <StyledTitle>Search</StyledTitle>
-      <Input label="Search cafe" placeholder="The Cake" />
-      <Border />
-      <StyledTitle>Rating</StyledTitle>
-      <BasicRating />
-      <Border />
-      <StyledTitle>Price</StyledTitle>
-      <ButtonContainer>
-        <Button variant="secondary" vp="4px" hp="16px">
-          $
-        </Button>
-        <Button variant="secondary" vp="4px" hp="16px">
-          $$
-        </Button>
-        <Button variant="secondary" vp="4px" hp="16px">
-          $$$
-        </Button>
-      </ButtonContainer>
-      <Border />
-      <StyledTitle>Other</StyledTitle>
-      <CheckBoxContainer>
-        <Checkbox
-          label="Vegan menu"
-          checked={false}
-          onChange={handleCheckboxChange}
+  if (status === 'success') {
+    return (
+      <FilterContainer onSubmit={handleSubmit}>
+        <ItemsWrapper>
+          <FiltersItem>Filters</FiltersItem>
+          <ClearButton>Clear all</ClearButton>
+        </ItemsWrapper>
+        <Border />
+        <StyledTitle>Location</StyledTitle>
+        {/* <CustomSelect
+          options={data}
+          label="Choose location"
+          placeholder="Choose city"
+        /> */}
+        <Select2
+          name="city"
+          label="Choose location"
+          placeholder="Choose city"
+          options={data}
         />
-        <Checkbox
-          label="Free WI-FI"
-          checked={false}
-          onChange={handleCheckboxChange}
-        />
-        <Checkbox
-          label="Coworking place"
-          checked={false}
-          onChange={handleCheckboxChange}
-        />
-        <Checkbox
-          label="Terrace"
-          checked={false}
-          onChange={handleCheckboxChange}
-        />
-        <Checkbox
-          label="Pet friendly"
-          checked={false}
-          onChange={handleCheckboxChange}
-        />
-      </CheckBoxContainer>
-      <Button variant="primary">Apply</Button>
-    </FilterContainer>
-  );
+        <Border />
+        <StyledTitle>Search</StyledTitle>
+        <Input name="name" label="Search cafe" placeholder="The Cake" />
+        <Border />
+        <StyledTitle>Rating</StyledTitle>
+        <BasicRating name="rating" />
+        <Border />
+        <RadioGroup title="Price" name="average-bill" />
+        <Border />
+        <StyledTitle>Other</StyledTitle>
+        <CheckBoxContainer>
+          <Checkbox label="Vegan menu" name="vegan" checked={false} />
+          <Checkbox label="Free WI-FI" name="wifi" checked={false} />
+          <Checkbox label="Coworking place" name="coworking" checked={false} />
+          <Checkbox label="Terrace" name="terrace" checked={false} />
+          <Checkbox label="Pet friendly" name="pets" checked={false} />
+        </CheckBoxContainer>
+        <Button type="submit">Apply</Button>
+      </FilterContainer>
+    );
+  }
 };
