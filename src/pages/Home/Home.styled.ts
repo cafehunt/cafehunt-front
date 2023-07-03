@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import {
   COLORS,
-  MEDIA,
   FONT_SIZES,
   FONT_WEIGHTS,
   LINE_HEIGHTS,
@@ -34,17 +33,6 @@ export const Title = styled.h2`
   line-height: ${LINE_HEIGHTS.h48};
   text-align: center;
   color: ${COLORS.black};
-`;
-
-export const ExploreList = styled.div`
-  display: grid;
-  gap: 24px;
-
-  grid-template-columns: repeat(2, 1fr);
-
-  @media (min-width: ${MEDIA.ultraDesktops}) {
-    grid-template-columns: repeat(4, 1fr);
-  }
 `;
 
 export const HomeContent = styled.section`
