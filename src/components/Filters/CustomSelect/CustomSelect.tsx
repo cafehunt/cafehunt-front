@@ -10,22 +10,13 @@ import {
 } from './CustomSelect.styled';
 import { City } from '../../../types/City.type';
 
-export interface Option {
-  value: string;
-  label: string;
-}
-
-export interface CustomSelectProps {
+type Props = {
   options: City[];
   placeholder: string;
   label: string;
-}
+};
 
-export const CustomSelect: FC<CustomSelectProps> = ({
-  options,
-  placeholder,
-  label,
-}) => {
+export const CustomSelect: FC<Props> = ({ options, placeholder, label }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<City | null>(null);
   const hasSelection = selectedOption !== null;

@@ -8,15 +8,16 @@ import {
 } from './Input.styled';
 
 export type Props = {
+  name: string;
   label: string;
   placeholder: string;
 };
 
-export const Input: FC<Props> = ({ label, placeholder }) => {
+export const Input: FC<Props> = ({ name, label, placeholder }) => {
   return (
     <InputContainer>
       <StyledLabel>{label}</StyledLabel>
-      <StyledInput type="text" placeholder={placeholder} />
+      <StyledInput name={name} type="text" placeholder={placeholder} />
       <IconSearch src={searchIcon} />
     </InputContainer>
   );
