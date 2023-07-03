@@ -13,7 +13,7 @@ export const Location: FC<Props> = ({ street, variant, color }) => {
   return (
     <LocationStyled variant={variant} color={color} href="#">
       <SlLocationPin />
-      <span>{street}</span>
+      <span title={street}>{street}</span>
     </LocationStyled>
   );
 };

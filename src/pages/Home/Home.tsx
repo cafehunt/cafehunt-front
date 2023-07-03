@@ -4,7 +4,6 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 
 import {
-  ExploreList,
   HomeStyled,
   Title,
   HomeExplore,
@@ -12,12 +11,12 @@ import {
   HomeContent,
 } from './Home.styled';
 import { useMediaQueries } from '../../hooks/useMediaQueries';
-import { ItemCardSmall } from '../../components/ItemCardSmall';
 import { Filters } from '../../components/Filters';
 import { Header } from '../../components/Header';
 import { CafesList } from '../../components/CafesList';
 import { useCafesList } from '../../hooks/useCafesList';
 import { FlexContainer } from '../../components/FlexContainer';
+import { ExploreList } from '../../components/ExploreList';
 
 export const Home: FC = () => {
   const [page, setPage] = useState(1);
@@ -40,12 +39,7 @@ export const Home: FC = () => {
           {sm && (
             <div>
               <Title>Explore new places</Title>
-              <ExploreList>
-                <ItemCardSmall />
-                <ItemCardSmall />
-                <ItemCardSmall />
-                <ItemCardSmall />
-              </ExploreList>
+              <ExploreList />
             </div>
           )}
         </HomeExploreWrapper>

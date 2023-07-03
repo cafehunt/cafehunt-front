@@ -11,6 +11,7 @@ export const ItemCardSmallStyled = styled.article`
 `;
 
 export const ItemPhoto = styled.div`
+  height: 150px;
   position: relative;
 
   border-radius: 16px;
@@ -18,6 +19,8 @@ export const ItemPhoto = styled.div`
 
   img {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 `;
 
@@ -48,6 +51,12 @@ export const ItemInfo = styled.div`
   gap: 8px;
 
   color: ${COLORS.black};
+
+  span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 `;
 
 export const ItemTitleWrapper = styled.div`
@@ -56,9 +65,13 @@ export const ItemTitleWrapper = styled.div`
 `;
 
 export const ItemTitle = styled.h3`
-  font-size: ${FONT_SIZES.s24};
+  font-size: ${FONT_SIZES.s18};
   font-weight: ${FONT_WEIGHTS.medium};
   line-height: ${LINE_HEIGHTS.h34};
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const ItemRating = styled.p`
