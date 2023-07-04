@@ -9,6 +9,10 @@ import {
 
 import cafeBg from '../../assets/img/login-bg.jpg';
 
+type TitleProps = {
+  bg: string;
+}
+
 export const CafeStyled = styled.section`
   background-color: ${COLORS.white};
 `;
@@ -34,7 +38,7 @@ export const CafeHeader = styled.div`
   gap: 24px;
 `;
 
-export const CafeTitleWrapper = styled.div`
+export const CafeTitleWrapper = styled.div<TitleProps>`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -47,7 +51,7 @@ export const CafeTitleWrapper = styled.div`
       rgba(0, 0, 0, 0.5),
       rgba(0, 0, 0, 0.5)
     ),
-    url(${cafeBg});
+    url(${({ bg }) => bg});
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -76,7 +80,8 @@ export const Favorite = styled.button`
   cursor: pointer;
 `;
 
-export const CafeGallery = styled.div``;
+export const CafeGallery = styled.div`
+`;
 
 export const CafeTitleSecondary = styled.h3`
   margin-bottom: 20px;
@@ -89,6 +94,7 @@ export const CafeTitleSecondary = styled.h3`
 
 export const CafeGalleryContainer = styled.div`
   display: grid;
+  max-height: 436px;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, 1fr);
   grid-gap: 24px;
