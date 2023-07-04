@@ -19,6 +19,7 @@ export interface Cafe {
   can_with_pets: boolean;
   has_outdoor_seating: boolean;
   has_vegan_menu: boolean;
+  phone_number?: string;
 }
 
 export interface CafesAPIResponse {

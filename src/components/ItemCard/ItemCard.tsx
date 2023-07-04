@@ -41,6 +41,7 @@ export const ItemCard: FC<Props> = ({ cafe }) => {
     work_time_end,
     rating,
     reviews,
+    id
   } = cafe;
 
   const features = createFeaturesList(cafe);
@@ -77,7 +78,7 @@ export const ItemCard: FC<Props> = ({ cafe }) => {
           </ItemCardDescription>
           <ItemCardFooter>
             <CafeRating rating={rating} reviews={reviews} />
-            <Link to={appRoutes.cafes}>
+            <Link to={`/cafes/${id}`}>
               <Button variant="secondary" width="130px">
                 View
               </Button>

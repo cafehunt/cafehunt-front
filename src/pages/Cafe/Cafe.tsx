@@ -33,10 +33,40 @@ import { Button } from '../../components/Button';
 
 import photoImg from '../../assets/img/item-card.jpg';
 import { COLORS } from '../../theme';
-import { ItemCardSmall } from '../../components/ItemCardSmall';
 import { Header } from '../../components/Header';
+import { useParams } from 'react-router-dom';
+import { useGetGafeById } from '../../hooks/useGetCafeById';
+import { ExploreList } from '../../components/ExploreList';
+import { createFeaturesList } from '../../utils/createFeaturesList';
+import { normalizeWorkingTime } from '../../utils/normalizeWorkingTime';
+import { isCafeOpen } from '../../utils/isCafeOpen';
 
 export const Cafe: FC = () => {
+  const { cafeId = 0 } = useParams();
+  const [data, status] = useGetGafeById(+cafeId);
+  const {
+    name,
+    street,
+    reviews,
+    rating,
+    images,
+    work_time_start,
+    work_time_end,
+    average_bill,
+    phone_number,
+  } = data;
+
+  const features = createFeaturesList(data);
+  const normalizedStartTime = normalizeWorkingTime(String(work_time_start));
+  const normalizedEndTime = normalizeWorkingTime(String(work_time_end));
+
+  const isOpen = isCafeOpen(normalizedStartTime, normalizedEndTime);
+  console.log('cafe:', data);
+
+  if (status === 'loading') {
+    return 'laoding';
+  }
+
   return (
     <CafeStyled>
       <CafeWrapper>
@@ -47,25 +77,28 @@ export const Cafe: FC = () => {
               <BackButton />
             </nav>
           </FlexContainer>
-          <CafeTitleWrapper>
-            <CafeTitle>Very Well Cafe</CafeTitle>
+          <CafeTitleWrapper bg={images[0].url}>
+            <CafeTitle>{name}</CafeTitle>
             <Favorite>
               <AiOutlineHeart />
             </Favorite>
           </CafeTitleWrapper>
           <FlexContainer jc="space-between" ai="center">
-            <FlexContainer fd="column" gap="8px">
-              <Location variant="big" />
+            <FlexContainer fd="column" gap="14px">
+              <Location variant="big" street={street} />
               <Schedule variant="big">
-                $$ &#183; Open now (8 AM - 22 PM)
+                {average_bill} &#183; {isOpen ? 'Open now' : 'Closed'} (
+                {normalizedStartTime}&nbsp;-&nbsp;
+                {normalizedEndTime})
               </Schedule>
               <FlexContainer gap="8px">
-                <CafeTag>Vegan menu</CafeTag>
-                <CafeTag>Free WI-FI</CafeTag>
+                {features.map((feature) => (
+                  <CafeTag key={feature}>{feature}</CafeTag>
+                ))}
               </FlexContainer>
             </FlexContainer>
             <FlexContainer fd="column" ai="flex-end" gap="8px">
-              <CafeRating />
+              <CafeRating rating={rating} reviews={reviews} />
               <Button width="200px">Reserve</Button>
             </FlexContainer>
           </FlexContainer>
@@ -73,31 +106,21 @@ export const Cafe: FC = () => {
         <CafeGallery>
           <CafeTitleSecondary>Photos</CafeTitleSecondary>
           <CafeGalleryContainer>
-            <PhotoContainer>
-              <img src={photoImg} alt="Cafe" />
-            </PhotoContainer>
-            <PhotoContainer>
-              <img src={photoImg} alt="Cafe" />
-            </PhotoContainer>
-            <PhotoContainer>
-              <img src={photoImg} alt="Cafe" />
-            </PhotoContainer>
-            <PhotoContainer>
-              <img src={photoImg} alt="Cafe" />
-            </PhotoContainer>
-            <PhotoContainer>
-              <img src={photoImg} alt="Cafe" />
-            </PhotoContainer>
+            {images.slice(0, 5).map((image) => (
+              <PhotoContainer key={image.url}>
+                <img src={image.url} alt="Cafe" />
+              </PhotoContainer>
+            ))}
           </CafeGalleryContainer>
         </CafeGallery>
         <CafeInfo>
           <CafeInfoItem>
             <CafeTitleTertiary>Location & Contacts</CafeTitleTertiary>
             <FlexContainer fd="column" gap="8px">
-              <Location color={COLORS.black} />
+              <Location color={COLORS.black} street={street} />
               <CafePhone>
                 <AiOutlinePhone />
-                <CafePhoneNumber>+38 (050) 123 45 67</CafePhoneNumber>
+                <CafePhoneNumber>{phone_number}</CafePhoneNumber>
               </CafePhone>
             </FlexContainer>
             <FlexContainer gap="8px">
@@ -109,10 +132,10 @@ export const Cafe: FC = () => {
             <FlexContainer fd="column" jc="space-between" height="100%">
               <CafeTitleTertiary>Rating & Reviews</CafeTitleTertiary>
               <FlexContainer jc="space-between" ai="flex-end" width="100%">
-                <CafeInfoReviews>372 reviews</CafeInfoReviews>
+                <CafeInfoReviews>{reviews} reviews</CafeInfoReviews>
                 <CafeInfoRating>
                   <AiFillStar />
-                  <span>4.2</span>
+                  <span>{rating}</span>
                 </CafeInfoRating>
               </FlexContainer>
             </FlexContainer>
@@ -124,12 +147,7 @@ export const Cafe: FC = () => {
         </CafeInfo>
         <CafeSuggestions>
           <CafeTitleSecondary>You might also like</CafeTitleSecondary>
-          <FlexContainer gap="24px">
-            <ItemCardSmall />
-            <ItemCardSmall />
-            <ItemCardSmall />
-            <ItemCardSmall />
-          </FlexContainer>
+          <ExploreList />
         </CafeSuggestions>
       </CafeWrapper>
     </CafeStyled>
