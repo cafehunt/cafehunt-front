@@ -1,4 +1,4 @@
-import { FC, useState, FormEvent } from 'react';
+import { FC, useState, FormEvent, useRef } from 'react';
 
 import { CustomSelect } from './CustomSelect';
 import { Input } from './Input';
@@ -18,13 +18,22 @@ import { useCitiesList } from '../../hooks/useCitiesList';
 import { Select2 } from './Select2';
 import { FiltersType } from '../../types/Filters.type';
 import { RadioGroup } from './RadioGroup';
+import { InputComponent } from './InputComponent';
 
 type Props = {
   onFiltersChange: (newFilters: FiltersType) => void;
 };
 
+type InputRef = {
+  getValue: () => string;
+  setValue: (value: string) => void;
+  clearValue: () => void;
+};
+
 export const Filters: FC<Props> = ({ onFiltersChange }) => {
   const [data, status] = useCitiesList();
+
+  const nameInputRef = useRef<InputRef | null>(null);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -46,12 +55,16 @@ export const Filters: FC<Props> = ({ onFiltersChange }) => {
     onFiltersChange(newData);
   };
 
+  const handleClear = () => {
+    nameInputRef.current?.clearValue();
+  };
+
   if (status === 'success') {
     return (
       <FilterContainer onSubmit={handleSubmit}>
         <ItemsWrapper>
           <FiltersItem>Filters</FiltersItem>
-          <ClearButton>Clear all</ClearButton>
+          <ClearButton onClick={handleClear}>Clear all</ClearButton>
         </ItemsWrapper>
         <Border />
         <StyledTitle>Location</StyledTitle>
@@ -67,6 +80,7 @@ export const Filters: FC<Props> = ({ onFiltersChange }) => {
           options={data}
         />
         <Border />
+        <InputComponent label="Input with ref" ref={nameInputRef} />
         <StyledTitle>Search</StyledTitle>
         <Input name="name" label="Search cafe" placeholder="The Cake" />
         <Border />
