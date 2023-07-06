@@ -1,38 +1,58 @@
-import { FC, useState, ChangeEvent } from 'react';
-import { TbCheck } from 'react-icons/tb';
 import {
-  CheckboxContainer,
-  CheckboxCustom,
-  CheckboxInput,
-  CheckboxLabel,
+  FC,
+  forwardRef,
+  useRef,
+  useCallback,
+  useImperativeHandle,
+} from 'react';
+import {
+  CustomCheckboxStyled,
+  CustomCheckboxInput,
+  CustomCheckboxLabel,
 } from './Checkbox.styled';
 
 type Props = {
   label: string;
-  checked: boolean;
   name: string;
 };
 
-export const Checkbox: FC<Props> = ({ label, checked, name }) => {
-  const [isChecked, setIsChecked] = useState(checked);
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const newValue = event.target.checked;
-    setIsChecked(newValue);
-  };
-
-  return (
-    <CheckboxContainer>
-      <CheckboxInput
-        type="checkbox"
-        name={name}
-        checked={isChecked}
-        onChange={handleChange}
-      />
-      <CheckboxCustom checked={isChecked}>
-        {isChecked && <TbCheck size={24} color="white" />}
-      </CheckboxCustom>
-      <CheckboxLabel>{label}</CheckboxLabel>
-    </CheckboxContainer>
-  );
+type InputRef = {
+  getValue: () => void;
+  setValue: (value: boolean) => void;
+  clearValue: () => void;
 };
+
+export const CustomCheckbox = forwardRef<InputRef, Props>(
+  ({ label, name }, ref) => {
+    const checkboxRef = useRef<HTMLInputElement>(null);
+
+    const getValue = useCallback(() => {
+      if (checkboxRef.current) {
+        return checkboxRef.current.checked;
+      }
+    }, []);
+
+    const setValue = useCallback((value: boolean) => {
+      if (checkboxRef.current) {
+        checkboxRef.current.checked = value;
+      }
+    }, []);
+
+    const clearValue = useCallback(() => {
+      if (checkboxRef.current) {
+        checkboxRef.current.checked = false;
+      }
+    }, []);
+
+    useImperativeHandle(ref, () => ({ getValue, setValue, clearValue }), []);
+
+    return (
+      <CustomCheckboxStyled>
+        <CustomCheckboxInput ref={checkboxRef} type="checkbox" name={name} />
+        <CustomCheckboxLabel>{label}</CustomCheckboxLabel>
+      </CustomCheckboxStyled>
+    );
+  }
+);
+
+CustomCheckbox.displayName = 'CustomCheckbox';

@@ -3,7 +3,8 @@ import { CafesAPIResponse } from '../types/Cafe.type';
 
 import { FiltersType } from '../types/Filters.type';
 
-const URL = 'http://localhost:8000';
+// const URL = 'http://localhost:8000';
+const URL = 'https://cafehunt.pp.ua/api';
 const ENDPOINT = 'cafes';
 const SIZE = 5;
 

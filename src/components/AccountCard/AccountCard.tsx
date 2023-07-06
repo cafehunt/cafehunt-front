@@ -47,7 +47,7 @@ export const AccountCard: FC<Props> = ({ isFavorites }) => {
               )}
             </ItemCardHeader>
             <ItemCardDescription>
-              <Location />
+              {/* <Location /> */}
               <Schedule>$$ &#183; Open now (8 AM - 22 PM)</Schedule>
             </ItemCardDescription>
             <ItemCardFooter>

@@ -31,6 +31,8 @@ export const Home: FC = () => {
 
   const handleFiltersChange = (newFilters: FiltersType) => {
     setFilters((currentFilters) => {
+      setPage(1);
+
       return { ...currentFilters, ...newFilters };
     });
   };
@@ -59,9 +61,11 @@ export const Home: FC = () => {
           <Stack spacing={2}>
             <Pagination
               count={data.pages}
-              siblingCount={0}
+              defaultPage={1}
+              siblingCount={2}
               boundaryCount={1}
               shape="rounded"
+              page={page}
               onChange={handlePageChange}
             />
           </Stack>
