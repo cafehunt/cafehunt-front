@@ -30,10 +30,25 @@ type InputRef = {
   clearValue: () => void;
 };
 
+type selectRef = {
+  getValue: () => string;
+  setValue: (value: number) => void;
+  clearValue: () => void;
+};
+
+type checkboxRef = {
+  getValue: () => void;
+  setValue: (value: boolean) => void;
+  clearValue: () => void;
+};
+
 export const Filters: FC<Props> = ({ onFiltersChange }) => {
   const [data, status] = useCitiesList();
 
   const nameInputRef = useRef<InputRef | null>(null);
+  const citySelectRef = useRef<selectRef | null>(null);
+  const averageBillRef = useRef<InputRef | null>(null);
+  const veganRef = useRef<checkboxRef | null>(null);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -41,10 +56,10 @@ export const Filters: FC<Props> = ({ onFiltersChange }) => {
     const formData = new FormData(event.target as HTMLFormElement);
 
     const newData: FiltersType = {
-      city: Number(formData.get('city')),
-      name: (String(formData.get('name')) ?? '').trim(),
+      city: Number(citySelectRef.current?.getValue()),
+      name: (nameInputRef.current?.getValue() ?? '').trim(),
       rating: Number(formData.get('rating')),
-      averageBill: String(formData.get('average-bill') ?? ''),
+      averageBill: averageBillRef.current?.getValue() || '',
       hasWiFi: Boolean(formData.get('wifi')),
       hasCoworking: Boolean(formData.get('coworking')),
       petsAllowed: Boolean(formData.get('pets')),
@@ -55,8 +70,27 @@ export const Filters: FC<Props> = ({ onFiltersChange }) => {
     onFiltersChange(newData);
   };
 
+  console.log('Vegan:', veganRef.current?.getValue());
+
   const handleClear = () => {
     nameInputRef.current?.clearValue();
+    citySelectRef.current?.clearValue();
+    averageBillRef.current?.clearValue();
+    veganRef.current?.clearValue();
+
+    const defaultData: FiltersType = {
+      city: 0,
+      name: '',
+      rating: 0,
+      averageBill: '',
+      hasWiFi: false,
+      hasCoworking: false,
+      petsAllowed: false,
+      hasTerrace: false,
+      hasVegan: false,
+    };
+
+    onFiltersChange(defaultData);
   };
 
   if (status === 'success') {
@@ -64,7 +98,9 @@ export const Filters: FC<Props> = ({ onFiltersChange }) => {
       <FilterContainer onSubmit={handleSubmit}>
         <ItemsWrapper>
           <FiltersItem>Filters</FiltersItem>
-          <ClearButton onClick={handleClear}>Clear all</ClearButton>
+          <ClearButton type="button" onClick={handleClear}>
+            Clear all
+          </ClearButton>
         </ItemsWrapper>
         <Border />
         <StyledTitle>Location</StyledTitle>
@@ -77,25 +113,36 @@ export const Filters: FC<Props> = ({ onFiltersChange }) => {
           name="city"
           label="Choose location"
           placeholder="Choose city"
+          ref={citySelectRef}
           options={data}
         />
         <Border />
-        <InputComponent label="Input with ref" ref={nameInputRef} />
+        {/* <InputComponent label="Input with ref" ref={nameInputRef} /> */}
         <StyledTitle>Search</StyledTitle>
-        <Input name="name" label="Search cafe" placeholder="The Cake" />
+        <Input
+          name="name"
+          label="Search cafe"
+          ref={nameInputRef}
+          placeholder="The Cake"
+        />
         <Border />
         <StyledTitle>Rating</StyledTitle>
         <BasicRating name="rating" />
         <Border />
-        <RadioGroup title="Price" name="average-bill" />
+        <RadioGroup title="Price" name="average-bill" ref={averageBillRef} />
         <Border />
         <StyledTitle>Other</StyledTitle>
         <CheckBoxContainer>
-          <Checkbox label="Vegan menu" name="vegan" checked={false} />
-          <Checkbox label="Free WI-FI" name="wifi" checked={false} />
-          <Checkbox label="Coworking place" name="coworking" checked={false} />
-          <Checkbox label="Terrace" name="terrace" checked={false} />
-          <Checkbox label="Pet friendly" name="pets" checked={false} />
+          <Checkbox
+            label="Vegan menu"
+            name="vegan"
+            ref={veganRef}
+            checked={false}
+          />
+          {/* <Checkbox label="Free WI-FI" name="wifi" />
+          <Checkbox label="Coworking place" name="coworking" />
+          <Checkbox label="Terrace" name="terrace" />
+          <Checkbox label="Pet friendly" name="pets" /> */}
         </CheckBoxContainer>
         <Button type="submit">Apply</Button>
       </FilterContainer>
