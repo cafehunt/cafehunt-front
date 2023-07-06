@@ -4,7 +4,7 @@ import { CustomSelect } from './CustomSelect';
 import { Input } from './Input';
 import { BasicRating } from './Rating';
 import { Button } from '../Button';
-import { Checkbox } from './Checkbox';
+import { CustomCheckbox } from './Checkbox';
 import {
   Border,
   CheckBoxContainer,
@@ -49,6 +49,10 @@ export const Filters: FC<Props> = ({ onFiltersChange }) => {
   const citySelectRef = useRef<selectRef | null>(null);
   const averageBillRef = useRef<InputRef | null>(null);
   const veganRef = useRef<checkboxRef | null>(null);
+  const wifiRef = useRef<checkboxRef | null>(null);
+  const coworkingRef = useRef<checkboxRef | null>(null);
+  const terraceRef = useRef<checkboxRef | null>(null);
+  const petsRef = useRef<checkboxRef | null>(null);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -60,23 +64,25 @@ export const Filters: FC<Props> = ({ onFiltersChange }) => {
       name: (nameInputRef.current?.getValue() ?? '').trim(),
       rating: Number(formData.get('rating')),
       averageBill: averageBillRef.current?.getValue() || '',
-      hasWiFi: Boolean(formData.get('wifi')),
-      hasCoworking: Boolean(formData.get('coworking')),
-      petsAllowed: Boolean(formData.get('pets')),
-      hasTerrace: Boolean(formData.get('terrace')),
-      hasVegan: Boolean(formData.get('vegan')),
+      hasWiFi: Boolean(wifiRef.current?.getValue()),
+      hasCoworking: Boolean(coworkingRef.current?.getValue()),
+      petsAllowed: Boolean(petsRef.current?.getValue()),
+      hasTerrace: Boolean(terraceRef.current?.getValue()),
+      hasVegan: Boolean(veganRef.current?.getValue()),
     };
 
     onFiltersChange(newData);
   };
-
-  console.log('Vegan:', veganRef.current?.getValue());
 
   const handleClear = () => {
     nameInputRef.current?.clearValue();
     citySelectRef.current?.clearValue();
     averageBillRef.current?.clearValue();
     veganRef.current?.clearValue();
+    wifiRef.current?.clearValue();
+    coworkingRef.current?.clearValue();
+    terraceRef.current?.clearValue();
+    petsRef.current?.clearValue();
 
     const defaultData: FiltersType = {
       city: 0,
@@ -133,16 +139,15 @@ export const Filters: FC<Props> = ({ onFiltersChange }) => {
         <Border />
         <StyledTitle>Other</StyledTitle>
         <CheckBoxContainer>
-          <Checkbox
-            label="Vegan menu"
-            name="vegan"
-            ref={veganRef}
-            checked={false}
+          <CustomCheckbox ref={veganRef} label="Vegan menu" name="vegan" />
+          <CustomCheckbox ref={wifiRef} label="Free Wi-Fi" name="wifi" />
+          <CustomCheckbox
+            ref={coworkingRef}
+            label="Coworking place"
+            name="coworking"
           />
-          {/* <Checkbox label="Free WI-FI" name="wifi" />
-          <Checkbox label="Coworking place" name="coworking" />
-          <Checkbox label="Terrace" name="terrace" />
-          <Checkbox label="Pet friendly" name="pets" /> */}
+          <CustomCheckbox ref={terraceRef} label="Terrace" name="terrace" />
+          <CustomCheckbox ref={petsRef} label="Pet friendly" name="pets" />
         </CheckBoxContainer>
         <Button type="submit">Apply</Button>
       </FilterContainer>

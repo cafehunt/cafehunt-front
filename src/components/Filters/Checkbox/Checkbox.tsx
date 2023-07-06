@@ -1,23 +1,18 @@
 import {
   FC,
-  useState,
-  ChangeEvent,
   forwardRef,
   useRef,
   useCallback,
   useImperativeHandle,
 } from 'react';
-import { TbCheck } from 'react-icons/tb';
 import {
-  CheckboxContainer,
-  CheckboxCustom,
-  CheckboxInput,
-  CheckboxLabel,
+  CustomCheckboxStyled,
+  CustomCheckboxInput,
+  CustomCheckboxLabel,
 } from './Checkbox.styled';
 
 type Props = {
   label: string;
-  checked: boolean;
   name: string;
 };
 
@@ -27,15 +22,8 @@ type InputRef = {
   clearValue: () => void;
 };
 
-export const Checkbox = forwardRef<InputRef, Props>(
-  ({ label, name, checked }, ref) => {
-    const [isChecked, setIsChecked] = useState(checked);
-
-    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-      const newValue = event.target.checked;
-      setIsChecked(newValue);
-    };
-
+export const CustomCheckbox = forwardRef<InputRef, Props>(
+  ({ label, name }, ref) => {
     const checkboxRef = useRef<HTMLInputElement>(null);
 
     const getValue = useCallback(() => {
@@ -59,21 +47,12 @@ export const Checkbox = forwardRef<InputRef, Props>(
     useImperativeHandle(ref, () => ({ getValue, setValue, clearValue }), []);
 
     return (
-      <CheckboxContainer>
-        <CheckboxInput
-          type="checkbox"
-          name={name}
-          ref={checkboxRef}
-          checked={checked}
-          onChange={handleChange}
-        />
-        <CheckboxCustom checked={checked}>
-          {isChecked && <TbCheck size={24} color="white" />}
-        </CheckboxCustom>
-        <CheckboxLabel>{label}</CheckboxLabel>
-      </CheckboxContainer>
+      <CustomCheckboxStyled>
+        <CustomCheckboxInput ref={checkboxRef} type="checkbox" name={name} />
+        <CustomCheckboxLabel>{label}</CustomCheckboxLabel>
+      </CustomCheckboxStyled>
     );
   }
 );
 
-Checkbox.displayName = 'Checkbox';
+CustomCheckbox.displayName = 'CustomCheckbox';

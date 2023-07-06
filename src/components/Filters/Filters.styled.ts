@@ -57,5 +57,9 @@ export const StyledTitle = styled.h2`
 // `;
 
 export const CheckBoxContainer = styled.div`
+  display: inline-flex;
+  flex-direction: column;
+  gap: 8px;
+
   margin-bottom: 26px;
 `;
