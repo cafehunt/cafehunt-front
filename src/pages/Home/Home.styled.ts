@@ -1,10 +1,5 @@
 import styled from 'styled-components';
-import {
-  COLORS,
-  FONT_SIZES,
-  FONT_WEIGHTS,
-  LINE_HEIGHTS,
-} from '../../theme';
+import { COLORS, FONT_SIZES, FONT_WEIGHTS, LINE_HEIGHTS } from '../../theme';
 
 export const HomeStyled = styled.div`
   padding-bottom: 56px;
@@ -18,9 +13,6 @@ export const HomeExplore = styled.section`
 `;
 
 export const HomeExploreWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
   max-width: 1320px;
   margin: 0 auto;
 `;

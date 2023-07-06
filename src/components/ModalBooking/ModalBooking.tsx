@@ -5,7 +5,7 @@ import { FC } from 'react';
 import { Input } from '../Input';
 import { DatePicker } from '@mui/x-date-pickers';
 import { CustomSelect } from '../Filters/CustomSelect';
-import { options } from '../Filters';
+// import { options } from '../Filters';
 import { Button } from '../Button';
 
 export const StyledTitle = styled.h3`
@@ -114,7 +114,7 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 14px;
-`
+`;
 
 export type Props = {
   cafeName: string;
@@ -153,11 +153,11 @@ export const ModalBooking: FC<Props> = ({ cafeName }) => {
               placeholder="4"
             />
             <div>
-            <CustomSelect
+              {/* <CustomSelect
               options={options}
               label="Choose available time"
               placeholder="2:30 pm"
-            />
+            /> */}
             </div>
           </RightContent>
         </FormContainer>

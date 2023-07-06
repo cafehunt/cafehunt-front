@@ -1,4 +1,4 @@
-import { FC, useState, FormEvent, useRef } from 'react';
+import { FC, useState, FormEvent, useRef, ChangeEvent } from 'react';
 
 import { CustomSelect } from './CustomSelect';
 import { Input } from './Input';
@@ -19,6 +19,7 @@ import { Select2 } from './Select2';
 import { FiltersType } from '../../types/Filters.type';
 import { RadioGroup } from './RadioGroup';
 import { InputComponent } from './InputComponent';
+import { RatingList } from './RatingList';
 
 type Props = {
   onFiltersChange: (newFilters: FiltersType) => void;
@@ -47,6 +48,7 @@ export const Filters: FC<Props> = ({ onFiltersChange }) => {
 
   const nameInputRef = useRef<InputRef | null>(null);
   const citySelectRef = useRef<selectRef | null>(null);
+  const ratingRef = useRef<checkboxRef | null>(null);
   const averageBillRef = useRef<InputRef | null>(null);
   const veganRef = useRef<checkboxRef | null>(null);
   const wifiRef = useRef<checkboxRef | null>(null);
@@ -57,12 +59,10 @@ export const Filters: FC<Props> = ({ onFiltersChange }) => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const formData = new FormData(event.target as HTMLFormElement);
-
     const newData: FiltersType = {
       city: Number(citySelectRef.current?.getValue()),
       name: (nameInputRef.current?.getValue() ?? '').trim(),
-      rating: Number(formData.get('rating')),
+      rating: Number(ratingRef.current?.getValue()),
       averageBill: averageBillRef.current?.getValue() || '',
       hasWiFi: Boolean(wifiRef.current?.getValue()),
       hasCoworking: Boolean(coworkingRef.current?.getValue()),
@@ -77,6 +77,7 @@ export const Filters: FC<Props> = ({ onFiltersChange }) => {
   const handleClear = () => {
     nameInputRef.current?.clearValue();
     citySelectRef.current?.clearValue();
+    ratingRef.current?.clearValue();
     averageBillRef.current?.clearValue();
     veganRef.current?.clearValue();
     wifiRef.current?.clearValue();
@@ -132,8 +133,8 @@ export const Filters: FC<Props> = ({ onFiltersChange }) => {
           placeholder="The Cake"
         />
         <Border />
-        <StyledTitle>Rating</StyledTitle>
-        <BasicRating name="rating" />
+        {/* <BasicRating name="rating" /> */}
+        <RatingList name="rating" ref={ratingRef} />
         <Border />
         <RadioGroup title="Price" name="average-bill" ref={averageBillRef} />
         <Border />
