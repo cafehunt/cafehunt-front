@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { COLORS, FONT_SIZES } from '../../../theme';
 
+import check from '../../../assets/icons/check-city.svg';
+
 export const CustomSelectWrapper = styled.div`
   position: relative;
 `;
@@ -18,6 +20,7 @@ export const SelectButton = styled.button<{ hasSelection: boolean }>`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 26px;
+  outline: none;
   cursor: pointer;
 
   &:focus {
@@ -48,11 +51,20 @@ export const Options = styled.ul<{ isOpen: boolean }>`
 `;
 
 export const Option = styled.li`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 8px;
 
   &:hover {
     background-color: ${COLORS.light_green};
     color: ${COLORS.main};
+
+    &::after {
+      content: url(${check});
+
+      font-size: ${FONT_SIZES.s24};
+    }
   }
 `;
 

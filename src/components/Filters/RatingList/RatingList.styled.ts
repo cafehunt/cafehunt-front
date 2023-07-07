@@ -25,8 +25,6 @@ export const RatingListItem = styled.p`
   display: flex;
   gap: 8px;
   align-items: center;
-
-  cursor: pointer;
 `;
 
 export const RatingInput = styled.input`

@@ -1,8 +1,7 @@
-import { FC, useState, FormEvent, useRef, ChangeEvent } from 'react';
+import { FC, useState, FormEvent, useRef } from 'react';
 
 import { CustomSelect } from './CustomSelect';
 import { Input } from './Input';
-import { BasicRating } from './Rating';
 import { Button } from '../Button';
 import { CustomCheckbox } from './Checkbox';
 import {
@@ -18,8 +17,8 @@ import { useCitiesList } from '../../hooks/useCitiesList';
 import { Select2 } from './Select2';
 import { FiltersType } from '../../types/Filters.type';
 import { RadioGroup } from './RadioGroup';
-import { InputComponent } from './InputComponent';
 import { RatingList } from './RatingList';
+import { City } from '../../types/City.type';
 
 type Props = {
   onFiltersChange: (newFilters: FiltersType) => void;
@@ -45,9 +44,10 @@ type checkboxRef = {
 
 export const Filters: FC<Props> = ({ onFiltersChange }) => {
   const [data, status] = useCitiesList();
+  const [selectedCity, setSelectedCity] = useState<City | null>(null);
 
   const nameInputRef = useRef<InputRef | null>(null);
-  const citySelectRef = useRef<selectRef | null>(null);
+  // const citySelectRef = useRef<selectRef | null>(null);
   const ratingRef = useRef<checkboxRef | null>(null);
   const averageBillRef = useRef<InputRef | null>(null);
   const veganRef = useRef<checkboxRef | null>(null);
@@ -60,7 +60,7 @@ export const Filters: FC<Props> = ({ onFiltersChange }) => {
     event.preventDefault();
 
     const newData: FiltersType = {
-      city: Number(citySelectRef.current?.getValue()),
+      city: Number(selectedCity?.id),
       name: (nameInputRef.current?.getValue() ?? '').trim(),
       rating: Number(ratingRef.current?.getValue()),
       averageBill: averageBillRef.current?.getValue() || '',
@@ -76,7 +76,8 @@ export const Filters: FC<Props> = ({ onFiltersChange }) => {
 
   const handleClear = () => {
     nameInputRef.current?.clearValue();
-    citySelectRef.current?.clearValue();
+    // citySelectRef.current?.clearValue();
+    setSelectedCity(null);
     ratingRef.current?.clearValue();
     averageBillRef.current?.clearValue();
     veganRef.current?.clearValue();
@@ -100,6 +101,10 @@ export const Filters: FC<Props> = ({ onFiltersChange }) => {
     onFiltersChange(defaultData);
   };
 
+  const handleCitySelection = (option: City) => {
+    setSelectedCity(option);
+  };
+
   if (status === 'success') {
     return (
       <FilterContainer onSubmit={handleSubmit}>
@@ -111,18 +116,20 @@ export const Filters: FC<Props> = ({ onFiltersChange }) => {
         </ItemsWrapper>
         <Border />
         <StyledTitle>Location</StyledTitle>
-        {/* <CustomSelect
+        <CustomSelect
           options={data}
+          selectedCity={selectedCity}
+          onCitySelect={handleCitySelection}
           label="Choose location"
           placeholder="Choose city"
-        /> */}
-        <Select2
+        />
+        {/* <Select2
           name="city"
           label="Choose location"
           placeholder="Choose city"
           ref={citySelectRef}
           options={data}
-        />
+        /> */}
         <Border />
         {/* <InputComponent label="Input with ref" ref={nameInputRef} /> */}
         <StyledTitle>Search</StyledTitle>
