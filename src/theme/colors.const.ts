@@ -12,4 +12,5 @@ export const COLORS = {
   white: '#FFF',
   orange: '#FFB546',
   red: '#FF3939',
+  light_red: '#FFD7D7',
 };

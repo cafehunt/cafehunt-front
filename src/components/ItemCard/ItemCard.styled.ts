@@ -38,6 +38,7 @@ export const ItemCardTitle = styled.h3`
   font-size: ${FONT_SIZES.s24};
   font-weight: ${FONT_WEIGHTS.medium};
   line-height: ${LINE_HEIGHTS.h34};
+  color: ${COLORS.black};
 `;
 
 export const ItemCardFavorite = styled.div`

@@ -2,12 +2,13 @@ import { FC } from 'react';
 import { useExploreNew } from '../../hooks/useExploreNew';
 import { StyledExploreList } from './ExploreList.styled';
 import { ItemCardSmall } from '../ItemCardSmall';
+import { Loader } from '../Loader';
 
 export const ExploreList: FC = () => {
   const [data, status] = useExploreNew();
 
   if (status === 'loading') {
-    return <div>loading</div>
+    return <Loader />;
   }
 
   return (

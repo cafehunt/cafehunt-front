@@ -41,7 +41,7 @@ export const ItemCard: FC<Props> = ({ cafe }) => {
     work_time_end,
     rating,
     reviews,
-    id
+    id,
   } = cafe;
 
   const features = createFeaturesList(cafe);
@@ -58,7 +58,9 @@ export const ItemCard: FC<Props> = ({ cafe }) => {
       <ItemCardContent>
         <div>
           <ItemCardHeader>
-            <ItemCardTitle>{name}</ItemCardTitle>
+            <Link to={`/cafes/${id}`}>
+              <ItemCardTitle>{name}</ItemCardTitle>
+            </Link>
             <ItemCardFavorite>
               <AiOutlineHeart />
             </ItemCardFavorite>
