@@ -83,3 +83,8 @@ export const ContentImage = styled.div`
   background-repeat: no-repeat;
   background-position: left center;
 `;
+
+export const StyledError = styled.p`
+  color: red;
+  font-size: 13px;
+`
