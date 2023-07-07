@@ -1,6 +1,6 @@
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 import { AiFillStar, AiOutlineHeart } from 'react-icons/ai';
-import { SlLocationPin } from 'react-icons/sl';
 import {
   ItemCardSmallStyled,
   ItemFavorite,
@@ -23,6 +23,7 @@ type Props = {
 
 export const ItemCardSmall: FC<Props> = ({ cafe }) => {
   const {
+    id,
     name,
     images,
     street,
@@ -47,7 +48,9 @@ export const ItemCardSmall: FC<Props> = ({ cafe }) => {
       </ItemPhoto>
       <ItemInfo>
         <ItemTitleWrapper>
-          <ItemTitle title={name}>{name}</ItemTitle>
+          <Link to={`/cafes/${id}`}>
+            <ItemTitle title={name}>{name}</ItemTitle>
+          </Link>
           <ItemRating>
             <RatingIcon>
               <AiFillStar />

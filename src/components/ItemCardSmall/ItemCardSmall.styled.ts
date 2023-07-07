@@ -68,6 +68,7 @@ export const ItemTitle = styled.h3`
   font-size: ${FONT_SIZES.s18};
   font-weight: ${FONT_WEIGHTS.medium};
   line-height: ${LINE_HEIGHTS.h34};
+  color: ${COLORS.black};
 
   white-space: nowrap;
   overflow: hidden;

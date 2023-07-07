@@ -48,14 +48,14 @@ export const LinkStyled = styled.span`
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 40px;
   margin-bottom: 30px;
 `;
 
 export const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 24px;
 `;
 
 export const InputContainer = styled.div`
@@ -87,4 +87,4 @@ export const ContentImage = styled.div`
 export const StyledError = styled.p`
   color: red;
   font-size: 13px;
-`
+`;

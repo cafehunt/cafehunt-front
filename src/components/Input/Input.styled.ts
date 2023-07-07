@@ -1,18 +1,26 @@
 import styled from 'styled-components';
 import { COLORS } from '../../theme';
 
+type Props = {
+  hasError?: boolean;
+};
+
 export const InputStyled = styled.label`
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   gap: 8px;
-  flex: 1;
+  flex: 1; */
+  display: block;
 
   span {
+    display: inline-block;
+    margin-bottom: 8px;
+
     color: ${COLORS.dark_grey};
   }
 `;
 
-export const InputContainer = styled.div`
+export const InputContainer = styled.div<Props>`
   position: relative;
   display: block;
 
@@ -20,8 +28,12 @@ export const InputContainer = styled.div`
     width: 100%;
     padding: 12px 38px 12px 12px;
 
-    border: 1px solid ${COLORS.grey};
+    color: ${({ hasError }) => (hasError ? COLORS.red : COLORS.black)};
+
+    border: 1px solid ${({ hasError }) => (hasError ? COLORS.red : COLORS.grey)};
     border-radius: 8px;
+    background-color: ${({ hasError }) =>
+      hasError ? COLORS.light_red : COLORS.white};
 
     outline: none;
 
@@ -45,4 +57,11 @@ export const IconContainer = styled.div`
   color: ${COLORS.black};
 
   cursor: pointer;
+`;
+
+export const StyledError = styled.p`
+  padding-left: 12px;
+
+  font-size: 13px;
+  color: red;
 `;

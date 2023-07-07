@@ -18,6 +18,7 @@ import { useCafesList } from '../../hooks/useCafesList';
 import { FlexContainer } from '../../components/FlexContainer';
 import { FiltersType } from '../../types/Filters.type';
 import { ExploreList } from '../../components/ExploreList';
+import { Loader } from '../../components/Loader';
 
 export const Home: FC = () => {
   const [page, setPage] = useState(1);
@@ -38,7 +39,7 @@ export const Home: FC = () => {
   };
 
   if (status === 'loading') {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   return (

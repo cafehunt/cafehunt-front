@@ -1,6 +1,11 @@
 import { FC, useState } from 'react';
 import { UseFormRegisterReturn } from 'react-hook-form';
-import { IconContainer, InputContainer, InputStyled } from './Input.styled';
+import {
+  IconContainer,
+  InputContainer,
+  InputStyled,
+  StyledError,
+} from './Input.styled';
 import { IoEyeOutline, IoEyeOffOutline } from 'react-icons/io5';
 
 type Props = {
@@ -8,26 +13,38 @@ type Props = {
   label: string;
   name: string;
   placeholder?: string;
-  register?: UseFormRegisterReturn; 
+  register?: UseFormRegisterReturn;
+  errors: Record<string, any>;
 };
 
-export const Input: FC<Props> = ({ type, label, name, placeholder = '', register }) => {
+export const Input: FC<Props> = ({
+  type,
+  label,
+  name,
+  placeholder = '',
+  register,
+  errors,
+}) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
   };
 
+  // console.log('Errors:', errors);
+
+  const hasError = Boolean(errors[name]);
+
   return (
     <InputStyled>
       <span>{label}</span>
-      <InputContainer>
+      <InputContainer hasError={hasError}>
         <input
           type={type === 'password' && !showPassword ? 'password' : 'text'}
           name={name}
           placeholder={placeholder}
           autoComplete={name}
-          {...register} 
+          {...register}
         />
         {type === 'password' && (
           <IconContainer onClick={handleTogglePassword}>
@@ -35,6 +52,7 @@ export const Input: FC<Props> = ({ type, label, name, placeholder = '', register
           </IconContainer>
         )}
       </InputContainer>
+      {hasError && <StyledError>{errors[name].message}</StyledError>}
     </InputStyled>
   );
 };
