@@ -14,8 +14,10 @@ type Props = {
   name: string;
   placeholder?: string;
   register?: UseFormRegisterReturn;
-  errors: Record<string, any>;
+  errors?: Record<string, any>;
 };
+
+type ErrorRecord = Record<string, { message: string }>;
 
 export const Input: FC<Props> = ({
   type,
@@ -33,7 +35,7 @@ export const Input: FC<Props> = ({
 
   // console.log('Errors:', errors);
 
-  const hasError = Boolean(errors[name]);
+  const hasError = Boolean(errors?.[name]);
 
   return (
     <InputStyled>
@@ -52,7 +54,9 @@ export const Input: FC<Props> = ({
           </IconContainer>
         )}
       </InputContainer>
-      {hasError && <StyledError>{errors[name].message}</StyledError>}
+      {hasError && (
+        <StyledError>{(errors as ErrorRecord)[name]?.message}</StyledError>
+      )}
     </InputStyled>
   );
 };
