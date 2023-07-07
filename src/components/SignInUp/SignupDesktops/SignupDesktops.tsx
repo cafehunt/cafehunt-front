@@ -79,7 +79,11 @@ export const SignupDesktops: FC = () => {
             <Loader />
           ) : (
             <>
-              {mutation.isError && <p>An error occured: {error.message}</p>}
+              {mutation.isError && (
+                <Alert severity="error">
+                  An error occured: {error.message}
+                </Alert>
+              )}
 
               {mutation.isSuccess && (
                 <Alert
