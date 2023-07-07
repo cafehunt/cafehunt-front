@@ -12,29 +12,41 @@ import { City } from '../../../types/City.type';
 
 type Props = {
   options: City[];
+  selectedCity: City | null;
+  onCitySelect: (option: City) => void;
   placeholder: string;
   label: string;
 };
 
-export const CustomSelect: FC<Props> = ({ options, placeholder, label }) => {
+export const CustomSelect: FC<Props> = ({
+  options,
+  placeholder,
+  label,
+  selectedCity,
+  onCitySelect,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<City | null>(null);
-  const hasSelection = selectedOption !== null;
+
+  const hasSelection = selectedCity !== null;
 
   const handleToggleOptions = () => {
     setIsOpen(!isOpen);
   };
 
   const handleSelectOption = (option: City) => {
-    setSelectedOption(option);
+    onCitySelect(option);
     setIsOpen(false);
   };
 
   return (
     <CustomSelectWrapper>
       <StyledLabel>{label}</StyledLabel>
-      <SelectButton onClick={handleToggleOptions} hasSelection={hasSelection}>
-        {selectedOption ? selectedOption.name : placeholder}
+      <SelectButton
+        type="button"
+        onClick={handleToggleOptions}
+        hasSelection={hasSelection}
+      >
+        {selectedCity ? selectedCity.name : placeholder}
         <DropdownIcon src={arrowDown} alt="Dropdown" isOpen={isOpen} />
       </SelectButton>
       <Options isOpen={isOpen}>
