@@ -19,3 +19,8 @@ export interface NewUserAPIResponse {
   last_name: string;
   phone_number: null;
 }
+
+export interface LoginUserAPIResponse {
+  access_token: string;
+  token_type: 'bearer';
+}

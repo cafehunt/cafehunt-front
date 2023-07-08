@@ -1,10 +1,11 @@
 import * as yup from 'yup';
+import { emailTemplate } from '../../../utils/emailTemplate';
 
 export const schema = yup.object().shape({
   email: yup
     .string()
     .required('The email field is required')
-    .email('The email must be a valid email address'),
+    .matches(emailTemplate, 'The email must be a valid email address.'),
   first_name: yup
     .string()
     .required('The firstname field is required')
