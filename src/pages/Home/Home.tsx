@@ -56,7 +56,7 @@ export const Home: FC = () => {
       </HomeExplore>
       <HomeContent>
         <Filters onFiltersChange={handleFiltersChange} />
-        <FlexContainer fd="column" gap="10px">
+        <FlexContainer fd="column" gap="10px" width="100%">
           <TitleResults>{data.total} results match your filters</TitleResults>
           <FlexContainer width="100%" fd="column" ai="center" gap="24px">
             <CafesList cafes={data.items} />
