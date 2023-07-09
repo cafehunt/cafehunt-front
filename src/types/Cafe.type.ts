@@ -22,8 +22,8 @@ export interface Cafe {
   phone_number?: string;
 }
 
-export interface CafesAPIResponse {
-  items: Cafe[];
+export interface APIResponse<T> {
+  items: T[];
   total: number;
   page: number;
   size: number;

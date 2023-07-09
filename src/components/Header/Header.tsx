@@ -7,17 +7,27 @@ import { useMediaQueries } from '../../hooks/useMediaQueries';
 import { HeaderStyled, HeaderWrapper } from './Header.styled';
 import { Logo } from '../Logo';
 import { Button } from '../Button';
+import { useUserData } from '../../hooks/useUserData';
+import { LoginUser } from '../LoginUser';
 
 export const Header: FC = () => {
   const { sm } = useMediaQueries();
+  const token = localStorage.getItem('accessToken');
+  const [data, status] = useUserData(token || '');
 
   return (
     <HeaderStyled>
       <HeaderWrapper>
         <Logo />
-        <Link to={appRoutes.login}>
-          <Button width={sm ? '200px' : '100px'}>Log in</Button>
-        </Link>
+        {data.id ? (
+          <Link to={appRoutes.account}>
+            <LoginUser firstName={data.first_name} lastName={data.last_name} />
+          </Link>
+        ) : (
+          <Link to={appRoutes.login}>
+            <Button width={sm ? '200px' : '100px'}>Log in</Button>
+          </Link>
+        )}
       </HeaderWrapper>
     </HeaderStyled>
   );

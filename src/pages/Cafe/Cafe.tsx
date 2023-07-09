@@ -1,4 +1,7 @@
 import { FC, useState } from 'react';
+
+import { useNavigate } from 'react-router-dom';
+
 import { AiOutlineHeart, AiOutlinePhone, AiFillStar } from 'react-icons/ai';
 import { FlexContainer } from '../../components/FlexContainer';
 import {
@@ -36,8 +39,11 @@ import { ExploreList } from '../../components/ExploreList';
 import { createFeaturesList } from '../../utils/createFeaturesList';
 import { normalizeWorkingTime } from '../../utils/normalizeWorkingTime';
 import { isCafeOpen } from '../../utils/isCafeOpen';
+import { ModalBooking } from '../../components/ModalBooking';
+import { appRoutes } from '../../routes/Routes';
 import { Gallery } from '../../components/Gallery';
 import { Loader } from '../../components/Loader';
+
 
 export const Cafe: FC = () => {
   const { cafeId = 0 } = useParams();
@@ -54,14 +60,29 @@ export const Cafe: FC = () => {
     average_bill,
     phone_number,
   } = data;
+  const navigate = useNavigate();
+
+  const [showModal, setShowModal] = useState(false);
 
   const features = createFeaturesList(data);
   const normalizedStartTime = normalizeWorkingTime(String(work_time_start));
   const normalizedEndTime = normalizeWorkingTime(String(work_time_end));
 
   const isOpen = isCafeOpen(normalizedStartTime, normalizedEndTime);
-  console.log('cafe:', data);
-  console.log(images);
+
+  const handleShowModal = () => {
+    if (!localStorage.getItem('accessToken')) {
+      navigate(appRoutes.login);
+    } else {
+      setShowModal(true);
+      document.body.style.overflow = 'hidden';
+    }
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    document.body.style.overflow = 'visible';
+  };
 
   if (status === 'loading') {
     return <Loader />
@@ -99,7 +120,12 @@ export const Cafe: FC = () => {
             </FlexContainer>
             <FlexContainer fd="column" ai="flex-end" gap="8px">
               <CafeRating rating={rating} reviews={reviews} />
-              <Button width="200px">Reserve</Button>
+              <Button type="button" width="200px" onClick={handleShowModal}>
+                Reserve
+              </Button>
+              {showModal && (
+                <ModalBooking cafeName={name} onClose={handleCloseModal} />
+              )}
             </FlexContainer>
           </FlexContainer>
         </CafeHeader>

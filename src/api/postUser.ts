@@ -1,8 +1,8 @@
 import { RegisterFormValues } from '../types/RegisterFormValues.type';
 import { NewUserAPIResponse } from '../types/User.type';
 
-const URL = 'http://localhost:8000/auth/register';
-// const URL = 'http://cafehunt.pp.ua/auth/register';
+// const URL = 'http://localhost:8000/auth/register';
+const URL = 'https://cafehunt.pp.ua/api/auth/register';
 
 export const postUser = async (
   newUser: RegisterFormValues
@@ -16,7 +16,7 @@ export const postUser = async (
   });
 
   if (!apiRes.ok) {
-    throw new Error(`User wasn't created`);
+    throw new Error(`User is already exist`);
   }
 
   return apiRes.json() as Promise<NewUserAPIResponse>;

@@ -2,6 +2,9 @@ import { QueryFunction } from 'react-query';
 import { User } from '../types/User.type';
 import { FormRequestData } from '../components/SignInUp/SignupDesktops';
 
+// const URL = 'http://localhost:8000/auth/register';
+const URL = 'https://cafehunt.pp.ua/api/auth/register';
+
 export const fetchUserRegister: QueryFunction<
   User,
   ['register', FormRequestData | null]
@@ -12,7 +15,7 @@ export const fetchUserRegister: QueryFunction<
     return;
   }
 
-  const apiRes = await fetch(`http://localhost:8000/auth/register`, {
+  const apiRes = await fetch(URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
