@@ -1,5 +1,5 @@
 import { QueryFunction } from 'react-query';
-import { CafesAPIResponse } from '../types/Cafe.type';
+import { APIResponse, Cafe } from '../types/Cafe.type';
 
 import { FiltersType } from '../types/Filters.type';
 
@@ -51,15 +51,13 @@ const createSearchParams = (params: FiltersType) => {
 };
 
 export const fetchCafes: QueryFunction<
-  CafesAPIResponse,
+  APIResponse<Cafe>,
   ['cafes', number, FiltersType]
 > = async ({ queryKey }) => {
   const page = queryKey[1];
   const filters = queryKey[2];
 
   const searchParams = createSearchParams(filters);
-
-  console.log('Query key:', queryKey);
 
   const apiRes = await fetch(
     `${URL}/${ENDPOINT}?page=${page}${searchParams}&size=${SIZE}`

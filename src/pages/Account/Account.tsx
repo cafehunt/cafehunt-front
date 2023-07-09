@@ -28,10 +28,15 @@ import {
   Tab,
   TabsWrapper,
 } from './Account.styled';
+import { useUserData } from '../../hooks/useUserData';
+import { useOrdersList } from '../../hooks/useOrdersList';
 
 export const Account: FC = () => {
   const [showOptions, setShowOptions] = useState(false);
   const [activeTab, setActiveTab] = useState<string>('bookings');
+  const token = localStorage.getItem('accessToken');
+  const [data] = useUserData(token || '');
+  const [ordersData] = useOrdersList(token || '');
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
@@ -48,6 +53,8 @@ export const Account: FC = () => {
   const handleLogout = () => {
     // Handle logout logic here
   };
+
+  console.log('Orders:', ordersData);
 
   return (
     <AccountStyled>
@@ -68,7 +75,7 @@ export const Account: FC = () => {
               <FlexContainer ai="center" jc="space-between" width="100%">
                 <FlexContainer ai="center">
                   <StyledTitle fs="40px" fw="700" lnh="120%">
-                    Mary Brown
+                    {data.first_name} {data.last_name}
                   </StyledTitle>
                   <PencilImage src={pencilIcon} alt="Pencil" />
                 </FlexContainer>
@@ -98,13 +105,13 @@ export const Account: FC = () => {
                     type="email"
                     label="Email"
                     name="email"
-                    placeholder="mbrown@gmail.com"
+                    placeholder={data.email}
                   />
                   <Input
                     type="text"
                     label="Phone"
                     name="phone"
-                    placeholder="050 123 45 67"
+                    placeholder={data.phone_number || ''}
                   />
                 </FlexContainer>
                 <Button width="168px" vp="13px">
@@ -132,11 +139,7 @@ export const Account: FC = () => {
         </TabsWrapper>
         {activeTab === 'bookings' ? (
           <>
-            <StyledTitle mb="24px">Active bookings</StyledTitle>
-            <BookingsWrapper>
-              <AccountCard />
-            </BookingsWrapper>
-            <StyledTitle mb="24px">Unactive bookings</StyledTitle>
+            <StyledTitle mb="24px">Bookings history</StyledTitle>
             <BookingsWrapper>
               <AccountCard />
               <AccountCard />

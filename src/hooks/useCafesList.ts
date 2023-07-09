@@ -1,6 +1,6 @@
 import { QueryStatus, useQuery } from 'react-query';
 import { fetchCafes } from '../api/fetchCafes';
-import { CafesAPIResponse } from '../types/Cafe.type';
+import { APIResponse, Cafe } from '../types/Cafe.type';
 
 export const useCafesList = (
   page = 1,
@@ -20,10 +20,8 @@ export const useCafesList = (
     keepPreviousData: true,
   });
 
-  console.log('Filters:', filters);
-
   return [results?.data ?? [], results.status] as [
-    CafesAPIResponse,
+    APIResponse<Cafe>,
     QueryStatus
   ];
 };

@@ -5,6 +5,7 @@ import { COLORS, FONT_SIZES, FONT_WEIGHTS, LINE_HEIGHTS } from '../../theme';
 export const ItemCardStyled = styled.article`
   display: flex;
   flex: 1;
+  align-self: stretch;
   max-width: 1320px;
   border: 1px solid ${COLORS.grey};
   border-radius: 24px;
@@ -14,7 +15,7 @@ export const ItemCardStyled = styled.article`
 
 export const BookingStyled = styled.div`
   display: flex;
-  flex:1;
+  flex: 1;
   flex-direction: column;
   max-width: 403px;
   border: 1px solid ${COLORS.grey};
@@ -22,17 +23,17 @@ export const BookingStyled = styled.div`
   background-color: ${COLORS.white};
   overflow: hidden;
   padding: 12px;
-`
+`;
 
 export const StyledSubtitle = styled.h3`
   font-size: ${FONT_SIZES.s18};
   color: ${COLORS.black};
   line-height: 140%;
-`
+`;
 
 export const SubtitleWrapper = styled.div`
   margin-bottom: 34px;
-`
+`;
 
 export const ItemCardPhoto = styled.div`
   width: 280px;

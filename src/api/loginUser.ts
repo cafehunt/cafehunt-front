@@ -1,8 +1,8 @@
 import { LoginFormValues } from '../types/LoginFormValues.type';
 import { LoginUserAPIResponse } from '../types/User.type';
 
-const URL = 'http://localhost:8000/auth/jwt/login';
-// const URL = 'http://cafehunt.pp.ua/auth/login';
+// const URL = 'http://localhost:8000/auth/jwt/login';
+const URL = 'https://cafehunt.pp.ua/api/auth/jwt/login';
 
 export const loginUser = async (
   userData: LoginFormValues
@@ -20,7 +20,7 @@ export const loginUser = async (
   });
 
   if (!apiRes.ok) {
-    throw new Error(`Login failed`);
+    throw new Error('Login failed');
   }
 
   return apiRes.json() as Promise<LoginUserAPIResponse>;

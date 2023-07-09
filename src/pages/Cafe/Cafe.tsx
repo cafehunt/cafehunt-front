@@ -1,4 +1,5 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { AiOutlineHeart, AiOutlinePhone, AiFillStar } from 'react-icons/ai';
 
@@ -31,7 +32,6 @@ import { CafeTag } from '../../components/CafeTag';
 import { CafeRating } from '../../components/CafeRating';
 import { Button } from '../../components/Button';
 
-import photoImg from '../../assets/img/item-card.jpg';
 import { COLORS } from '../../theme';
 import { Header } from '../../components/Header';
 import { useParams } from 'react-router-dom';
@@ -40,6 +40,8 @@ import { ExploreList } from '../../components/ExploreList';
 import { createFeaturesList } from '../../utils/createFeaturesList';
 import { normalizeWorkingTime } from '../../utils/normalizeWorkingTime';
 import { isCafeOpen } from '../../utils/isCafeOpen';
+import { ModalBooking } from '../../components/ModalBooking';
+import { appRoutes } from '../../routes/Routes';
 
 export const Cafe: FC = () => {
   const { cafeId = 0 } = useParams();
@@ -55,13 +57,29 @@ export const Cafe: FC = () => {
     average_bill,
     phone_number,
   } = data;
+  const navigate = useNavigate();
+
+  const [showModal, setShowModal] = useState(false);
 
   const features = createFeaturesList(data);
   const normalizedStartTime = normalizeWorkingTime(String(work_time_start));
   const normalizedEndTime = normalizeWorkingTime(String(work_time_end));
 
   const isOpen = isCafeOpen(normalizedStartTime, normalizedEndTime);
-  console.log('cafe:', data);
+
+  const handleShowModal = () => {
+    if (!localStorage.getItem('accessToken')) {
+      navigate(appRoutes.login);
+    } else {
+      setShowModal(true);
+      document.body.style.overflow = 'hidden';
+    }
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    document.body.style.overflow = 'visible';
+  };
 
   if (status === 'loading') {
     return 'laoding';
@@ -99,7 +117,12 @@ export const Cafe: FC = () => {
             </FlexContainer>
             <FlexContainer fd="column" ai="flex-end" gap="8px">
               <CafeRating rating={rating} reviews={reviews} />
-              <Button width="200px">Reserve</Button>
+              <Button type="button" width="200px" onClick={handleShowModal}>
+                Reserve
+              </Button>
+              {showModal && (
+                <ModalBooking cafeName={name} onClose={handleCloseModal} />
+              )}
             </FlexContainer>
           </FlexContainer>
         </CafeHeader>

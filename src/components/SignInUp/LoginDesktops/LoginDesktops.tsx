@@ -51,12 +51,13 @@ export const LoginDesktops: FC = () => {
   const onSubmit = (userData: LoginFormValues) => {
     mutation.mutate(userData);
 
-    if (mutation.isSuccess) {
-      localStorage.setItem('accessToken', mutation.data.access_token);
-    }
+    // await queryClient.invalidateQueries(['user', mutationResult.access_token]);
+    // await queryClient.refetchQueries(['user', mutationResult.access_token]);
   };
 
   if (mutation.isSuccess) {
+    localStorage.setItem('accessToken', mutation.data.access_token);
+
     navigate(appRoutes.home);
   }
 
