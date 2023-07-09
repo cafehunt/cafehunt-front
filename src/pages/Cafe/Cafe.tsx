@@ -1,7 +1,5 @@
-import { FC } from 'react';
-
+import { FC, useState } from 'react';
 import { AiOutlineHeart, AiOutlinePhone, AiFillStar } from 'react-icons/ai';
-
 import { FlexContainer } from '../../components/FlexContainer';
 import {
   CafeStyled,
@@ -30,8 +28,6 @@ import { Schedule } from '../../components/Schedule';
 import { CafeTag } from '../../components/CafeTag';
 import { CafeRating } from '../../components/CafeRating';
 import { Button } from '../../components/Button';
-
-import photoImg from '../../assets/img/item-card.jpg';
 import { COLORS } from '../../theme';
 import { Header } from '../../components/Header';
 import { useParams } from 'react-router-dom';
@@ -40,10 +36,13 @@ import { ExploreList } from '../../components/ExploreList';
 import { createFeaturesList } from '../../utils/createFeaturesList';
 import { normalizeWorkingTime } from '../../utils/normalizeWorkingTime';
 import { isCafeOpen } from '../../utils/isCafeOpen';
+import { Gallery } from '../../components/Gallery';
+import { Loader } from '../../components/Loader';
 
 export const Cafe: FC = () => {
   const { cafeId = 0 } = useParams();
   const [data, status] = useGetGafeById(+cafeId);
+  const [currentImage, setCurrentImage] = useState<number>(0);
   const {
     name,
     street,
@@ -62,9 +61,10 @@ export const Cafe: FC = () => {
 
   const isOpen = isCafeOpen(normalizedStartTime, normalizedEndTime);
   console.log('cafe:', data);
+  console.log(images);
 
   if (status === 'loading') {
-    return 'laoding';
+    return <Loader />
   }
 
   return (
@@ -106,8 +106,11 @@ export const Cafe: FC = () => {
         <CafeGallery>
           <CafeTitleSecondary>Photos</CafeTitleSecondary>
           <CafeGalleryContainer>
-            {images.slice(0, 5).map((image) => (
-              <PhotoContainer key={image.url}>
+            {images.slice(0, 5).map((image, index) => (
+              <PhotoContainer
+                key={image.url}
+                onClick={() => setCurrentImage(index + 1)}
+              >
                 <img src={image.url} alt="Cafe" />
               </PhotoContainer>
             ))}
@@ -150,6 +153,13 @@ export const Cafe: FC = () => {
           <ExploreList />
         </CafeSuggestions>
       </CafeWrapper>
+      {currentImage !== 0 && (
+        <Gallery
+          images={images.map((obj) => obj.url)}
+          currentImage={currentImage}
+          setCurrentImage={setCurrentImage}
+        />
+      )}
     </CafeStyled>
   );
 };

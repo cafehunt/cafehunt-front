@@ -33,3 +33,9 @@ export const HomeContent = styled.section`
   max-width: 1320px;
   margin: 0 auto;
 `;
+
+export const TitleResults = styled.p`
+  font-size: ${FONT_SIZES.s16};
+  line-height: 140%;
+  color: ${COLORS.black};
+`;
