@@ -7,11 +7,9 @@ import {
   MEDIA,
 } from '../../theme';
 
-import cafeBg from '../../assets/img/login-bg.jpg';
-
 type TitleProps = {
   bg: string;
-}
+};
 
 export const CafeStyled = styled.section`
   background-color: ${COLORS.white};
@@ -80,8 +78,7 @@ export const Favorite = styled.button`
   cursor: pointer;
 `;
 
-export const CafeGallery = styled.div`
-`;
+export const CafeGallery = styled.div``;
 
 export const CafeTitleSecondary = styled.h3`
   margin-bottom: 20px;
@@ -114,8 +111,15 @@ export const PhotoContainer = styled.div`
   img {
     width: 100%;
     height: 100%;
+    cursor: pointer;
 
     object-fit: cover;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    transition: all 0.3s;
   }
 `;
 

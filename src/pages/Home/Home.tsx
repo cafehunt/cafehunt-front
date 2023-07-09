@@ -1,14 +1,13 @@
 import { FC, useState, ChangeEvent } from 'react';
-
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-
 import {
   HomeStyled,
   Title,
   HomeExplore,
   HomeExploreWrapper,
   HomeContent,
+  TitleResults,
 } from './Home.styled';
 import { useMediaQueries } from '../../hooks/useMediaQueries';
 import { Filters } from '../../components/Filters';
@@ -57,19 +56,22 @@ export const Home: FC = () => {
       </HomeExplore>
       <HomeContent>
         <Filters onFiltersChange={handleFiltersChange} />
-        <FlexContainer width="100%" fd="column" ai="center" gap="24px">
-          <CafesList cafes={data.items} />
-          <Stack spacing={2}>
-            <Pagination
-              count={data.pages}
-              defaultPage={1}
-              siblingCount={2}
-              boundaryCount={1}
-              shape="rounded"
-              page={page}
-              onChange={handlePageChange}
-            />
-          </Stack>
+        <FlexContainer fd="column" gap="10px" width="100%">
+          <TitleResults>{data.total} results match your filters</TitleResults>
+          <FlexContainer width="100%" fd="column" ai="center" gap="24px">
+            <CafesList cafes={data.items} />
+            <Stack spacing={2}>
+              <Pagination
+                count={data.pages}
+                defaultPage={1}
+                siblingCount={2}
+                boundaryCount={1}
+                shape="rounded"
+                page={page}
+                onChange={handlePageChange}
+              />
+            </Stack>
+          </FlexContainer>
         </FlexContainer>
       </HomeContent>
     </HomeStyled>
