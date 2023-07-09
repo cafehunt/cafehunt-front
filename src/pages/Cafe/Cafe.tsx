@@ -37,6 +37,7 @@ import { createFeaturesList } from '../../utils/createFeaturesList';
 import { normalizeWorkingTime } from '../../utils/normalizeWorkingTime';
 import { isCafeOpen } from '../../utils/isCafeOpen';
 import { Gallery } from '../../components/Gallery';
+import { Loader } from '../../components/Loader';
 
 export const Cafe: FC = () => {
   const { cafeId = 0 } = useParams();
@@ -63,7 +64,7 @@ export const Cafe: FC = () => {
   console.log(images);
 
   if (status === 'loading') {
-    return 'laoding';
+    return <Loader />
   }
 
   return (
