@@ -18,7 +18,7 @@ export const MainImage = styled.img`
   width: 715px;
   height: 450px;
   border-radius: 10px;
-  object-fit: cover;
+  object-fit: contain;
   margin-bottom: 24px;
   user-select: none;
 `;
