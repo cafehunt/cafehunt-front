@@ -174,7 +174,10 @@ export const ModalBooking: FC<Props> = ({ cafeName, onClose }) => {
     mutationFn: (newOrder: OrderValues) => {
       return postOrder(newOrder);
     },
-    onSuccess: () => onClose(),
+    onSuccess: () => {
+      onClose();
+      navigate(appRoutes.account);
+    },
   });
 
   const { cafeId = 0 } = useParams();
@@ -208,8 +211,6 @@ export const ModalBooking: FC<Props> = ({ cafeName, onClose }) => {
     };
 
     mutation.mutate(data);
-
-    navigate(appRoutes.account);
   };
 
   return (
