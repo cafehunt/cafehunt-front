@@ -128,7 +128,7 @@ export const Account: FC = () => {
                       type="text"
                       label="Phone"
                       name="phone"
-                      placeholder={data.phone_number || ''}
+                      placeholder={data.phone_number || '050 123 45 67'}
                     />
                   </AccountInput>
                 </FlexContainer>
