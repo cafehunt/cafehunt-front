@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useState, ChangeEvent } from 'react';
 import { Header } from '../../components/Header';
 import { BackButton } from '../../components/BackButton';
 import { FlexContainer } from '../../components/FlexContainer';
@@ -13,6 +13,7 @@ import { AccountCard } from '../../components/AccountCard';
 import {
   AccountStyled,
   AccountWrapper,
+  AccountPagination,
   AvatarCircle,
   AvatarImage,
   BookingsWrapper,
@@ -27,16 +28,21 @@ import {
   StyledTitle,
   Tab,
   TabsWrapper,
+  AccountInput,
 } from './Account.styled';
 import { useUserData } from '../../hooks/useUserData';
 import { useOrdersList } from '../../hooks/useOrdersList';
+import { Loader } from '../../components/Loader';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 
 export const Account: FC = () => {
+  const [page, setPage] = useState(1);
   const [showOptions, setShowOptions] = useState(false);
   const [activeTab, setActiveTab] = useState<string>('bookings');
   const token = localStorage.getItem('accessToken');
   const [data] = useUserData(token || '');
-  const [ordersData] = useOrdersList(token || '');
+  const [ordersData, ordersStatus] = useOrdersList(token || '', page);
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
@@ -54,7 +60,15 @@ export const Account: FC = () => {
     // Handle logout logic here
   };
 
-  console.log('Orders:', ordersData);
+  const handlePageChange = (event: ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+  };
+
+  console.log('Orders:', ordersData.items);
+
+  if (ordersStatus === 'loading') {
+    return <Loader />;
+  }
 
   return (
     <AccountStyled>
@@ -101,18 +115,22 @@ export const Account: FC = () => {
               </FlexContainer>
               <FlexContainer gap="92px" width="100%" ai="flex-end">
                 <FlexContainer gap="24px" width="100%">
-                  <Input
-                    type="email"
-                    label="Email"
-                    name="email"
-                    placeholder={data.email}
-                  />
-                  <Input
-                    type="text"
-                    label="Phone"
-                    name="phone"
-                    placeholder={data.phone_number || ''}
-                  />
+                  <AccountInput>
+                    <Input
+                      type="email"
+                      label="Email"
+                      name="email"
+                      placeholder={data.email}
+                    />
+                  </AccountInput>
+                  <AccountInput>
+                    <Input
+                      type="text"
+                      label="Phone"
+                      name="phone"
+                      placeholder={data.phone_number || ''}
+                    />
+                  </AccountInput>
                 </FlexContainer>
                 <Button width="168px" vp="13px">
                   Save
@@ -141,20 +159,31 @@ export const Account: FC = () => {
           <>
             <StyledTitle mb="24px">Bookings history</StyledTitle>
             <BookingsWrapper>
-              <AccountCard />
-              <AccountCard />
-              <AccountCard />
-              <AccountCard />
-              <AccountCard />
+              {ordersData.items.map((item) => (
+                <AccountCard key={item.id} data={item} user={data} />
+              ))}
+              <AccountPagination>
+                <Stack spacing={2}>
+                  <Pagination
+                    count={ordersData.pages}
+                    defaultPage={1}
+                    siblingCount={2}
+                    boundaryCount={1}
+                    shape="rounded"
+                    page={page}
+                    onChange={handlePageChange}
+                  />
+                </Stack>
+              </AccountPagination>
             </BookingsWrapper>
           </>
         ) : (
           <BookingsWrapper>
+            {/* <AccountCard isFavorites />
             <AccountCard isFavorites />
             <AccountCard isFavorites />
             <AccountCard isFavorites />
-            <AccountCard isFavorites />
-            <AccountCard isFavorites />
+            <AccountCard isFavorites /> */}
           </BookingsWrapper>
         )}
       </AccountWrapper>

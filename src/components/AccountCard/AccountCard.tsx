@@ -21,25 +21,42 @@ import { Schedule } from '../Schedule';
 import { Location } from '../Location';
 import { Button } from '../Button';
 
-import itemPhoto from '../../assets/img/item-card.jpg';
-import { appRoutes } from '../../routes/Routes';
 import { FlexContainer } from '../FlexContainer';
+import { Order } from '../../types/Order.type';
+import { NewUserAPIResponse } from '../../types/User.type';
 
 type Props = {
+  data: Order;
+  user: NewUserAPIResponse;
   isFavorites?: boolean;
 };
 
-export const AccountCard: FC<Props> = ({ isFavorites }) => {
+function formatDate(inputDate: string) {
+  const dateObj = new Date(inputDate);
+  const day = String(dateObj.getDate()).padStart(2, '0');
+  const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+  const year = dateObj.getFullYear();
+  const hours = String(dateObj.getHours()).padStart(2, '0');
+  const minutes = String(dateObj.getMinutes()).padStart(2, '0');
+
+  return `${day}/${month}/${year} ${hours}:${minutes}`;
+}
+
+export const AccountCard: FC<Props> = ({ data, user, isFavorites }) => {
+  const { cafe_id, cafe_name, places, booking_date, image } = data;
+
   return (
     <FlexContainer gap="48px">
       <ItemCardStyled>
         <ItemCardPhoto>
-          <img src={itemPhoto} alt="Very well cafe" />
+          <img src={image} alt={cafe_name} />
         </ItemCardPhoto>
         <ItemCardContent>
           <div>
             <ItemCardHeader>
-              <ItemCardTitle>Very Well Cafe</ItemCardTitle>
+              <Link to={`/cafes/${cafe_id}`}>
+                <ItemCardTitle>{cafe_name}</ItemCardTitle>
+              </Link>
               {!isFavorites || (
                 <ItemCardFavorite>
                   <RedHeartIcon />
@@ -47,7 +64,7 @@ export const AccountCard: FC<Props> = ({ isFavorites }) => {
               )}
             </ItemCardHeader>
             <ItemCardDescription>
-              {/* <Location /> */}
+              <Location street="Zankovetska St., 15/4, Kyiv, Ukraine" />
               <Schedule>$$ &#183; Open now (8 AM - 22 PM)</Schedule>
             </ItemCardDescription>
             <ItemCardFooter>
@@ -57,7 +74,7 @@ export const AccountCard: FC<Props> = ({ isFavorites }) => {
                 </RatingIcon>
                 <span>4.2</span>
               </ItemCardRating>
-              <Link to={appRoutes.cafes}>
+              <Link to={`/cafes/${cafe_id}`}>
                 <Button variant="secondary" width="130px">
                   View
                 </Button>
@@ -68,10 +85,12 @@ export const AccountCard: FC<Props> = ({ isFavorites }) => {
       </ItemCardStyled>
       {!isFavorites && (
         <BookingStyled>
-          <ItemCardTitle>Booking for 4 people</ItemCardTitle>
+          <ItemCardTitle>Booking for {places} people</ItemCardTitle>
           <SubtitleWrapper>
-            <StyledSubtitle>Mary Brown</StyledSubtitle>
-            <StyledSubtitle>22/06/2023 5:00pm - 6:00pm</StyledSubtitle>
+            <StyledSubtitle>
+              {user.first_name} {user.last_name}
+            </StyledSubtitle>
+            <StyledSubtitle>{formatDate(booking_date)}</StyledSubtitle>
           </SubtitleWrapper>
           <Button>Cancel booking</Button>
         </BookingStyled>
