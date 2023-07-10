@@ -15,6 +15,7 @@ type Props = {
   placeholder?: string;
   register?: UseFormRegisterReturn;
   errors?: Record<string, any>;
+  disabled?: boolean;
 };
 
 type ErrorRecord = Record<string, { message: string }>;
@@ -26,6 +27,7 @@ export const Input: FC<Props> = ({
   placeholder = '',
   register,
   errors,
+  disabled = false,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -42,11 +44,13 @@ export const Input: FC<Props> = ({
       <span>{label}</span>
       <InputContainer hasError={hasError}>
         <input
-          type={type === 'password' && !showPassword ? 'password' : 'text'}
+          type={type && !showPassword ? type : 'text'}
           name={name}
           placeholder={placeholder}
           autoComplete={name}
           {...register}
+          disabled={disabled}
+          min="1"
         />
         {type === 'password' && (
           <IconContainer onClick={handleTogglePassword}>

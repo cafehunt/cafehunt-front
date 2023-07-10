@@ -20,6 +20,7 @@ import { useMutation } from 'react-query';
 import { postOrder } from '../../api/postOrder';
 import { Alert } from '@mui/material';
 import { appRoutes } from '../../routes/Routes';
+import { User } from '../../types/User.type';
 
 export const StyledTitle = styled.h3`
   font-size: ${FONT_SIZES.s24};
@@ -57,7 +58,17 @@ export const CloseIcon = styled(AiOutlineClose)`
 
 export const FormContainer = styled.div`
   display: flex;
+  flex-direction: column;
+  gap: 18px;
+`;
+
+export const FormRow = styled.div`
+  display: flex;
   gap: 16px;
+`;
+
+export const FormRowElement = styled.div`
+  flex: 1;
 `;
 
 export const LeftContent = styled.div`
@@ -96,10 +107,6 @@ export const StyledLabel = styled.p`
   line-height: 140%;
   color: ${COLORS.dark_grey};
   margin-bottom: 6px;
-`;
-
-export const PickerContainer = styled.div`
-  width: 100%;
 `;
 
 export const StyledDatePicker = styled(DatePicker)`
@@ -181,6 +188,12 @@ export const ModalBooking: FC<Props> = ({ cafeName, onClose }) => {
   });
 
   const { cafeId = 0 } = useParams();
+  const userData = JSON.parse(localStorage.getItem('user') || '{}') as Pick<
+    User,
+    'first_name' | 'last_name'
+  >;
+
+  console.log('User name:', userData);
 
   const error = mutation.error as Error;
 
@@ -225,19 +238,33 @@ export const ModalBooking: FC<Props> = ({ cafeName, onClose }) => {
         <StyledCafeTitle>{cafeName}</StyledCafeTitle>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <FormContainer>
-            <LeftContent>
-              <Input
-                type="text"
-                name="name"
-                label="Enter your name"
-                placeholder="Mary Brown"
-              />
-              <PickerContainer>
+            <FormRow>
+              <FormRowElement>
+                <Input
+                  type="text"
+                  name="name"
+                  label="Your name"
+                  placeholder={`${userData.first_name} ${userData.last_name}`}
+                  disabled={true}
+                />
+              </FormRowElement>
+              <FormRowElement>
+                <Input
+                  type="number"
+                  name="places"
+                  label="Enter number of guests"
+                  placeholder="4"
+                  register={register('places')}
+                  errors={errors}
+                />
+              </FormRowElement>
+            </FormRow>
+            <FormRow>
+              <FormRowElement>
                 <StyledLabel>Choose date</StyledLabel>
                 <Controller
                   name="booking_date"
                   control={control}
-                  defaultValue=""
                   render={({ field }) => (
                     <StyledDatePicker
                       {...field}
@@ -245,18 +272,8 @@ export const ModalBooking: FC<Props> = ({ cafeName, onClose }) => {
                     />
                   )}
                 />
-              </PickerContainer>
-            </LeftContent>
-            <RightContent>
-              <Input
-                type="text"
-                name="places"
-                label="Enter number of guests"
-                placeholder="4"
-                register={register('places')}
-                errors={errors}
-              />
-              <PickerContainer>
+              </FormRowElement>
+              <FormRowElement>
                 <StyledLabel>Choose available time</StyledLabel>
                 <Controller
                   name="booking_time"
@@ -271,8 +288,8 @@ export const ModalBooking: FC<Props> = ({ cafeName, onClose }) => {
                     />
                   )}
                 />
-              </PickerContainer>
-            </RightContent>
+              </FormRowElement>
+            </FormRow>
           </FormContainer>
           <Button type="submit" disabled={!isValid || isSubmitting}>
             Reserve
