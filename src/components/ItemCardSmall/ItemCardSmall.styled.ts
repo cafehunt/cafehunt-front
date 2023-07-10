@@ -70,7 +70,7 @@ export const ItemTitle = styled.h3`
   line-height: ${LINE_HEIGHTS.h34};
   color: ${COLORS.black};
 
-  white-space: nowrap;
+  /* white-space: nowrap; */
   overflow: hidden;
   text-overflow: ellipsis;
 `;

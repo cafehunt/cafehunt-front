@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-misused-promises */
+import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import { ChangeEvent } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { COLORS, FONT_SIZES, FONT_WEIGHTS } from '../../theme';
@@ -12,8 +12,6 @@ import { FC } from 'react';
 import { Input } from '../Input';
 import { DatePicker } from '@mui/x-date-pickers';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
-import { CustomSelect } from '../Filters/CustomSelect';
-// import { options } from '../Filters';
 import { Button } from '../Button';
 import { Modal } from '../Modal/Modal';
 import { BookingFormValues, OrderValues } from '../../types/BookingFormValues';
@@ -21,6 +19,7 @@ import { BookingSchema } from '../../schemas/Booking.schema';
 import { useMutation } from 'react-query';
 import { postOrder } from '../../api/postOrder';
 import { Alert } from '@mui/material';
+import { appRoutes } from '../../routes/Routes';
 
 export const StyledTitle = styled.h3`
   font-size: ${FONT_SIZES.s24};
@@ -169,6 +168,8 @@ export type Props = {
 };
 
 export const ModalBooking: FC<Props> = ({ cafeName, onClose }) => {
+  const navigate = useNavigate();
+
   const mutation = useMutation({
     mutationFn: (newOrder: OrderValues) => {
       return postOrder(newOrder);
@@ -194,11 +195,11 @@ export const ModalBooking: FC<Props> = ({ cafeName, onClose }) => {
     const formattedBookingDate = format(
       new Date(bookingData.booking_date),
       'yyyy.MM.dd'
-    ) as string;
+    );
     const formattedBookingTime: string = format(
       new Date(bookingData.booking_time),
       'HH'
-    ) as string;
+    );
 
     const data = {
       cafe_id: Number(cafeId),
@@ -206,9 +207,9 @@ export const ModalBooking: FC<Props> = ({ cafeName, onClose }) => {
       booking_date: `${formattedBookingDate} ${formattedBookingTime}`,
     };
 
-    console.log('Booking data:', data);
-
     mutation.mutate(data);
+
+    navigate(appRoutes.account);
   };
 
   return (

@@ -37,12 +37,13 @@ export const SubtitleWrapper = styled.div`
 
 export const ItemCardPhoto = styled.div`
   width: 280px;
+  max-height: 200px;
+  aspect-ratio: 1;
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 24px;
   }
 `;
 
@@ -69,6 +70,7 @@ export const ItemCardTitle = styled.h3`
   font-size: ${FONT_SIZES.s24};
   font-weight: ${FONT_WEIGHTS.medium};
   line-height: ${LINE_HEIGHTS.h34};
+  color: ${COLORS.black};
 `;
 
 export const ItemCardFavorite = styled.div`

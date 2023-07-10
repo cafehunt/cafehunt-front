@@ -19,6 +19,15 @@ export const AccountWrapper = styled.div`
   }
 `;
 
+export const AccountInput = styled.p`
+  flex: 1;
+`;
+
+export const AccountPagination = styled.div`
+  display: inline-flex;
+  justify-content: center;
+`;
+
 export type TitleProps = {
   fs?: string;
   fw?: string;
