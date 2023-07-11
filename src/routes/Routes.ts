@@ -4,4 +4,5 @@ export const appRoutes = {
   register: '/register',
   cafes: '/cafes/:cafeId',
   account: '/account',
+  notFound: '*',
 };
