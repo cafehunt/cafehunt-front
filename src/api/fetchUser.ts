@@ -10,6 +10,10 @@ export const fetchUser: QueryFunction<
 > = async ({ queryKey }) => {
   const token = queryKey[1];
 
+  if (token === '') {
+    return;
+  }
+
   const apiRes = await fetch(URL, {
     method: 'GET',
     headers: {

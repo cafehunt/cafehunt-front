@@ -13,15 +13,18 @@ import { LoginUser } from '../LoginUser';
 export const Header: FC = () => {
   const { sm } = useMediaQueries();
   const token = localStorage.getItem('accessToken');
-  const [data, status] = useUserData(token || '');
+  const [userData, status] = useUserData(token || '');
 
   return (
     <HeaderStyled>
       <HeaderWrapper>
         <Logo />
-        {data.id ? (
+        {userData.id ? (
           <Link to={appRoutes.account}>
-            <LoginUser firstName={data.first_name} lastName={data.last_name} />
+            <LoginUser
+              firstName={userData.first_name}
+              lastName={userData.last_name}
+            />
           </Link>
         ) : (
           <Link to={appRoutes.login}>
