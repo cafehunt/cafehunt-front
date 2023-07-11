@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { FC, useState, ChangeEvent } from 'react';
 import { Header } from '../../components/Header';
 import { BackButton } from '../../components/BackButton';
@@ -35,14 +36,18 @@ import { useOrdersList } from '../../hooks/useOrdersList';
 import { Loader } from '../../components/Loader';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
+import { logOut } from '../../api/logOut';
+import { useNavigate } from 'react-router-dom';
+import { appRoutes } from '../../routes/Routes';
 
 export const Account: FC = () => {
   const [page, setPage] = useState(1);
   const [showOptions, setShowOptions] = useState(false);
   const [activeTab, setActiveTab] = useState<string>('bookings');
-  const token = localStorage.getItem('accessToken');
+  const token = localStorage.getItem('accessToken') || '';
   const [data] = useUserData(token || '');
   const [ordersData, ordersStatus] = useOrdersList(token || '', page);
+  const navigate = useNavigate();
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
@@ -56,8 +61,10 @@ export const Account: FC = () => {
     // Handle delete account logic here
   };
 
-  const handleLogout = () => {
-    // Handle logout logic here
+  const handleLogout = async () => {
+    await logOut(token);
+
+    navigate(appRoutes.home);
   };
 
   const handlePageChange = (event: ChangeEvent<unknown>, value: number) => {
