@@ -14,6 +14,7 @@ import { appRoutes } from './routes/Routes';
 import { Cafe } from './pages/Cafe';
 import { ScrollToTop } from './helpers/ScrollToTop';
 import { Account } from './pages/Account';
+import { NotFound } from './pages/NotFound';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -38,6 +39,7 @@ const App: FC = () => {
                 <Route path={appRoutes.register} element={<Signup />} />
                 <Route path={appRoutes.cafes} element={<Cafe />} />
                 <Route path={appRoutes.account} element={<Account />} />
+                <Route path={appRoutes.notFound} element={<NotFound />} />
               </Routes>
             </QueryClientProvider>
           </ScrollToTop>
