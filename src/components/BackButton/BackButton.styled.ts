@@ -10,6 +10,8 @@ export const BackButtonStyled = styled.p`
   text-decoration: none;
   color: ${COLORS.black};
 
+  cursor: pointer;
+
   svg {
     font-size: 20px;
   }

@@ -33,12 +33,12 @@ import {
 } from './Account.styled';
 import { useUserData } from '../../hooks/useUserData';
 import { useOrdersList } from '../../hooks/useOrdersList';
-import { Loader } from '../../components/Loader';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import { logOut } from '../../api/logOut';
 import { useNavigate } from 'react-router-dom';
 import { appRoutes } from '../../routes/Routes';
+import { Loader } from '../../components/Loader';
 
 export const Account: FC = () => {
   const [page, setPage] = useState(1);
@@ -71,12 +71,6 @@ export const Account: FC = () => {
     setPage(value);
   };
 
-  console.log('Orders:', ordersData.items);
-
-  if (ordersStatus === 'loading') {
-    return <Loader />;
-  }
-
   return (
     <AccountStyled>
       <AccountWrapper>
@@ -108,10 +102,10 @@ export const Account: FC = () => {
                   />
                   {showOptions && (
                     <OptionsContainer>
-                      <Option onClick={handleDeleteAccount}>
+                      {/* <Option onClick={handleDeleteAccount}>
                         <DeleteImage src={deleteIcon} alt="Delete" />
                         Delete account
-                      </Option>
+                      </Option> */}
                       <Option onClick={handleLogout}>
                         <LogoutImage src={logoutIcon} alt="Logout" />
                         Log out
@@ -128,6 +122,7 @@ export const Account: FC = () => {
                       label="Email"
                       name="email"
                       placeholder={data.email}
+                      disabled
                     />
                   </AccountInput>
                   <AccountInput>
@@ -166,9 +161,13 @@ export const Account: FC = () => {
           <>
             <StyledTitle mb="24px">Bookings history</StyledTitle>
             <BookingsWrapper>
-              {ordersData.items.map((item) => (
-                <AccountCard key={item.id} data={item} user={data} />
-              ))}
+              {ordersStatus === 'loading' ? (
+                <Loader />
+              ) : (
+                ordersData.items.map((item) => (
+                  <AccountCard key={item.id} data={item} user={data} />
+                ))
+              )}
               <AccountPagination>
                 <Stack spacing={2}>
                   <Pagination

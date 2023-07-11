@@ -16,7 +16,7 @@ import { Button } from '../Button';
 import { Modal } from '../Modal/Modal';
 import { BookingFormValues, OrderValues } from '../../types/BookingFormValues';
 import { BookingSchema } from '../../schemas/Booking.schema';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { postOrder } from '../../api/postOrder';
 import { Alert } from '@mui/material';
 import { appRoutes } from '../../routes/Routes';
@@ -176,12 +176,15 @@ export type Props = {
 
 export const ModalBooking: FC<Props> = ({ cafeName, onClose }) => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const token = localStorage.getItem('accessToken');
 
   const mutation = useMutation({
     mutationFn: (newOrder: OrderValues) => {
       return postOrder(newOrder);
     },
-    onSuccess: () => {
+    onSuccess: async () => {
+      await queryClient.invalidateQueries(['orders', token, 1]);
       onClose();
       navigate(appRoutes.account);
     },
