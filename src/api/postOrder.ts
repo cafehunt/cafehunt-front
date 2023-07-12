@@ -20,7 +20,9 @@ export const postOrder = async (
   if (!apiRes.ok) {
     const res = (await apiRes.json()) as Promise<OrderError>;
 
-    throw new Error(`Order was not created: ${(await res).detail}`);
+    if (apiRes.status === 422) {
+      throw new Error(`Order was not created: ${(await res).detail[0].msg}`);
+    }
   }
 
   return apiRes.json() as Promise<OrderValues>;
