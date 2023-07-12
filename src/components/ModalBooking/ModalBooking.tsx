@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-misused-promises */
+import dayjs from 'dayjs';
 import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 import { useParams } from 'react-router-dom';
@@ -191,12 +192,11 @@ export const ModalBooking: FC<Props> = ({ cafeName, onClose }) => {
   });
 
   const { cafeId = 0 } = useParams();
+  const currentDate = dayjs();
   const userData = JSON.parse(localStorage.getItem('user') || '{}') as Pick<
     User,
     'first_name' | 'last_name'
   >;
-
-  console.log('User name:', userData);
 
   const error = mutation.error as Error;
 
@@ -272,6 +272,7 @@ export const ModalBooking: FC<Props> = ({ cafeName, onClose }) => {
                     <StyledDatePicker
                       {...field}
                       onChange={(value) => field.onChange(value as string)}
+                      minDate={currentDate}
                     />
                   )}
                 />
