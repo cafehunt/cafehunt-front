@@ -14,9 +14,10 @@ export const useCafesList = (
     petsAllowed: false,
     hasTerrace: false,
     hasVegan: false,
-  }
+  },
+  token = '',
 ) => {
-  const results = useQuery(['cafes', page, filters], fetchCafes, {
+  const results = useQuery(['cafes', page, filters, token], fetchCafes, {
     keepPreviousData: true,
   });
 

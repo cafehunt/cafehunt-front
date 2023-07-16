@@ -43,6 +43,10 @@ function formatDate(inputDate: string) {
 }
 
 export const AccountCard: FC<Props> = ({ data, user, isFavorites }) => {
+  // if (!data || !user) {
+  //   return;
+  // }
+
   const { cafe_id, cafe_name, places, booking_date, image } = data;
 
   return (
