@@ -1,5 +1,5 @@
-import { FC, useState } from 'react';
-import { UseFormRegisterReturn } from 'react-hook-form';
+import { FC, useState, ChangeEvent, useEffect } from 'react';
+import { Controller, UseFormRegisterReturn } from 'react-hook-form';
 import {
   IconContainer,
   InputContainer,
@@ -10,24 +10,29 @@ import { IoEyeOutline, IoEyeOffOutline } from 'react-icons/io5';
 
 type Props = {
   type: string;
-  label: string;
+  label?: string;
   name: string;
   placeholder?: string;
   register?: UseFormRegisterReturn;
   errors?: Record<string, any>;
   disabled?: boolean;
+  controled?: boolean;
+  userName?: string;
+  handleInputChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
 type ErrorRecord = Record<string, { message: string }>;
 
 export const Input: FC<Props> = ({
-  type,
+  type = 'text',
   label,
   name,
   placeholder = '',
   register,
   errors,
   disabled = false,
+  userName,
+  handleInputChange,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -35,13 +40,11 @@ export const Input: FC<Props> = ({
     setShowPassword(!showPassword);
   };
 
-  // console.log('Errors:', errors);
-
   const hasError = Boolean(errors?.[name]);
 
   return (
     <InputStyled>
-      <span>{label}</span>
+      {label ? <span>{label}</span> : null}
       <InputContainer hasError={hasError}>
         <input
           type={type && !showPassword ? type : 'text'}
