@@ -14,7 +14,6 @@ import {
   StyledTitle,
 } from './Filters.styled';
 import { useCitiesList } from '../../hooks/useCitiesList';
-import { Select2 } from './Select2';
 import { FiltersType } from '../../types/Filters.type';
 import { RadioGroup } from './RadioGroup';
 import { RatingList } from './RatingList';
@@ -47,7 +46,6 @@ export const Filters: FC<Props> = ({ onFiltersChange }) => {
   const [selectedCity, setSelectedCity] = useState<City | null>(null);
 
   const nameInputRef = useRef<InputRef | null>(null);
-  // const citySelectRef = useRef<selectRef | null>(null);
   const ratingRef = useRef<checkboxRef | null>(null);
   const averageBillRef = useRef<InputRef | null>(null);
   const veganRef = useRef<checkboxRef | null>(null);
@@ -76,7 +74,6 @@ export const Filters: FC<Props> = ({ onFiltersChange }) => {
 
   const handleClear = () => {
     nameInputRef.current?.clearValue();
-    // citySelectRef.current?.clearValue();
     setSelectedCity(null);
     ratingRef.current?.clearValue();
     averageBillRef.current?.clearValue();
@@ -123,15 +120,7 @@ export const Filters: FC<Props> = ({ onFiltersChange }) => {
           label="Choose location"
           placeholder="Choose city"
         />
-        {/* <Select2
-          name="city"
-          label="Choose location"
-          placeholder="Choose city"
-          ref={citySelectRef}
-          options={data}
-        /> */}
         <Border />
-        {/* <InputComponent label="Input with ref" ref={nameInputRef} /> */}
         <StyledTitle>Search</StyledTitle>
         <Input
           name="name"
@@ -140,7 +129,6 @@ export const Filters: FC<Props> = ({ onFiltersChange }) => {
           placeholder="The Cake"
         />
         <Border />
-        {/* <BasicRating name="rating" /> */}
         <RatingList name="rating" ref={ratingRef} />
         <Border />
         <RadioGroup title="Price" name="average-bill" ref={averageBillRef} />

@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import { FC, useState, ChangeEvent } from 'react';
+import { FC, useState, ChangeEvent, useEffect, FormEvent } from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Header } from '../../components/Header';
 import { BackButton } from '../../components/BackButton';
 import { FlexContainer } from '../../components/FlexContainer';
@@ -30,6 +32,7 @@ import {
   Tab,
   TabsWrapper,
   AccountInput,
+  EditButton,
 } from './Account.styled';
 import { useUserData } from '../../hooks/useUserData';
 import { useOrdersList } from '../../hooks/useOrdersList';
@@ -39,15 +42,49 @@ import { logOut } from '../../api/logOut';
 import { useNavigate } from 'react-router-dom';
 import { appRoutes } from '../../routes/Routes';
 import { Loader } from '../../components/Loader';
+import { AiOutlineCheck } from 'react-icons/ai';
+import { GrClose } from 'react-icons/gr';
+import { UserNameFormValues } from '../../types/UserNameFormValues';
+import { EditNameSchema } from '../../schemas/EditName.schema';
 
 export const Account: FC = () => {
-  const [page, setPage] = useState(1);
-  const [showOptions, setShowOptions] = useState(false);
-  const [activeTab, setActiveTab] = useState<string>('bookings');
   const token = localStorage.getItem('accessToken') || '';
   const [data] = useUserData(token || '');
+  const [page, setPage] = useState(1);
+
+  const fullName = `${data.first_name} ${data.last_name}`;
+
+  const [showOptions, setShowOptions] = useState(false);
+  const [activeTab, setActiveTab] = useState<string>('bookings');
+  const [userName, setUserName] = useState('');
+  const [isEditing, setIsEditing] = useState(false);
   const [ordersData, ordersStatus] = useOrdersList(token || '', page);
+
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors, isValid, isSubmitting },
+  } = useForm<UserNameFormValues>({
+    resolver: yupResolver(EditNameSchema),
+    mode: 'onBlur',
+  });
+
   const navigate = useNavigate();
+
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
+
+  const handleChangeNameSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    setIsEditing(false);
+  };
+
+  const handleCancelClick = () => {
+    setIsEditing(false);
+  };
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
@@ -55,10 +92,6 @@ export const Account: FC = () => {
 
   const handleIconClick = () => {
     setShowOptions(!showOptions);
-  };
-
-  const handleDeleteAccount = () => {
-    // Handle delete account logic here
   };
 
   const handleLogout = async () => {
@@ -70,6 +103,12 @@ export const Account: FC = () => {
   const handlePageChange = (event: ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
+
+  useEffect(() => {
+    setUserName(fullName);
+  }, [fullName]);
+
+  console.log('User name:', userName);
 
   return (
     <AccountStyled>
@@ -89,10 +128,32 @@ export const Account: FC = () => {
             <FlexContainer fd="column" width="100%" gap="14px">
               <FlexContainer ai="center" jc="space-between" width="100%">
                 <FlexContainer ai="center">
-                  <StyledTitle fs="40px" fw="700" lnh="120%">
-                    {data.first_name} {data.last_name}
-                  </StyledTitle>
-                  <PencilImage src={pencilIcon} alt="Pencil" />
+                  {!isEditing ? (
+                    <>
+                      <StyledTitle fs="40px" fw="700" lnh="120%">
+                        {userName}
+                      </StyledTitle>
+                      <EditButton type="button" onClick={handleEditClick}>
+                        <PencilImage src={pencilIcon} alt="Pencil" />
+                      </EditButton>
+                    </>
+                  ) : (
+                    <form action="" onSubmit={handleChangeNameSubmit}>
+                      <Input
+                        type="text"
+                        controled={true}
+                        name="userName"
+                        register={register('userName')}
+                        errors={errors}
+                      />
+                      <button type="submit" disabled={!isValid || isSubmitting}>
+                        <AiOutlineCheck />
+                      </button>
+                      <button type="button" onClick={handleCancelClick}>
+                        <GrClose />
+                      </button>
+                    </form>
+                  )}
                 </FlexContainer>
                 <Container>
                   <MoreImage

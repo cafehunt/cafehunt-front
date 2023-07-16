@@ -6,13 +6,13 @@ import { LoginPhones } from '../../components/SignInUp/LoginPhones';
 import { LoginDesktops } from '../../components/SignInUp/LoginDesktops';
 
 export const Login: FC = () => {
-  const { md } = useMediaQueries();
+  // const { md } = useMediaQueries();
 
-  if (md) {
-    return <LoginDesktops />;
-  }
+  // if (md) {
+  //   return <LoginDesktops />;
+  // }
 
-  return <LoginPhones />;
+  return <LoginDesktops />;
 };
 
 // import { FC } from 'react';
