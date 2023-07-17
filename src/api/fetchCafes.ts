@@ -52,15 +52,22 @@ const createSearchParams = (params: FiltersType) => {
 
 export const fetchCafes: QueryFunction<
   APIResponse<Cafe>,
-  ['cafes', number, FiltersType]
+  ['cafes', number, FiltersType, string]
 > = async ({ queryKey }) => {
   const page = queryKey[1];
   const filters = queryKey[2];
+  const token = queryKey[3];
 
   const searchParams = createSearchParams(filters);
 
   const apiRes = await fetch(
-    `${URL}/${ENDPOINT}?page=${page}${searchParams}&size=${SIZE}`
+    `${URL}/${ENDPOINT}?page=${page}${searchParams}&size=${SIZE}`,
+    {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    }
   );
 
   if (!apiRes.ok) {

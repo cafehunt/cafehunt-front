@@ -41,7 +41,11 @@ export const ItemCardTitle = styled.h3`
   color: ${COLORS.black};
 `;
 
-export const ItemCardFavorite = styled.div`
+type FavouriteProps = {
+  isFavourite: boolean;
+}
+
+export const ItemCardFavorite = styled.div<FavouriteProps>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -51,6 +55,8 @@ export const ItemCardFavorite = styled.div`
   font-size: ${FONT_SIZES.s24};
 
   cursor: pointer;
+
+  color:${({ isFavourite }) => isFavourite? 'red' : 'black'};
 `;
 
 export const ItemCardFeaturesList = styled.div`

@@ -23,7 +23,8 @@ export const Home: FC = () => {
   const [page, setPage] = useState(1);
   const [filters, setFilters] = useState<FiltersType>();
   const { sm } = useMediaQueries();
-  const [data, status] = useCafesList(page, filters);
+  const token = localStorage.getItem('accessToken') || '';
+  const [data, status] = useCafesList(page, filters, token);
 
   const handlePageChange = (event: ChangeEvent<unknown>, value: number) => {
     setPage(value);

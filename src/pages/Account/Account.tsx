@@ -41,11 +41,15 @@ import Stack from '@mui/material/Stack';
 import { logOut } from '../../api/logOut';
 import { useNavigate } from 'react-router-dom';
 import { appRoutes } from '../../routes/Routes';
+
+import { useFavouritesList } from '../../hooks/useFavouritesList';
+
 import { Loader } from '../../components/Loader';
 import { AiOutlineCheck } from 'react-icons/ai';
 import { GrClose } from 'react-icons/gr';
 import { UserNameFormValues } from '../../types/UserNameFormValues';
 import { EditNameSchema } from '../../schemas/EditName.schema';
+
 
 export const Account: FC = () => {
   const token = localStorage.getItem('accessToken') || '';
@@ -60,6 +64,9 @@ export const Account: FC = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [ordersData, ordersStatus] = useOrdersList(token || '', page);
 
+  const [favourites, favouritesStatus] = useFavouritesList(token);
+
+
   const {
     register,
     handleSubmit,
@@ -69,6 +76,7 @@ export const Account: FC = () => {
     resolver: yupResolver(EditNameSchema),
     mode: 'onBlur',
   });
+
 
   const navigate = useNavigate();
 
@@ -246,6 +254,9 @@ export const Account: FC = () => {
           </>
         ) : (
           <BookingsWrapper>
+            {favourites.map(favourite => (
+              <AccountCard isFavorites key={favourite.street} favouriteCafe={favourite} />
+            ))}
             {/* <AccountCard isFavorites />
             <AccountCard isFavorites />
             <AccountCard isFavorites />
