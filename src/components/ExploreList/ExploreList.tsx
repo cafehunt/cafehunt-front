@@ -5,7 +5,8 @@ import { ItemCardSmall } from '../ItemCardSmall';
 import { Loader } from '../Loader';
 
 export const ExploreList: FC = () => {
-  const [data, status] = useExploreNew();
+  const token = localStorage.getItem('accessToken') || '';
+  const [data, status] = useExploreNew(token);
 
   if (status === 'loading') {
     return <Loader />;

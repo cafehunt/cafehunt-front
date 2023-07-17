@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { AiFillStar, AiOutlineHeart } from 'react-icons/ai';
+import { AiFillStar, AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import {
   ItemCardSmallStyled,
   ItemFavorite,
@@ -10,6 +10,7 @@ import {
   ItemTitle,
   ItemTitleWrapper,
   RatingIcon,
+  StyledFavourite,
 } from './ItemCardSmall.styled';
 import { Schedule } from '../Schedule';
 import { Location } from '../Location';
@@ -31,6 +32,7 @@ export const ItemCardSmall: FC<Props> = ({ cafe }) => {
     work_time_start,
     work_time_end,
     rating,
+    is_favourite_cafe,
   } = cafe;
 
   const normalizedStartTime = normalizeWorkingTime(String(work_time_start));
@@ -43,7 +45,7 @@ export const ItemCardSmall: FC<Props> = ({ cafe }) => {
       <ItemPhoto>
         <img src={images[0].url} alt="The Cake" />
         <ItemFavorite>
-          <AiOutlineHeart />
+          {is_favourite_cafe? <StyledFavourite /> : <AiOutlineHeart />}
         </ItemFavorite>
       </ItemPhoto>
       <ItemInfo>

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { COLORS, FONT_SIZES, FONT_WEIGHTS, LINE_HEIGHTS } from '../../theme';
+import { AiFillHeart } from 'react-icons/ai';
 
 export const ItemCardSmallStyled = styled.article`
   display: flex;
@@ -96,3 +97,7 @@ export const RatingIcon = styled.span`
     font-size: 14px;
   }
 `;
+
+export const StyledFavourite = styled(AiFillHeart)`
+  color: red;
+`
