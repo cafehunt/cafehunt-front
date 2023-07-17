@@ -14,4 +14,5 @@ export const logOut = async (token: string) => {
   }
 
   localStorage.removeItem('accessToken');
+  localStorage.removeItem('user');
 }
