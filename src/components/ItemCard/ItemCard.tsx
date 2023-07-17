@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -24,7 +25,7 @@ import { Carousel } from '../Carousel';
 import { normalizeWorkingTime } from '../../utils/normalizeWorkingTime';
 import { createFeaturesList } from '../../utils/createFeaturesList';
 import { isCafeOpen } from '../../utils/isCafeOpen';
-import { addToFavourite } from '../../api/addToFavourite';
+import { toggleFavourite } from '../../api/toggleFavourite';
 import { useQueryClient } from 'react-query';
 
 type Props = {
@@ -55,7 +56,7 @@ export const ItemCard: FC<Props> = ({ cafe }) => {
   const queryClient = useQueryClient();
 
   const handleFavourite = async () => {
-    await addToFavourite(token, id);
+    await toggleFavourite(token, id);
     setIsFavourite((current) => !current);
     await queryClient.invalidateQueries([
       'cafes',

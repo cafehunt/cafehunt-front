@@ -24,11 +24,13 @@ import { Button } from '../Button';
 import { FlexContainer } from '../FlexContainer';
 import { Order } from '../../types/Order.type';
 import { NewUserAPIResponse } from '../../types/User.type';
+import { FavouriteCafe } from '../../types/FavouriteCafe';
 
 type Props = {
-  data: Order;
-  user: NewUserAPIResponse;
+  data?: Order;
+  user?: NewUserAPIResponse;
   isFavorites?: boolean;
+  favouriteCafe?: FavouriteCafe;
 };
 
 function formatDate(inputDate: string) {
@@ -42,10 +44,42 @@ function formatDate(inputDate: string) {
   return `${day}/${month}/${year} ${hours}:${minutes}`;
 }
 
-export const AccountCard: FC<Props> = ({ data, user, isFavorites }) => {
-  // if (!data || !user) {
-  //   return;
-  // }
+export const AccountCard: FC<Props> = ({ data, user, isFavorites, favouriteCafe }) => {
+  if (!data || !user) {
+    return (
+      <FlexContainer gap="48px">
+        <ItemCardStyled>
+          <ItemCardPhoto>
+            <img src={favouriteCafe?.image} alt={favouriteCafe?.name} />
+          </ItemCardPhoto>
+          <ItemCardContent>
+            <div>
+              <ItemCardHeader>
+                  <ItemCardTitle>{favouriteCafe?.name}</ItemCardTitle>
+                {!isFavorites || (
+                  <ItemCardFavorite>
+                    <RedHeartIcon />
+                  </ItemCardFavorite>
+                )}
+              </ItemCardHeader>
+              <ItemCardDescription>
+                <Location street="Zankovetska St., 15/4, Kyiv, Ukraine" />
+                <Schedule>$$ &#183; Open now (8 AM - 22 PM)</Schedule>
+              </ItemCardDescription>
+              <ItemCardFooter>
+                <ItemCardRating>
+                  <RatingIcon>
+                    <AiFillStar />
+                  </RatingIcon>
+                  <span>4.2</span>
+                </ItemCardRating>
+              </ItemCardFooter>
+            </div>
+          </ItemCardContent>
+        </ItemCardStyled>
+      </FlexContainer>
+    );
+  }
 
   const { cafe_id, cafe_name, places, booking_date, image } = data;
 

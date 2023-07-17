@@ -1,4 +1,4 @@
-export const addToFavourite = async (token: string, cafeId: number) => {
+export const toggleFavourite = async (token: string, cafeId: number) => {
   const URL = `https://cafehunt.pp.ua/api/cafes/${cafeId}/add_delete_favourite/`;
   const apiRes = await fetch(URL, {
     method: 'POST',
