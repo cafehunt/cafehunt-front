@@ -52,6 +52,26 @@ function formatDate(inputDate: string) {
 }
 
 export const AccountCard: FC<Props> = ({ data, user, isFavorites, favouriteCafe }) => {
+  const queryClient = useQueryClient();
+  const token = localStorage.getItem('accessToken');
+
+  const mutation = useMutation(
+    (mutationKey: readonly [string, number]) => {
+      const [token, orderId] = mutationKey;
+      return removeOrder(token, orderId);
+    },
+    {
+      onSuccess: async () => {
+        await queryClient.invalidateQueries(['orders', token]);
+      },
+    }
+  );
+
+  const handleRemove = () => {
+    const token = localStorage.getItem('accessToken') || '';
+    mutation.mutate([token, id]);
+  };
+
     if (!data || !user) {
     return (
       <FlexContainer gap="48px">
@@ -87,29 +107,9 @@ export const AccountCard: FC<Props> = ({ data, user, isFavorites, favouriteCafe 
       </FlexContainer>
     );
   }
-  
+
   const { cafe_id, cafe_name, places, booking_date, image, id } = data;
-  const queryClient = useQueryClient();
-  const token = localStorage.getItem('accessToken');
-
   const isBookingCompleted = isDateGone(booking_date);
-
-  const mutation = useMutation(
-    (mutationKey: readonly [string, number]) => {
-      const [token, orderId] = mutationKey;
-      return removeOrder(token, orderId);
-    },
-    {
-      onSuccess: async () => {
-        await queryClient.invalidateQueries(['orders', token]);
-      },
-    }
-  );
-
-  const handleRemove = () => {
-    const token = localStorage.getItem('accessToken') || '';
-    mutation.mutate([token, id]);
-  };
 
   return (
     <FlexContainer gap="48px">

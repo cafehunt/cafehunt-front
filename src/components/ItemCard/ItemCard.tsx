@@ -27,12 +27,15 @@ import { createFeaturesList } from '../../utils/createFeaturesList';
 import { isCafeOpen } from '../../utils/isCafeOpen';
 import { toggleFavourite } from '../../api/toggleFavourite';
 import { useQueryClient } from 'react-query';
+import { FiltersType } from '../../types/Filters.type';
 
 type Props = {
   cafe: Cafe;
+  page: number;
+  filters: FiltersType;
 };
 
-export const ItemCard: FC<Props> = ({ cafe }) => {
+export const ItemCard: FC<Props> = ({ cafe, page, filters }) => {
   const {
     name,
     images,
@@ -60,18 +63,8 @@ export const ItemCard: FC<Props> = ({ cafe }) => {
     setIsFavourite((current) => !current);
     await queryClient.invalidateQueries([
       'cafes',
-      1,
-      {
-        city: 0,
-        name: '',
-        rating: 0,
-        averageBill: '',
-        hasWiFi: false,
-        hasCoworking: false,
-        petsAllowed: false,
-        hasTerrace: false,
-        hasVegan: false,
-      },
+      page,
+      filters,
       token,
     ]);
   };
