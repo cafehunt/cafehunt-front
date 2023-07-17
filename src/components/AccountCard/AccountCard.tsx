@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { useMutation, useQueryClient } from 'react-query';
 import { Link } from 'react-router-dom';
 import { AiFillStar } from 'react-icons/ai';
 import {
@@ -17,6 +18,7 @@ import {
   SubtitleWrapper,
   RedHeartIcon,
 } from './AccountCard.styled';
+import Alert from '@mui/material/Alert';
 import { Schedule } from '../Schedule';
 import { Location } from '../Location';
 import { Button } from '../Button';
@@ -24,7 +26,12 @@ import { Button } from '../Button';
 import { FlexContainer } from '../FlexContainer';
 import { Order } from '../../types/Order.type';
 import { NewUserAPIResponse } from '../../types/User.type';
+
 import { FavouriteCafe } from '../../types/FavouriteCafe';
+
+import { removeOrder } from '../../api/removeOrder';
+import { isDateGone } from '../../utils/isDateGone';
+
 
 type Props = {
   data?: Order;
@@ -45,7 +52,7 @@ function formatDate(inputDate: string) {
 }
 
 export const AccountCard: FC<Props> = ({ data, user, isFavorites, favouriteCafe }) => {
-  if (!data || !user) {
+    if (!data || !user) {
     return (
       <FlexContainer gap="48px">
         <ItemCardStyled>
@@ -80,8 +87,29 @@ export const AccountCard: FC<Props> = ({ data, user, isFavorites, favouriteCafe 
       </FlexContainer>
     );
   }
+  
+  const { cafe_id, cafe_name, places, booking_date, image, id } = data;
+  const queryClient = useQueryClient();
+  const token = localStorage.getItem('accessToken');
 
-  const { cafe_id, cafe_name, places, booking_date, image } = data;
+  const isBookingCompleted = isDateGone(booking_date);
+
+  const mutation = useMutation(
+    (mutationKey: readonly [string, number]) => {
+      const [token, orderId] = mutationKey;
+      return removeOrder(token, orderId);
+    },
+    {
+      onSuccess: async () => {
+        await queryClient.invalidateQueries(['orders', token]);
+      },
+    }
+  );
+
+  const handleRemove = () => {
+    const token = localStorage.getItem('accessToken') || '';
+    mutation.mutate([token, id]);
+  };
 
   return (
     <FlexContainer gap="48px">
@@ -130,7 +158,19 @@ export const AccountCard: FC<Props> = ({ data, user, isFavorites, favouriteCafe 
             </StyledSubtitle>
             <StyledSubtitle>{formatDate(booking_date)}</StyledSubtitle>
           </SubtitleWrapper>
-          <Button>Cancel booking</Button>
+          {!isBookingCompleted ? (
+            <Button
+              disabled={isBookingCompleted}
+              type="button"
+              onClick={handleRemove}
+            >
+              Cancel booking
+            </Button>
+          ) : (
+            <Alert sx={{ borderRadius: '16px' }} severity="success">
+              Completed
+            </Alert>
+          )}
         </BookingStyled>
       )}
     </FlexContainer>

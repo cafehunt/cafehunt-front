@@ -17,6 +17,7 @@ export const BookingStyled = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
+  align-self: stretch;
   max-width: 403px;
   border: 1px solid ${COLORS.grey};
   border-radius: 24px;

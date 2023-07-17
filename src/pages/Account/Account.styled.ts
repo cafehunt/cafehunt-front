@@ -23,6 +23,17 @@ export const AccountInput = styled.p`
   flex: 1;
 `;
 
+export const EditButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+
+  background-color: transparent;
+  border: none;
+`;
+
 export const AccountPagination = styled.div`
   display: inline-flex;
   justify-content: center;
@@ -68,8 +79,6 @@ export const AvatarImage = styled.img`
 export const PencilImage = styled.img`
   width: 24px;
   height: 24px;
-  margin-left: 8px;
-  cursor: pointer;
 `;
 
 export const MoreImage = styled.img`

@@ -11,5 +11,5 @@ export interface OrderValues {
 }
 
 export interface OrderError {
-  detail: string;
+  detail: [{ msg: string }];
 }

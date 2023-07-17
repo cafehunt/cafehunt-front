@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-misused-promises */
+import dayjs from 'dayjs';
 import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 import { useParams } from 'react-router-dom';
@@ -16,7 +17,7 @@ import { Button } from '../Button';
 import { Modal } from '../Modal/Modal';
 import { BookingFormValues, OrderValues } from '../../types/BookingFormValues';
 import { BookingSchema } from '../../schemas/Booking.schema';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { postOrder } from '../../api/postOrder';
 import { Alert } from '@mui/material';
 import { appRoutes } from '../../routes/Routes';
@@ -176,24 +177,26 @@ export type Props = {
 
 export const ModalBooking: FC<Props> = ({ cafeName, onClose }) => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const token = localStorage.getItem('accessToken');
 
   const mutation = useMutation({
     mutationFn: (newOrder: OrderValues) => {
       return postOrder(newOrder);
     },
-    onSuccess: () => {
+    onSuccess: async () => {
+      await queryClient.invalidateQueries(['orders', token, 1]);
       onClose();
       navigate(appRoutes.account);
     },
   });
 
   const { cafeId = 0 } = useParams();
+  const currentDate = dayjs();
   const userData = JSON.parse(localStorage.getItem('user') || '{}') as Pick<
     User,
     'first_name' | 'last_name'
   >;
-
-  console.log('User name:', userData);
 
   const error = mutation.error as Error;
 
@@ -269,6 +272,7 @@ export const ModalBooking: FC<Props> = ({ cafeName, onClose }) => {
                     <StyledDatePicker
                       {...field}
                       onChange={(value) => field.onChange(value as string)}
+                      minDate={currentDate}
                     />
                   )}
                 />
