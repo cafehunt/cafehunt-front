@@ -3,11 +3,16 @@ import { Cafe } from '../types/Cafe.type';
 
 export const fetchExploreNew: QueryFunction<
   Cafe[],
-  'exploreNew'
-> = async () => {
-  // const apiRes = await fetch(`http://localhost:8000/cafes/explore_new/`);
-
-  const apiRes = await fetch(`https://cafehunt.pp.ua/api/cafes/explore_new/`);
+  ['exploreNew', string]
+> = async ({ queryKey }) => {
+  const URL = `https://cafehunt.pp.ua/api/cafes/explore_new/`;
+  const token = queryKey[1];
+  const apiRes = await fetch(URL, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
   if (!apiRes.ok) {
     throw new Error(`Cafes fetch not ok`);
