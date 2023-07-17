@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { FC, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 
@@ -28,6 +28,7 @@ import { isCafeOpen } from '../../utils/isCafeOpen';
 import { toggleFavourite } from '../../api/toggleFavourite';
 import { useQueryClient } from 'react-query';
 import { FiltersType } from '../../types/Filters.type';
+import { appRoutes } from '../../routes/Routes';
 
 type Props = {
   cafe: Cafe;
@@ -57,8 +58,12 @@ export const ItemCard: FC<Props> = ({ cafe, page, filters }) => {
   const isOpen = isCafeOpen(normalizedStartTime, normalizedEndTime);
   const token = localStorage.getItem('accessToken') || '';
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const handleFavourite = async () => {
+    if (token === '') {
+      navigate(appRoutes.login);
+    }
     await toggleFavourite(token, id);
     setIsFavourite((current) => !current);
     await queryClient.invalidateQueries([
