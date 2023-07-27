@@ -1,4 +1,5 @@
-import { FC, useState } from 'react';
+/* eslint-disable @typescript-eslint/no-misused-promises */
+import { FC, useEffect, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -24,6 +25,7 @@ import {
   CafeInfoReviews,
   CafeInfoRating,
   CafeSuggestions,
+  StyledFavourite,
 } from './Cafe.styled';
 import { BackButton } from '../../components/BackButton';
 import { Location } from '../../components/Location';
@@ -43,11 +45,13 @@ import { ModalBooking } from '../../components/ModalBooking';
 import { appRoutes } from '../../routes/Routes';
 import { Gallery } from '../../components/Gallery';
 import { Loader } from '../../components/Loader';
-
+import { toggleFavourite } from '../../api/toggleFavourite';
+import { useQueryClient } from 'react-query';
 
 export const Cafe: FC = () => {
   const { cafeId = 0 } = useParams();
-  const [data, status] = useGetGafeById(+cafeId);
+  const token = localStorage.getItem('accessToken') || '';
+  const [data, status] = useGetGafeById(+cafeId, token);
   const [currentImage, setCurrentImage] = useState<number>(0);
   const {
     name,
@@ -59,16 +63,25 @@ export const Cafe: FC = () => {
     work_time_end,
     average_bill,
     phone_number,
+    is_favourite_cafe,
+    id
   } = data;
+  
   const navigate = useNavigate();
-
+  const [isFav, setIsFav] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
   const features = createFeaturesList(data);
   const normalizedStartTime = normalizeWorkingTime(String(work_time_start));
   const normalizedEndTime = normalizeWorkingTime(String(work_time_end));
-
   const isOpen = isCafeOpen(normalizedStartTime, normalizedEndTime);
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    if (data) {
+      setIsFav(is_favourite_cafe);
+    }
+  }, [data, is_favourite_cafe]);
 
   const handleShowModal = () => {
     if (!localStorage.getItem('accessToken')) {
@@ -84,8 +97,17 @@ export const Cafe: FC = () => {
     document.body.style.overflow = 'visible';
   };
 
+  const handleFavourite = async () => {
+    if (token === '') {
+      navigate(appRoutes.login);
+    }
+    await toggleFavourite(token, id);
+    setIsFav(curr => !curr);
+    await queryClient.invalidateQueries(['favourites', token]);
+  }
+
   if (status === 'loading') {
-    return <Loader />
+    return <Loader />;
   }
 
   return (
@@ -100,8 +122,10 @@ export const Cafe: FC = () => {
           </FlexContainer>
           <CafeTitleWrapper bg={images[0].url}>
             <CafeTitle>{name}</CafeTitle>
-            <Favorite>
-              <AiOutlineHeart />
+            <Favorite
+              onClick={handleFavourite}
+            >
+              {isFav ? <StyledFavourite /> : <AiOutlineHeart />}
             </Favorite>
           </CafeTitleWrapper>
           <FlexContainer jc="space-between" ai="center">

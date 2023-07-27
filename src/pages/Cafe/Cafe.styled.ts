@@ -6,6 +6,7 @@ import {
   LINE_HEIGHTS,
   MEDIA,
 } from '../../theme';
+import { AiFillHeart } from 'react-icons/ai';
 
 type TitleProps = {
   bg: string;
@@ -205,3 +206,7 @@ export const CafeSuggestions = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
+export const StyledFavourite = styled(AiFillHeart)`
+  color: red;
+`

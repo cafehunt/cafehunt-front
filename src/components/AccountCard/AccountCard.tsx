@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { FC } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import { Link } from 'react-router-dom';
@@ -31,7 +32,9 @@ import { FavouriteCafe } from '../../types/FavouriteCafe';
 
 import { removeOrder } from '../../api/removeOrder';
 import { isDateGone } from '../../utils/isDateGone';
-
+import { normalizeWorkingTime } from '../../utils/normalizeWorkingTime';
+import { isCafeOpen } from '../../utils/isCafeOpen';
+import { toggleFavourite } from '../../api/toggleFavourite';
 
 type Props = {
   data?: Order;
@@ -51,9 +54,22 @@ function formatDate(inputDate: string) {
   return `${day}/${month}/${year} ${hours}:${minutes}`;
 }
 
-export const AccountCard: FC<Props> = ({ data, user, isFavorites, favouriteCafe }) => {
+export const AccountCard: FC<Props> = ({
+  data,
+  user,
+  isFavorites,
+  favouriteCafe,
+}) => {
   const queryClient = useQueryClient();
-  const token = localStorage.getItem('accessToken');
+  const token = localStorage.getItem('accessToken') || '';
+  const normalizedStartTime = normalizeWorkingTime(
+    String(favouriteCafe?.work_time_start)
+  );
+  const normalizedEndTime = normalizeWorkingTime(
+    String(favouriteCafe?.work_time_end)
+  );
+
+  const isOpen = isCafeOpen(normalizedStartTime, normalizedEndTime);
 
   const mutation = useMutation(
     (mutationKey: readonly [string, number]) => {
@@ -72,7 +88,12 @@ export const AccountCard: FC<Props> = ({ data, user, isFavorites, favouriteCafe 
     mutation.mutate([token, id]);
   };
 
-    if (!data || !user) {
+  const deleteFromFav = async () => {
+    await toggleFavourite(token, favouriteCafe?.id || 0);
+    await queryClient.invalidateQueries(['favourites', token])
+  }
+
+  if (!data || !user) {
     return (
       <FlexContainer gap="48px">
         <ItemCardStyled>
@@ -82,23 +103,31 @@ export const AccountCard: FC<Props> = ({ data, user, isFavorites, favouriteCafe 
           <ItemCardContent>
             <div>
               <ItemCardHeader>
+                <Link to={`/cafes/${favouriteCafe?.id || 0}`}>
                   <ItemCardTitle>{favouriteCafe?.name}</ItemCardTitle>
+                </Link>
                 {!isFavorites || (
-                  <ItemCardFavorite>
+                  <ItemCardFavorite
+                    onClick={deleteFromFav}
+                  >
                     <RedHeartIcon />
                   </ItemCardFavorite>
                 )}
               </ItemCardHeader>
               <ItemCardDescription>
-                <Location street="Zankovetska St., 15/4, Kyiv, Ukraine" />
-                <Schedule>$$ &#183; Open now (8 AM - 22 PM)</Schedule>
+                <Location street={favouriteCafe?.street || ''} />
+                <Schedule>
+                  $$ &#183; {isOpen ? 'Open now' : 'Closed'} (
+                  {normalizedStartTime}&nbsp;-&nbsp;
+                  {normalizedEndTime})
+                </Schedule>
               </ItemCardDescription>
               <ItemCardFooter>
                 <ItemCardRating>
                   <RatingIcon>
                     <AiFillStar />
                   </RatingIcon>
-                  <span>4.2</span>
+                  <span>{favouriteCafe?.rating}</span>
                 </ItemCardRating>
               </ItemCardFooter>
             </div>

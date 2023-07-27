@@ -1,6 +1,7 @@
-import { FC } from 'react';
-import { Link } from 'react-router-dom';
-import { AiFillStar, AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
+/* eslint-disable @typescript-eslint/no-misused-promises */
+import { FC, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { AiFillStar, AiOutlineHeart } from 'react-icons/ai';
 import {
   ItemCardSmallStyled,
   ItemFavorite,
@@ -17,6 +18,8 @@ import { Location } from '../Location';
 import { Cafe } from '../../types/Cafe.type';
 import { normalizeWorkingTime } from '../../utils/normalizeWorkingTime';
 import { isCafeOpen } from '../../utils/isCafeOpen';
+import { toggleFavourite } from '../../api/toggleFavourite';
+import { appRoutes } from '../../routes/Routes';
 
 type Props = {
   cafe: Cafe;
@@ -35,17 +38,30 @@ export const ItemCardSmall: FC<Props> = ({ cafe }) => {
     is_favourite_cafe,
   } = cafe;
 
+  const [isFav, setIsFav] = useState(is_favourite_cafe);
   const normalizedStartTime = normalizeWorkingTime(String(work_time_start));
   const normalizedEndTime = normalizeWorkingTime(String(work_time_end));
 
   const isOpen = isCafeOpen(normalizedStartTime, normalizedEndTime);
+  const token = localStorage.getItem('accessToken') || '';
+  const navigate = useNavigate();
+
+  const handleFavourite = async () => {
+    if (token === '') {
+      navigate(appRoutes.login);
+    }
+    await toggleFavourite(token, id);
+    setIsFav(curr => !curr);
+  }
 
   return (
     <ItemCardSmallStyled>
       <ItemPhoto>
         <img src={images[0].url} alt="The Cake" />
-        <ItemFavorite>
-          {is_favourite_cafe? <StyledFavourite /> : <AiOutlineHeart />}
+        <ItemFavorite
+          onClick={handleFavourite}
+        >
+          {isFav? <StyledFavourite /> : <AiOutlineHeart />}
         </ItemFavorite>
       </ItemPhoto>
       <ItemInfo>
