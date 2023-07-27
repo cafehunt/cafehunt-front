@@ -82,7 +82,9 @@ export const AccountCard: FC<Props> = ({ data, user, isFavorites, favouriteCafe 
           <ItemCardContent>
             <div>
               <ItemCardHeader>
+                <Link to={`/cafes/${favouriteCafe?.id || 0}`}>
                   <ItemCardTitle>{favouriteCafe?.name}</ItemCardTitle>
+                </Link>
                 {!isFavorites || (
                   <ItemCardFavorite>
                     <RedHeartIcon />

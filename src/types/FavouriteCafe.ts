@@ -1,4 +1,5 @@
 export interface FavouriteCafe {
+  id: number;
   name: string;
   street: string;
   work_time_start: string;
