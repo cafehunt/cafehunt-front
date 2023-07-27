@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { FC } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import { Link } from 'react-router-dom';
@@ -33,6 +34,7 @@ import { removeOrder } from '../../api/removeOrder';
 import { isDateGone } from '../../utils/isDateGone';
 import { normalizeWorkingTime } from '../../utils/normalizeWorkingTime';
 import { isCafeOpen } from '../../utils/isCafeOpen';
+import { toggleFavourite } from '../../api/toggleFavourite';
 
 type Props = {
   data?: Order;
@@ -59,7 +61,7 @@ export const AccountCard: FC<Props> = ({
   favouriteCafe,
 }) => {
   const queryClient = useQueryClient();
-  const token = localStorage.getItem('accessToken');
+  const token = localStorage.getItem('accessToken') || '';
   const normalizedStartTime = normalizeWorkingTime(
     String(favouriteCafe?.work_time_start)
   );
@@ -86,6 +88,11 @@ export const AccountCard: FC<Props> = ({
     mutation.mutate([token, id]);
   };
 
+  const deleteFromFav = async () => {
+    await toggleFavourite(token, favouriteCafe?.id || 0);
+    await queryClient.invalidateQueries(['favourites', token])
+  }
+
   if (!data || !user) {
     return (
       <FlexContainer gap="48px">
@@ -100,7 +107,9 @@ export const AccountCard: FC<Props> = ({
                   <ItemCardTitle>{favouriteCafe?.name}</ItemCardTitle>
                 </Link>
                 {!isFavorites || (
-                  <ItemCardFavorite>
+                  <ItemCardFavorite
+                    onClick={deleteFromFav}
+                  >
                     <RedHeartIcon />
                   </ItemCardFavorite>
                 )}
