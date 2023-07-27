@@ -46,6 +46,7 @@ import { appRoutes } from '../../routes/Routes';
 import { Gallery } from '../../components/Gallery';
 import { Loader } from '../../components/Loader';
 import { toggleFavourite } from '../../api/toggleFavourite';
+import { useQueryClient } from 'react-query';
 
 export const Cafe: FC = () => {
   const { cafeId = 0 } = useParams();
@@ -74,6 +75,7 @@ export const Cafe: FC = () => {
   const normalizedStartTime = normalizeWorkingTime(String(work_time_start));
   const normalizedEndTime = normalizeWorkingTime(String(work_time_end));
   const isOpen = isCafeOpen(normalizedStartTime, normalizedEndTime);
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     if (data) {
@@ -101,6 +103,7 @@ export const Cafe: FC = () => {
     }
     await toggleFavourite(token, id);
     setIsFav(curr => !curr);
+    await queryClient.invalidateQueries(['favourites', token]);
   }
 
   if (status === 'loading') {
